@@ -73,6 +73,7 @@
                     <li class="nav-item"><a class="nav-link scrollto" href="#item-1-1">Dodawanie rezerwacji assistance</a></li>
                     <li class="nav-item"><a class="nav-link scrollto" href="#item-1-2">Dodawanie rezerwacji OC sprawcy</a></li>
                     <li class="nav-item"><a class="nav-link scrollto" href="#item-1-3">Dodawanie rezerwacji prywatnej</a></li>
+                    <li class="nav-item"><a class="nav-link scrollto" href="#item-1-10">Dodawanie rezerwacji długoterminowej</a></li>
                     <li class="nav-item"><a class="nav-link scrollto" href="#item-1-4">Dodawanie rezerwacji WWW - Rentis.pl</a></li>
                     <li class="nav-item"><a class="nav-link scrollto" href="#item-1-5">Dodawanie rezerwacji brokerskich</a></li>
                     <li class="nav-item"><a class="nav-link scrollto" href="#item-1-6">Dodawanie usług w trakcie najmu</a></li>
@@ -124,9 +125,8 @@
                                 </h4>
                                 <p><b>W przypadku VIG/Global Assistance: </b><br>
                                     Zamawiającym jest zawsze: Global Assistance<br>
-                                    Klient: w zleceniu na dole <b>wytłuszczony na czarno</b> lub po końcowce sprawy -link- <br>
+                                    Klient: w zleceniu na dole <b>wytłuszczony na czarno</b> lub po końcowce sprawy (<a href="#item-1-9">ściąga</a>) <br>
                                     Użytkownik: osoba na zleceniu<br>
-                                    Ściąga: <a href="#item-1-9">lista</a>
                                 </p>
                             </div>
                             <!--//content-->
@@ -182,9 +182,8 @@
                                 </h4>
                                 <p><b>W przypadku VIG/Global Assitance: </b><br>
                                     Zamawiającym jest zawsze: Global Assistance<br>
-                                    Klientem jest zawsze firma, jeśli auto jest na osobę prywatną, wpisujemy <b>dane wytłuszczone na czarno na dole zlecenia</b><br>
+                                    Klientem jest zawsze firma, jeśli auto jest na osobę prywatną, wpisujemy <b>dane wytłuszczone na czarno na dole zlecenia </b>(<a href="#item-1-9">ściąga</a>)<br>
                                     Użytkownik: osoba na zleceniu<br>
-                                    Ściąga: <a href="#item-1-9">lista</a>
                                 </p>
                             </div>
                             <!--//content-->
@@ -285,6 +284,32 @@
 
                     </section>
                     <!--//section-->
+
+                    <section class="docs-section" id="item-1-10">
+                        <h2 class="section-heading">Dodawanie rezerwacji długoterminowej</h2>
+                        <p>Zakładanie rezerwacji długoterminowej składa się z kilku dodatkowych etapow: utworzenie cennikow oraz przypisanie lub utworzenie nowego kontraktu.</p>
+                        <h5>Tworzenie nowego cennika:</h5>
+                        <p>W celu stworzenia nowego cennika udajemy się do modułu <b>Cenniki</b>. Musimy utworzyć nowy cennik <b>Wynajem</b> oraz <b>Kary</b>.</p>
+                        <p><b>Wynajem</b> - tutaj określamy stawki miesiecznie za dany segment, limit km, wysokość depozytu oraz metodę płatności.</p>
+                        <p><b>Kary</b> - w tym miejscu głownie interesuje nas kwota za każdy kilometr nadbiegu.</p>
+                        <p><b>Kontrakt</b> - tworzymy w module kontrakty, pozwala skonfigurować między innymi ilość dni na zapłatę faktury, automatyczne fakturowanie.</p>
+
+                        <h5>Wynajem:</h5>
+                        <p>Aby utworzyć nowy cennik, wchodzimy w listę już istniejących i wybieramy jeden z długoterminowych cennikow np. WGS Agentur po czym klikamy <b>Dodaj podobny</b>. Tworzymy nazwę nowego cennika i zmieniamy priorytet, gdyż każdy cennik musi mieć unikalny. A także przypisujemy kontrakt</p>
+                        <div class="alert alert-info" role="alert">
+                            W przypadku standardowej opcji opłacania najmu wybieramy kontrakt o nazwie <b>7 dni płatność przelew</b> i ID <b>100</b>
+                        </div>
+                        <a href="assets/images/lt-cennik.png"><img class="figure-img img-fluid shadow rounded" src="assets/images/lt-cennik.png" alt="" title="przykład" /></a>
+                        <h5>Kary:</h5>
+                        <p>Analogicznie postępujemy w przypadku cenniku kar.</p>
+                        <h5>Kontrakt:</h5>
+                        <p>Po utworzeniu cennikow przechodzimy do kontraktu, jeśli korzystamy z wyżej wymienionego cennika wchodzimy w szczegoly i dodajemy kontrahenta, ktorego będzie obejmować ten kontrakt.</p>
+<p>Gdy potrzebujemy utworzyć nowy kontrakt, <b>dodajemy podobny</b> na bazie istniejącego już kontraktu.</p>
+                        <a href="assets/images/lt-kontrakt.png"><img class="figure-img img-fluid shadow rounded" src="assets/images/lt-kontrakt.png" alt="" title="przykład" /></a>
+                        <h5>Usługi dodatkowe:</h5>
+<p>W tym miejscu najbardziej interesuje nas pakiet STC rozliczany miesięcznie. W tym celu podczas tworzenia rezerwacji w pozycji <b>cennik usług dodatkowychg</b> wybieramy <b>LongTerm STC 150</b>. Jest to pakiet STC w kwocie 150 zł netto miesięcznie.</p>
+                        <a href="assets/images/lt-stc.png"><img class="figure-img img-fluid shadow rounded" src="assets/images/lt-stc.png" alt="" title="przykład" /></a>
+                    </section>
 
                     <section class="docs-section" id="item-1-4">
                         <h2 class="section-heading">Dodawanie rezerwacji WWW - Rentis.pl</h2>
@@ -500,7 +525,8 @@
                                     Umowiles zwrot z klientem, a auto jest zablokowane do kolejnego najmu?
                                 </h4>
                                 <p>Na początek czy użyto przycisku <b>potwierdź zwrot z klientem</b>.
-                                    <br> Jeśli dalej nie możesz przypisać auta musisz ustawić poźniejszą datę wydania, ze względu iż według SoRent auto musi po ukończonym wynajmie wrocić do bazy.
+                                    <br> Jeśli dalej nie możesz przypisać auta musisz ustawić poźniejszą datę wydania, ze względu iż według SoRent auto musi po ukończonym wynajmie wrocić do bazy.<br>
+                                    Sprawdź rownież przebiegu pojazdu, możliwe, że wymagane jest wykonanie przeglądu technicznego!
                                 </p>
                             </div>
                             <!--//content-->
