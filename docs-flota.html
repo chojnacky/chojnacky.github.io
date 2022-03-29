@@ -69,15 +69,12 @@
             <nav id="docs-nav" class="docs-nav navbar">
                 <ul class="section-items list-unstyled nav flex-column pb-3">
                     <li class="nav-item section-title mt-3"><a class="nav-link scrollto" href="#section-1"><span class="theme-icon-holder me-2">
-                                <i class="fas fa-id-card"></i></span>Organizacja</a></li>
-                    <li class="nav-item"><a class="nav-link scrollto" href="#item-1-1">Użytkownicy</a></li>
-                    <li class="nav-item"><a class="nav-link scrollto" href="#item-1-2">Monitoring kierowcow</a></li>
-                    <li class="nav-item"><a class="nav-link scrollto" href="#item-1-3">Grafik zadań</a></li>
-                    <li class="nav-item"><a class="nav-link scrollto" href="#item-1-4">Zadania</a></li>
-                    <li class="nav-item"><a class="nav-link scrollto" href="#item-1-8">Dodawanie zadania</a></li>
-                    <li class="nav-item"><a class="nav-link scrollto" href="#item-1-5">Koszty pracownicze</a></li>
-                    <li class="nav-item"><a class="nav-link scrollto" href="#item-1-6">Wynagrodzenie</a></li>
-                    <li class="nav-item"><a class="nav-link scrollto" href="#item-1-7">Oddziały - Jednostki</a></li>
+                                <i class="fas fa-id-card"></i></span>Samochody</a></li>
+                    <li class="nav-item"><a class="nav-link scrollto" href="#item-1-1">Flota</a></li>
+                    <li class="nav-item"><a class="nav-link scrollto" href="#item-1-2">Polisy</a></li>
+                    <li class="nav-item"><a class="nav-link scrollto" href="#item-1-3">Telemetria</a></li>
+                    <li class="nav-item"><a class="nav-link scrollto" href="#item-1-4">Archiwum</a></li>
+                    <li class="nav-item"><a class="nav-link scrollto" href="#item-1-4">Dane bazowe</a></li>
                 </ul>
 
             </nav>
@@ -88,61 +85,52 @@
             <div class="container">
                 <article class="docs-article" id="section-1">
                     <header class="docs-header">
-                        <h1 class="docs-heading">Finanse</h1>
+                        <h1 class="docs-heading">Samochody</h1>
                         <section class="docs-intro">
-                            <p> Zarządzanie kontami agentow.<br>
-                                Dodawanie i weryfikacja zadan.<br>
-                                Grafik zadan.<br>
-                                Wynagrodzenia i koszty pracownicze.</p>
+                            <p> Zarządzanie flotą.<br>
+                                Kontrola przebiegow i stanu pojazdow.<br>
+                                Telemetria.<br>
+                                Archiwum.<br></p>
                         </section>
                         <!--//docs-intro-->
                     </header>
                     <section class="docs-section" id="item-1-1">
-                        <h2 class="section-heading">Użytkownicy</h2>
-                        <p>Pierwszą funkcją modułu <b>organizacja</b> jest opcja <b>użytkownicy</b>. W tym miejscu dodajemy nowe konta pracownikow.</p>
-                        <h2>Poniżej przykładowe ustawienia kont dla roznych stanowisk.</h2>
-                        <h2>Agent:</h2>
-                        <a href="assets/images/org-uzyt.png"><img class="figure-img img-fluid shadow rounded" src="assets/images/org-uzyt.png" alt="" title="przykład" /></a>
-                        <h2>Konto koordynatora:</h2>
-                        <a href="assets/images/org-koor.png"><img class="figure-img img-fluid shadow rounded" src="assets/images/org-koor.png" alt="" title="przykład" /></a>
-                        <h2>Konto KZR:</h2>
-                        <a href="assets/images/org-kzr.png"><img class="figure-img img-fluid shadow rounded" src="assets/images/org-kzr.png" alt="" title="przykład" /></a>
+                        <h2 class="section-heading">Flota</h2>
+                        <p>Moduł, w ktorym mamy pełny zbior informacji na temat każdego samochodu z floty. Możemy zmieniać stan pojazdu oraz jego aktualny oddział. W szczegolach kazdego pojazdu znajdziemy szereg informacji, ktore informują nas o aktualnym stanie.</p>
+                        <p>Jest on rownież bardzo przydatny dla koordynatorow, ponieważ przy dobrym ustawieniu tabeli możemy śledzić aktualne przebiegi pojazdow, co pozwala na kontrolowanie przeglądow techicznych.</p>
+                        <h5>Przykład:</h5>
+                        <a href="assets/images/sam-flota.png"><img class="figure-img img-fluid shadow rounded" src="assets/images/sam-flota.png" alt="" title="przykład" /></a>
+                        <div class="callout-block callout-block-success">
+                            <div class="content">
+                                <h4 class="callout-title">
+                                    <span class="callout-icon-holder me-1">
+                                        <i class="fas fa-thumbs-up"></i>
+                                    </span>
+                                    <!--//icon-holder-->
+                                    Automatyczna zmiana oddziału
+                                </h4>
+                                <p>Pojazd automatycznie zmieni oddział, jeśli oddział wydania jest inny niż ten aktualnie przypisany.
+                                </p>
+                            </div>
+                            <!--//content-->
+                        </div>
                     </section>
                     <section class="docs-section" id="item-1-2">
-                        <h2 class="section-heading">Monitoring kierowcow</h2>
-                        <p>Dobrze zapowiadający się moduł, ale na tę chwilę bezużyteczny. Śledzenie pracownikow jest niemożliwe, ponieważ SoRent odświeża pozycję co kilka minut i to dopiero wtedy, gdy pracownik korzysta z aplikacji. W związku z tym nie zweryfikujemy, gdzie dokładnie jest agent na trasie.</p>
+                        <h2 class="section-heading">Polisy</h2>
+                        <p>Do modułu polisy najczęściej będziemy sięgać w przypadku organizacji holowań lub aut zastępczych. Zawiera wszystkie polisy samochodow.</p>
                     </section>
                     <section class="docs-section" id="item-1-3">
-                        <h2 class="section-heading">Grafik zadań</h2>
-                        <p>W grafiku zadań możemy wygenerować grafik na każdy dzień. Przydatna opcja, gdy zapomnimy komu przydzieliliśmy jakie zadanie.</p>
-                        <a href="assets/images/org-graf.png"><img class="figure-img img-fluid shadow rounded" src="assets/images/org-graf.png" alt="" title="przykład" /></a>
+                        <h2 class="section-heading">Telemetria</h2>
+                        <p>W tym miejscu możemy podejrzeć pozycję pojazdow, ponieważ WEB-SAT został spięty z SoRentem dzięki czemu nie musimy sięgać do osobnej strony www naszego operatora GPS. Posiada okrojone możliwości względem WEB-SAT, ale pozwala podejrzeć pozycje pojazdu.</p>
+                        <p>Natomiast nie jestem pewny co do dokładności danych i czasu odświeżania pozycji.</p>
                     </section>
                     <section class="docs-section" id="item-1-4">
-                        <h2 class="section-heading">Zadania</h2>
-                        <p>Funkcja podobna do <b>grafiku zadań</b>, ale w formie tabeli i zawierająca więcej informacji. Można ją skonfigurować wedle uznania, a wtedy daje dużą wiedzę na temat postępu pracownikow.</p>
-                        <p>Poniżej przykładowo ułożona tabela, ktora śledzi zadania, ktore są zaplanowane i jeszcze nieukończone.</p>
-                        <a href="assets/images/org-zadtable.png"><img class="figure-img img-fluid shadow rounded" src="assets/images/org-zadtable.png" alt="" title="przykład" /></a>
-                    </section>
-                    <section class="docs-section" id="item-1-8">
-                        <h2 class="section-heading">Dodawanie zadania</h2>
-                        <p>Możemy przypisać dowolne zadanie pracownikowi powiązane z dowolnym pojazdem oraz wynajem. Najczęściej będziemy korzystać z dodawania w przypadku, gdy zajdzie potrzeba utworzenia nowego zadania odbioru lub wydania pojazdu, ponieważ poprzednie zadanie zostało anulowane lub nastąpiła zmiana planow.
-                            <br><b>Organizacja -> Zadania -> Dodaj</b>. Wypełniamy pozycje, a na samym dole wiążemy zadanie z konkretnym wynajmem.
-                            <a href="assets/images/faq-zad.png"><img class="figure-img img-fluid shadow rounded" src="assets/images/faq-zad.png" alt="" title="przykład" /></a>
+                        <h2 class="section-heading">Archiwum</h2>
+                        <p>Jak sama nazwa wskazuje - możemy tutaj sprawdzić stan i parametry pojazdow, ktore już od nas odeszły.</p>
                     </section>
                     <section class="docs-section" id="item-1-5">
-                        <h2 class="section-heading">Koszty pracownicze</h2>
-                        <p>Zbior kosztow pracowniczych, dodawanych w tablecie. Pozycje można weryfikować i zaakceptować lub jeśli nie są zasadne odrzucić.</p>
-                        <a href="assets/images/org-kp.png"><img class="figure-img img-fluid shadow rounded" src="assets/images/org-kp.png" alt="" title="przykład" /></a>
-                    </section>
-                    <section class="docs-section" id="item-1-6">
-                        <h2 class="section-heading">Wynagrodzenie</h2>
-                        <p>W tym miejscu możemy wyliczć wynagrodzenie kierowcow na podstawie czasu wyliczonego przez zadania wykonywane w SoRent.</p>
-                        <a href="assets/images/org-wyn.png"><img class="figure-img img-fluid shadow rounded" src="assets/images/org-wyn.png" alt="" title="przykład" /></a>
-                    </section>
-                    <section class="docs-section" id="item-1-7">
-                        <h2 class="section-heading">Oddziały - Jednostki</h2>
-                        <p>Tutaj określamy wszystkie oddziały, ktore znajdują się u partnera. Oddziały używane są do obliczania odległości podstawienia i zwrotu.</p>
-                        <a href="assets/images/org-jed.png"><img class="figure-img img-fluid shadow rounded" src="assets/images/org-jed.png" alt="" title="przykład" /></a>
+                        <h2 class="section-heading">Dane bazowe</h2>
+                        <p>W <b>danych bazowych</b> określamy segmenty, na ktorych operuje SoRent, marki samochodow, modele oraz ich konfiguracje. Przy dodawaniu nowego pojazdu, opieramy się właśnie na tych ustawieniach, dzięki czemu nie musimy do każdego pojazdu wprowadzać ponownie konfiguracji.</p>
                     </section>
                     <!--//section-->
 

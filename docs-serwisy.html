@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>SoRent Docs</title>
+
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="SoRentDocs - wszystko w pigułce">
+    <meta name="author" content="Xiaoying Riley at 3rd Wave Media">
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome JS-->
+    <script defer src="assets/fontawesome/js/all.min.js"></script>
+
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.2/styles/atom-one-dark.min.css">
+    <link rel="stylesheet" href="assets/plugins/simplelightbox/simple-lightbox.min.css">
+
+    <!-- Theme CSS -->
+    <link id="theme-style" rel="stylesheet" href="assets/css/theme.css">
+
+</head>
+
+<body class="docs-page">
+    <header class="header fixed-top">
+        <div class="branding docs-branding">
+            <div class="container-fluid position-relative py-2">
+                <div class="docs-logo-wrapper">
+                    <button id="docs-sidebar-toggler" class="docs-sidebar-toggler docs-sidebar-visible me-2 d-xl-none" type="button">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    <div class="site-logo"><a class="navbar-brand" href="index.html"><img class="logo-icon me-2" src="assets/images/coderdocs-logo.svg" alt="logo"><span class="logo-text">SoRent<span class="text-alt">Docs</span></span></a></div>
+                </div>
+                <!--//docs-logo-wrapper-->
+                <div class="docs-top-utilities d-flex justify-content-end align-items-center">
+                    <div class="top-search-box d-none d-lg-flex">
+                        <form class="search-form">
+                            <input type="text" placeholder="Search the docs..." name="search" class="form-control search-input">
+                            <button type="submit" class="btn search-btn" value="Search"><i class="fas fa-search"></i></button>
+                        </form>
+                    </div>
+                </div>
+                <!--//docs-top-utilities-->
+            </div>
+            <!--//container-->
+        </div>
+        <!--//branding-->
+    </header>
+    <!--//header-->
+
+
+    <div class="docs-wrapper">
+        <div id="docs-sidebar" class="docs-sidebar">
+            <div class="top-search-box d-lg-none p-3">
+                <form class="search-form">
+                    <input type="text" placeholder="Search the docs..." name="search" class="form-control search-input">
+                    <button type="submit" class="btn search-btn" value="Search"><i class="fas fa-search"></i></button>
+                </form>
+            </div>
+            <nav id="docs-nav" class="docs-nav navbar">
+                <ul class="section-items list-unstyled nav flex-column pb-3">
+                    <li class="nav-item section-title mt-3"><a class="nav-link scrollto" href="#section-1"><span class="theme-icon-holder me-2">
+                                <i class="fas fa-id-card"></i></span>Serwisy</a></li>
+                    <li class="nav-item"><a class="nav-link scrollto" href="#item-1-1">Zlecenia serwisowe</a></li>
+                    <li class="nav-item"><a class="nav-link scrollto" href="#item-1-2">Prace serwisowe</a></li>
+                    <li class="nav-item"><a class="nav-link scrollto" href="#item-1-3">Szkody</a></li>
+                    <li class="nav-item"><a class="nav-link scrollto" href="#item-1-4">Warsztaty</a></li>
+                </ul>
+
+            </nav>
+            <!--//docs-nav-->
+        </div>
+        <!--//docs-sidebar-->
+        <div class="docs-content">
+            <div class="container">
+                <article class="docs-article" id="section-1">
+                    <header class="docs-header">
+                        <h1 class="docs-heading">Serwisy</h1>
+                        <section class="docs-intro">
+                            <p> Zlecenia serwisowe - przeglądy, naprawy.<br>
+                                Lista szkod.</p>
+                        </section>
+                        <!--//docs-intro-->
+                    </header>
+                    <section class="docs-section" id="item-1-1">
+                        <h2 class="section-heading">Zlecenia serwisowe</h2>
+                        <p>Zlecenia serwisowe tworzymy i wykonujemy, aby była historia całego pojazdu, od naprawy po przegląd techiczny. Zlecenia tworzy Rentis, Flotowiec lub koordynator, wiec warto zaglądać tutaj co jakiś czas, żeby sprawdzić czy przypadkiem coś nowego się nie pojawiło.</p>
+                        <p>W przypadku koordynatorow najczęściej będziemy odwiedzać to miejsce w celu wykonania przeglądu techicznego, bez utworzenia zadania i zrealizowania go, auto nie będzie dostępne do wydania.</p>
+                        <h5>Tworzenie zadania serwisowego (przegląd techiczny jako przykład):</h5>
+                        <p>- Typ zlecenia serwisowego -> określamy tutaj co będzie wykonywane w serwisie.</p>
+                        <p>- Typ finansowania -> z czego będzie pokryty koszt usługi. W przypadku przeglądu <b>własne środki</b>.</p>
+                        <p>- Generowanie zadań -> jeśli wybierzemy tą opcje, zadania podstawienia i odbioru pojazdu automatycznie wygenerują się będziemy mogli przypisać je kierowcy. Jeśli kierowca wykona zadania auto <b>automatycznie</b> zmieni swoj stan na aktualny po odbiorze z serwisu. W innym wypadku będzie trzeba ręcznie zakończyć zadanie w widoku tabeli zleceń serwiswoych.</p>
+                        <p>- Wybierz samochod -> ktorego auta dotyczy zlecenie.</p>
+                        <p>- Wybierz polise -> ładuję się samoczynnie po wybraniu auta.</p>
+                        <p>- Wybierz warsztat -> wskazujemy, w ktorym miejscu będzie wykonywana czynność serwisowa.</p>
+                        <p>- Stan pojazdu po serwisie -> jeśli wybierzemy <b>w ekslopatacji</b> to po ukończeniu zadań przez agenta auto wraca automatycznie do dyspozycji.</p>
+                        <p>- Uwagi -> opisujemy co będzie wykonywane w serwisie np. P-30, czyli przegląd techniczny 30k km.</p>
+                        <p>Resztę informacji uzupełnia Rentis po otrzymaniu FV.</p>
+                        <a href="assets/images/ser-zlec.png"><img class="figure-img img-fluid shadow rounded" src="assets/images/ser-zlec.png" alt="" title="przykład" /></a>
+                        <section class="docs-section" id="item-1-2">
+                            <h2 class="section-heading">Prace serwisowe</h2>
+                            <p>W tym miejscu mamy predefiniowane prace serwisowe, ktore można przypisać w zleceniach serwisowych, ale jak to nie wiem jeszcze. Prawdopodobnie brak nam uprawnień do takich czarow.</p>
+                            <a href="assets/images/ser-prace.png"><img class="figure-img img-fluid shadow rounded" src="assets/images/ser-prace.png" alt="" title="przykład" /></a>
+                        </section>
+                        <section class="docs-section" id="item-1-3">
+                            <h2 class="section-heading">Szkody</h2>
+                            <p>Bardzo ważny moduł dla koordynatorow. Miejsce, w ktorym mamy spis wszystkich dodanych przez agentow szkod. Warto skonfigurować tabele pod swoj oddział i regularnie, a najlepiej codziennie sprawdzac nowe uszkodzenia.</p>
+                            <p>Kolumna <b>źrodło</b> określa kiedy powstała szkoda:</p>
+                            <p>- Kliencka -> szkoda została stwierdzona przy odbiorze pojazdu.</p>
+                            <p>- Pracownicza -> szkoda została stwierdzona przy podejmowaniu auta lub odstawianiu go do bazy.</p>
+                            <p>W szczegolach szkody mamy zawartą dokumentację:</p>
+                            <p>- zdjęciową, </p>
+                            <p>- pozycje uszkodzenia</p>
+                            <p>- ID rezerwacji, jeśli jest to szkoda kliencka</p>
+                            <p>- dane zdarzenia, takie jak dane sprawcy, miejsce kolizji</p>
+                            <p>- druk szkodowy jeśli został wypełniony i odpis prawa jazdy</p>
+                            <p>Do danej szkody możemy automatycznie wygenerować zlecenie serwisowe za pomocą przycisku <b>dodaj zlecenie serwise</b>. Z widoku tabeli możemy zadecydować o szkodzie za pomocą trzech opcji: <b>nie wymaga naprawy, wymaga naprawy i naprawa na miejscu</b>.</p>
+                            <p>Jeśli brakuje nam dokumentacji możemy ręcznie wygenerować protokoł do każdej szkody za pomocą <b>wygeneruj protokoł szkody</b>, wypełniamy go zgodnie ze stanem faktycznym.</p>
+                        </section>
+                        <section class="docs-section" id="item-1-4">
+                            <h2 class="section-heading">Warsztaty</h2>
+                            <p>Zbior warsztatow, z ktorych korzystamy. Jeśli korzystamy z warsztatu, a nie ma go na liście, śmiało w tym miejscu możemy go dodać.</p>
+                            <a href="assets/images/ser-war.png"><img class="figure-img img-fluid shadow rounded" src="assets/images/ser-war.png" alt="" title="przykład" /></a>
+                        </section>
+                        <section class="docs-section" id="item-1-5">
+                            <h2 class="section-heading">Opony</h2>
+
+                        </section>
+                        <!--//section-->
+
+
+                </article>
+                <!--//docs-article-->
+
+
+
+
+                <footer class="footer">
+                    <div class="container text-center py-5">
+                        <small class="copyright">Template Copyright &copy; <a href="https://themes.3rdwavemedia.com/" target="_blank">3rd Wave Media</a></small>
+                        <ul class="social-list list-unstyled pt-4 mb-0">
+                            <li class="list-inline-item"><a href="#"><i class="fab fa-github fa-fw"></i></a></li>
+                            <li class="list-inline-item"><a href="#"><i class="fab fa-twitter fa-fw"></i></a></li>
+                            <li class="list-inline-item"><a href="#"><i class="fab fa-slack fa-fw"></i></a></li>
+                            <li class="list-inline-item"><a href="#"><i class="fab fa-product-hunt fa-fw"></i></a></li>
+                            <li class="list-inline-item"><a href="#"><i class="fab fa-facebook-f fa-fw"></i></a></li>
+                            <li class="list-inline-item"><a href="#"><i class="fab fa-instagram fa-fw"></i></a></li>
+                        </ul>
+                        <!--//social-list-->
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </div>
+    <!--//docs-wrapper-->
+
+
+    <!-- Javascript -->
+    <script src="assets/plugins/popper.min.js"></script>
+    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+
+    <!-- Page Specific JS -->
+    <script src="assets/plugins/smoothscroll.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
+    <script src="assets/js/highlight-custom.js"></script>
+    <script src="assets/plugins/simplelightbox/simple-lightbox.min.js"></script>
+    <script src="assets/plugins/gumshoe/gumshoe.polyfills.min.js"></script>
+    <script src="assets/js/docs.js"></script>
+
+</body>
+
+</html>
