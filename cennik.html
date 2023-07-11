@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kalkulator wynajmu samochodu</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
 
   <style>
 * {
@@ -126,7 +125,7 @@ button {
   padding: 20px;
   margin-left: 20px;
   overflow-y: auto;
-  max-height: 800px;
+  max-height: 900px;
 }
 
 .car-description h2 {
@@ -300,6 +299,7 @@ button {
         <input type="number" id="discount" min="0" max="10" value="0">
 
         <button type="button" onclick="calculateRentalPrice()">Oblicz cenę wynajmu</button>
+      
 
         <div id="result"></div>
       </div>
@@ -570,7 +570,9 @@ const carClasses = {
       const resultElement = document.getElementById("result");
       resultElement.innerHTML = `
 <p> Klasa pojazdu: ${carClass} </p>
+<p >Dni: ${rentalPeriod} </p>
         <p >Stawka dobowa wynajmu: ${discountRate} PLN</p>
+
 ${
           podst ? `<p>Podstawienie: ${totalPricePodst} PLN</p>` : ""
         }
@@ -599,21 +601,9 @@ ${
         <p>Rabat: ${discount}%</p>
         <p>Koszt wynajmu samochodu: ${discountedTotalPrice.toFixed(2)} PLN</p>
         <p>Depozyt: ${deposit.toFixed(2)} PLN</p>
-        <button id="generatePdfButton">Generuj i pobierz PDF</button>
       `;
     }
   </script>
-      <script>
-    document.getElementById('generatePdfButton').addEventListener('click', function() {
-      const pdf = new jsPDF();
-      const options = {
-        background: '#fff' // Opcjonalnie, można ustawić kolor tła PDF
-      };
 
-      pdf.addHTML(document.body, options, function() {
-        pdf.save('moj_plik.pdf');
-      });
-    });
-  </script>
 </body>
 </html>
