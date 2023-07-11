@@ -292,7 +292,7 @@ button {
         </div>
         <div class="checkbox-container">
           <input type="checkbox" id="FCS">
-          <label class="checkbox-label" for="FCS">Full cleaning service (+99 PLN/STC PAK. +50PLN)</label>
+          <label class="checkbox-label" for="FCS">Full Cleaning Service (+99 PLN/STC PAK. +50PLN)</label>
         </div>
 
         <label for="discount">Rabat (% na stawkę dobową):</label>
@@ -497,6 +497,36 @@ const carClasses = {
   FFBD: [0, 0, 0, 0, 0, 0, 0, 0],
   RWBI: [0, 0, 0, 0, 0, 0, 0, 0]
 };
+      
+       // Funkcja do usuwania wyliczenia z historii
+    function deleteCalculation(index) {
+      calculations.splice(index, 1); // Usunięcie wyliczenia z tablicy
+      renderHistoryList(); // Ponowne renderowanie listy historii
+    }
+
+    // Funkcja renderująca listę historii
+    function renderHistoryList() {
+      const historyList = document.getElementById("historyList");
+      historyList.innerHTML = ""; // Wyczyszczenie listy przed ponownym renderowaniem
+
+      calculations.forEach((calculation, index) => {
+        const { carClass, rentalPeriod, discount, totalPrice, deposit } = calculation;
+
+        const calculationElement = document.createElement("div");
+        calculationElement.innerHTML = `
+          <h2> #${index + 1} </h2>
+          <p> Klasa pojazdu: ${carClass} </p>
+          <p >Dni: ${rentalPeriod} </p>
+          <p>Rabat: ${discount}%</p>
+          <p>Koszt wynajmu samochodu: ${totalPrice.toFixed(2)} PLN</p>
+          <p>Depozyt: ${deposit.toFixed(2)} PLN</p>
+          <button class="delete-button" onclick="deleteCalculation(${index})">Usuń</button>
+        `;
+
+        historyList.appendChild(calculationElement);
+      });
+    }
+
 
     function calculateRentalPrice() {
       nolist += 1;
@@ -580,7 +610,7 @@ const carClasses = {
       resultElement.innerHTML = `
 <p> Klasa pojazdu: ${carClass} </p>
 <p >Dni: ${rentalPeriod} </p>
-        <p >Stawka dobowa wynajmu: ${discountRate} PLN</p>
+        <p >Stawka dobowa wynajmu: ${discountRate.toFixed(20)} PLN</p>
 
 ${
           podst ? `<p>Podstawienie: ${totalPricePodst} PLN</p>` : ""
@@ -611,42 +641,16 @@ ${
         <p>Koszt wynajmu samochodu: ${discountedTotalPrice.toFixed(2)} PLN</p>
         <p>Depozyt: ${deposit.toFixed(2)} PLN</p>
       `;
-          const calculationResult = `
-        <h2> #${nolist} </h2>
-        <p> Klasa pojazdu: ${carClass} </p>
-        <p>Dni: ${rentalPeriod} </p>
-        <p>Stawka dobowa wynajmu: ${discountRate} PLN</p>
-        ${
-          podst ? `<p>Podstawienie: ${totalPricePodst} PLN</p>` : ""
-        }
-        ${
-          zwrot ? `<p>Podstawienie: ${totalPriceZwrot} PLN</p>` : ""
-        }
-        ${
-          stcOption !== "none"
-            ? `<p>Dodatek STC: ${totalPriceSTC} PLN</p>`
-            : ""
-        }
-        ${international ? `<p>Wyjazd za granicę: ${totalPriceWZG} PLN</p>` : ""}
-        ${
-          WPG ? `<p>Wydanie poza godzinami: ${totalPriceWPG} PLN</p>` : ""
-        }
-        ${
-          ZPG ? `<p>Zwrot poza godzinami: ${totalPriceZPG} PLN</p>` : ""
-        }
-        ${
-          ZWIO ? `<p>Zwrot w innym oddziale: ${totalPriceZWIO} PLN</p>` : ""
-        }
-        ${
-          FCS ? `<p>Full Cleaning Service: ${totalPriceFCS} PLN</p>` : ""
-        }
-        <p>Rabat: ${discount}%</p>
-        <p>Koszt wynajmu samochodu: ${discountedTotalPrice.toFixed(2)} PLN</p>
-        <p>Depozyt: ${deposit.toFixed(2)} PLN</p>
-      `;
+      const calculation = {
+        carClass,
+        rentalPeriod,
+        discount,
+        totalPrice: discountedTotalPrice,
+        deposit,
+      };
 
-      calculations.unshift(calculationResult);
-      historyList.innerHTML = calculations.join("<hr style='margin: 10px 0;'>");
+      calculations.unshift(calculation); // Dodanie wyliczenia do historii
+      renderHistoryList(); // Ponowne renderowanie listy historii
     }
       
     
