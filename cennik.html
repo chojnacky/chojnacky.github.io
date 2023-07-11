@@ -208,6 +208,7 @@ button {
   </style>
 </head>
 <body>
+    
   <div class="container">
     <div class="calculator">
       <h1>Kalkulator wynajmu samochodu</h1>
@@ -253,7 +254,25 @@ button {
             <option value="package">STC - pakiet</option>
           </select>
         </div>
-
+          
+            <div class="checkbox-container">
+          <input type="checkbox" id="podst">
+          <label class="checkbox-label" for="podst">Podstawienie</label>
+          </div>
+        <div class="checkbox-container" id="podst" style="display: none;">
+        <div id="numberInput" > Wpisz liczbę km:
+        <input type="number" id="podst_km" >
+        </div>
+                        </div>
+           <div class="checkbox-container">
+          <input type="checkbox" id="zwrot">
+          <label class="checkbox-label" for="zwrot">Zwrot</label>
+          </div>
+        <div class="checkbox-container" id="zwrot" style="display: none; color: black">
+        <div id="numberInput" > Wpisz liczbę km:
+        <input type="number" id="zwrot_km" >
+        </div>
+                        </div>
         <div class="checkbox-container">
           <input type="checkbox" id="international">
           <label class="checkbox-label" for="international">Wyjazd za granicę (+200 PLN)</label>
@@ -318,8 +337,34 @@ button {
       </div>
     </div>
   </div>
+<script>
+ const checkbox = document.getElementById('podst');
+  const numberInputContainer = document.querySelector('.checkbox-container[style="display: none;"]');
 
+  checkbox.addEventListener('change', function() {
+    if (this.checked) {
+      numberInputContainer.style.display = 'block';
+    } else {
+      numberInputContainer.style.display = 'none';
+    }
+  });
+</script>
+    
+    <script>
+ const checkbox1 = document.getElementById('zwrot');
+  const numberInputContainer1 = document.querySelector('.checkbox-container[style="display: none; color: black"]');
+
+  checkbox1.addEventListener('change', function() {
+    if (this.checked) {
+      numberInputContainer1.style.display = 'block';
+    } else {
+      numberInputContainer1.style.display = 'none';
+    }
+  });
+</script>
   <script>
+      
+     
       const carSTC = {
           MDMR : [30, 199, 2000],
           EDAR : [30, 199, 2000],
@@ -449,7 +494,12 @@ const carClasses = {
       const ZPG = document.getElementById("ZPG").checked;
       const ZWIO = document.getElementById("ZWIO").checked;
       let FCS = document.getElementById("FCS").checked;
+        let zwrot = document.getElementById("zwrot").checked;
+        let podst = document.getElementById("podst").checked;
       const discount = document.getElementById("discount").value;
+        const podstkm = document.getElementById("podst_km").value;
+        const zwrotkm = document.getElementById("zwrot_km").value;
+        
 
       const rateIndex = rentalPeriod >= 8 ? 7 : rentalPeriod - 1;
       let rate = carClasses[carClass][rateIndex];
@@ -461,6 +511,17 @@ const carClasses = {
       let totalPriceZWIO = 0;
       let totalPriceFCS = 0;
       let deposit = carSTC[carClass][2];
+      let totalPricePodst = 0;
+      let totalPriceZwrot = 0;
+        
+        if(zwrot) {
+            totalPriceZwrot += (zwrotkm * 2 * 3);
+            totalPrice += totalPriceZwrot;
+        }
+        if(podst) {
+            totalPricePodst += (podstkm * 2 * 3);
+            totalPrice += totalPricePodst;
+        }
 
       if (international) {
         totalPriceWZG += 200;
@@ -505,6 +566,12 @@ const carClasses = {
       resultElement.innerHTML = `
 <p> Klasa pojazdu: ${carClass} </p>
         <p >Stawka dobowa wynajmu: ${discountRate} PLN</p>
+${
+          podst ? `<p>Podstawienie: ${totalPricePodst} PLN</p>` : ""
+        }
+${
+          zwrot ? `<p>Podstawienie: ${totalPriceZwrot} PLN</p>` : ""
+        }
         ${
           stcOption !== "none"
             ? `<p>Dodatek STC: ${totalPriceSTC} PLN</p>`
