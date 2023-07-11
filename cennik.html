@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kalkulator wynajmu samochodu</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
+    <script>let nolist = 0</script>
   <style>
 * {
   box-sizing: border-box;
@@ -125,7 +125,7 @@ button {
   padding: 20px;
   margin-left: 20px;
   overflow-y: auto;
-  max-height: 900px;
+  max-height: 1000px;
 }
 
 .car-description h2 {
@@ -305,6 +305,13 @@ button {
       </div>
     </div>
     <div class="car-description">
+      <h2 style="text-align: center;">Historia wyliczeń</h2>
+      <div id="historyList"></div>
+    </div>
+    
+  </div>
+    <div class="container">
+        <div class="car-description">
       <h2>Opis klas samochodów</h2>
       <div class="scrollable-content">
         <ul>
@@ -338,7 +345,7 @@ button {
         </ul>
       </div>
     </div>
-  </div>
+    </div>
 <script>
  const checkbox = document.getElementById('podst');
   const numberInputContainer = document.querySelector('.checkbox-container[style="display: none;"]');
@@ -369,7 +376,8 @@ const numberInput = document.getElementById('podst_km');
 </script>
   <script>
       
-     
+             const historyList = document.getElementById("historyList");
+    const calculations = [];
       const carSTC = {
           MDMR : [30, 199, 2000],
           EDAR : [30, 199, 2000],
@@ -491,6 +499,7 @@ const carClasses = {
 };
 
     function calculateRentalPrice() {
+      nolist += 1;
       const carClass = document.getElementById("carClass").value;
       const rentalPeriod = document.getElementById("rentalPeriod").valueAsNumber;
       const stcOption = document.getElementById("stcOption").value;
@@ -602,7 +611,45 @@ ${
         <p>Koszt wynajmu samochodu: ${discountedTotalPrice.toFixed(2)} PLN</p>
         <p>Depozyt: ${deposit.toFixed(2)} PLN</p>
       `;
+          const calculationResult = `
+        <h2> #${nolist} </h2>
+        <p> Klasa pojazdu: ${carClass} </p>
+        <p>Dni: ${rentalPeriod} </p>
+        <p>Stawka dobowa wynajmu: ${discountRate} PLN</p>
+        ${
+          podst ? `<p>Podstawienie: ${totalPricePodst} PLN</p>` : ""
+        }
+        ${
+          zwrot ? `<p>Podstawienie: ${totalPriceZwrot} PLN</p>` : ""
+        }
+        ${
+          stcOption !== "none"
+            ? `<p>Dodatek STC: ${totalPriceSTC} PLN</p>`
+            : ""
+        }
+        ${international ? `<p>Wyjazd za granicę: ${totalPriceWZG} PLN</p>` : ""}
+        ${
+          WPG ? `<p>Wydanie poza godzinami: ${totalPriceWPG} PLN</p>` : ""
+        }
+        ${
+          ZPG ? `<p>Zwrot poza godzinami: ${totalPriceZPG} PLN</p>` : ""
+        }
+        ${
+          ZWIO ? `<p>Zwrot w innym oddziale: ${totalPriceZWIO} PLN</p>` : ""
+        }
+        ${
+          FCS ? `<p>Full Cleaning Service: ${totalPriceFCS} PLN</p>` : ""
+        }
+        <p>Rabat: ${discount}%</p>
+        <p>Koszt wynajmu samochodu: ${discountedTotalPrice.toFixed(2)} PLN</p>
+        <p>Depozyt: ${deposit.toFixed(2)} PLN</p>
+      `;
+
+      calculations.unshift(calculationResult);
+      historyList.innerHTML = calculations.join("<hr style='margin: 10px 0;'>");
     }
+      
+    
   </script>
 
 </body>
