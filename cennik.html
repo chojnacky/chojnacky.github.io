@@ -510,13 +510,14 @@ const carClasses = {
       historyList.innerHTML = ""; // Wyczyszczenie listy przed ponownym renderowaniem
 
       calculations.forEach((calculation, index) => {
-        const { carClass, rentalPeriod, discount, stcOption, international, wpg, zpg, zwio, fcs, podst, zwrot, totalPrice, deposit } = calculation;
+        const { carClass, rentalPeriod, daily, discount, stcOption, international, wpg, zpg, zwio, fcs, podst, zwrot, totalPrice, deposit } = calculation;
 
         const calculationElement = document.createElement("div");
         calculationElement.innerHTML = `
           <h2> #${index + 1} </h2>
           <p> Klasa pojazdu: ${carClass} </p>
           <p >Dni: ${rentalPeriod} </p>
+<p >Stawka dobowa wynajmu: ${daily} PLN</p>
 ${
           podst > 0 ? `<p>Podstawienie: ${podst} PLN</p>` : ""
         }
@@ -669,6 +670,7 @@ ${
       const calculation = {
         carClass,
         rentalPeriod,
+        daily: discountRate.toFixed(2),
         stcOption: totalPriceSTC,
         international: totalPriceWZG,
         wpg: totalPriceWPG,
