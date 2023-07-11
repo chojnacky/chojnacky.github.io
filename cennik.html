@@ -261,7 +261,7 @@ button {
           </div>
         <div class="checkbox-container" id="podst" style="display: none;">
         <div id="numberInput" > Wpisz liczbę km:
-        <input type="number" id="podst_km" >
+        <input type="number" id="podst_km" value ="0">
         </div>
                         </div>
            <div class="checkbox-container">
@@ -270,7 +270,7 @@ button {
           </div>
         <div class="checkbox-container" id="zwrot" style="display: none; color: black">
         <div id="numberInput" > Wpisz liczbę km:
-        <input type="number" id="zwrot_km" >
+        <input type="number" id="zwrot_km" value ="0">
         </div>
                         </div>
         <div class="checkbox-container">
@@ -340,11 +340,12 @@ button {
 <script>
  const checkbox = document.getElementById('podst');
   const numberInputContainer = document.querySelector('.checkbox-container[style="display: none;"]');
-
+const numberInput = document.getElementById('podst_km');
   checkbox.addEventListener('change', function() {
     if (this.checked) {
       numberInputContainer.style.display = 'block';
     } else {
+        numberInput.value = 0;
       numberInputContainer.style.display = 'none';
     }
   });
@@ -353,11 +354,13 @@ button {
     <script>
  const checkbox1 = document.getElementById('zwrot');
   const numberInputContainer1 = document.querySelector('.checkbox-container[style="display: none; color: black"]');
+        const numberInput1 = document.getElementById('zwrot_km');
 
   checkbox1.addEventListener('change', function() {
     if (this.checked) {
       numberInputContainer1.style.display = 'block';
     } else {
+        numberInput1.value = 0;
       numberInputContainer1.style.display = 'none';
     }
   });
