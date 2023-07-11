@@ -16,8 +16,9 @@ body {
   padding: 0;
   background-color: #f2f2f2;
   font-family: Arial, sans-serif;
-}
 
+    
+}
 .container {
   max-width: 900px;
   margin: 50px auto;
@@ -205,18 +206,20 @@ button {
   }
 }
 
-
   </style>
 </head>
 <body>
-    
   <div class="container">
     <div class="calculator">
-      <h1>Kalkulator wynajmu samochodu</h1>
+          <h1>
+        Kalkulator wynajmu samochodu
+      </h1>
 
       <div class="form-container">
         <div class="select-container">
+            
           <select id="carClass">
+        <option value="" disabled selected>Wybierz klasę pojazdu</option>
             <option value="MDMR">MDMR</option>
             <option value="EDMR">EDMR</option>
             <option value="EDAR">EDAR</option>
@@ -250,6 +253,7 @@ button {
 
         <div class="select-container">
           <select id="stcOption">
+            <option value="none" disabled selected>Wybierz STC</option>
             <option value="none">STC - brak</option>
             <option value="daily">STC - dobowo</option>
             <option value="package">STC - pakiet</option>
