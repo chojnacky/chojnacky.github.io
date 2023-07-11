@@ -510,13 +510,37 @@ const carClasses = {
       historyList.innerHTML = ""; // Wyczyszczenie listy przed ponownym renderowaniem
 
       calculations.forEach((calculation, index) => {
-        const { carClass, rentalPeriod, discount, totalPrice, deposit } = calculation;
+        const { carClass, rentalPeriod, discount, stcOption, international, wpg, zpg, zwio, fcs, podst, zwrot, totalPrice, deposit } = calculation;
 
         const calculationElement = document.createElement("div");
         calculationElement.innerHTML = `
           <h2> #${index + 1} </h2>
           <p> Klasa pojazdu: ${carClass} </p>
           <p >Dni: ${rentalPeriod} </p>
+${
+          podst > 0 ? `<p>Podstawienie: ${podst} PLN</p>` : ""
+        }
+${
+          zwrot > 0? `<p>Podstawienie: ${zwort} PLN</p>` : ""
+        }
+        ${
+          stcOption > 0
+            ? `<p>Dodatek STC: ${stcOption} PLN</p>`
+            : ""
+        }
+        ${international > 0 ? `<p>Wyjazd za granicę: ${international} PLN</p>` : ""}
+        ${
+          wpg > 0 ? `<p>Wydanie poza godzinami: ${wpg} PLN</p>` : ""
+        }
+        ${
+          zpg > 0 ? `<p>Zwrot poza godzinami: ${zpg} PLN</p>` : ""
+        }
+        ${
+          zwio > 0 ? `<p>Zwrot w innym oddziale: ${zwio} PLN</p>` : ""
+        }
+        ${
+          fcs > 0 ? `<p>Full Cleaning Service: ${fcs} PLN</p>` : ""
+        }
           <p>Rabat: ${discount}%</p>
           <p>Koszt wynajmu samochodu: ${totalPrice.toFixed(2)} PLN</p>
           <p>Depozyt: ${deposit.toFixed(2)} PLN</p>
@@ -641,9 +665,18 @@ ${
         <p>Koszt wynajmu samochodu: ${discountedTotalPrice.toFixed(2)} PLN</p>
         <p>Depozyt: ${deposit.toFixed(2)} PLN</p>
       `;
+
       const calculation = {
         carClass,
         rentalPeriod,
+        stcOption: totalPriceSTC,
+        international: totalPriceWZG,
+        wpg: totalPriceWPG,
+        zpg: totalPriceZPG,
+        zwio: totalPriceZWIO,
+        fcs: totalPriceFCS,
+        podst: totalPricePodst,
+        zwrot: totalPriceZwrot,
         discount,
         totalPrice: discountedTotalPrice,
         deposit,
