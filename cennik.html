@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kalkulator wynajmu samochodu</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+
   <style>
 * {
   box-sizing: border-box;
@@ -124,7 +126,7 @@ button {
   padding: 20px;
   margin-left: 20px;
   overflow-y: auto;
-  max-height: 600px;
+  max-height: 800px;
 }
 
 .car-description h2 {
@@ -311,7 +313,7 @@ button {
           <li><span>EDAR (B AT):</span> Kia Rio</li>
             <li><span>CDMR (C):</span> Toyota Corolla</li>
             <li><span>CDAR (C AT):</span> Toyota Corolla AT</li>
-            <li><span>CWMR (C KB):</span> Hyunda i30</li>
+            <li><span>CWMR (C KB):</span> Hyundai i30</li>
             <li><span>CWAR (C KB AT):</span> Toyota Corolla KB AT</li>
             <li><span>SLMR (D):</span> BRAK</li>
             <li><span>SLAR (D AT):</span> Skoda Superb</li>
@@ -320,15 +322,15 @@ button {
             <li><span>FFMR (SUV):</span> Brak</li>
             <li><span>FFAR (SUV AT):</span> Nissan Qashqai, Seat Ateca, Seat Arona, Skoda Kodiaq</li>
             <li><span>RLAR (D PR):</span> Audi A4</li>
-            <li><span>PFAR:</span> Audi A6</li>
-            <li><span>PLAR:</span> Audi Q5, Volvo  XC60, BMW X4, LR Discovery Sport</li>
-            <li><span>LFAD (LUX):</span> BMW X5, Volvo XC90</li>
+            <li><span>PFAR:</span> Audi A6, BMW 5</li>
+            <li><span>PLAR:</span> Audi Q5, Volvo  XC60, BMW X4, LR Discovery Sport, Lexus NX300H</li>
+            <li><span>LFAD (LUX):</span> BMW X5, Volvo XC90, Audi A7, Cupra Formentor</li>
             <li><span>WLAD (LUX ELITE):</span> Audi Q8, Audi A8, Porsche Macan</li>
             <li><span>SVMR (VAN 7os):</span> Dacia Jogger</li>
             <li><span>PVMD (9os):</span> BRAK</li>
             <li><span>EKMD (M. dost.):</span> Toyota Proace City</li>
             <li><span>CKMD (Śr. dost.):</span> Toyota Proace</li>
-            <li><span>SKMD (D. dost.):</span> Mercedes Sprinter (L4H2), Citoren Jumper (L3H2)</li>
+            <li><span>SKMD (D. dost.):</span> Mercedes Sprinter (L4H2), Citroen Jumper (L3H2)</li>
             
             
             
@@ -597,8 +599,21 @@ ${
         <p>Rabat: ${discount}%</p>
         <p>Koszt wynajmu samochodu: ${discountedTotalPrice.toFixed(2)} PLN</p>
         <p>Depozyt: ${deposit.toFixed(2)} PLN</p>
+        <button id="generatePdfButton">Generuj i pobierz PDF</button>
       `;
     }
+  </script>
+      <script>
+    document.getElementById('generatePdfButton').addEventListener('click', function() {
+      const pdf = new jsPDF();
+      const options = {
+        background: '#fff' // Opcjonalnie, można ustawić kolor tła PDF
+      };
+
+      pdf.addHTML(document.body, options, function() {
+        pdf.save('moj_plik.pdf');
+      });
+    });
   </script>
 </body>
 </html>
