@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kalkulator wynajmu samochodu</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-2WF6TMwB+3OSI1CxOxvqW8t6zCX9dEqbYYWATUO7UqY2pfsz8Wx7H6hIbb8zrg1s" crossorigin="anonymous">
     <script>
         let no = 0;
         let nolist = [];
@@ -543,6 +544,48 @@
             renderHistoryList(); // Ponowne renderowanie listy historii // Usunięcie wyliczenia z tablicy
             nolist.slice(index+1);
         }
+        
+function copyToClipboard(index) {
+    var element = calculations[index];
+    let resultText = `Klasa pojazdu: ${element.carClass}
+Dni: ${element.rentalPeriod}
+Stawka dobowa wynajmu: ${element.daily} PLN`;
+
+    // Sprawdź dostępność dodatków i dodaj odpowiednie linie do resultText
+    if (element.podst > 0) {
+        resultText += `\nPodstawienie: ${element.podst} PLN`;
+    }
+    if (element.zwrot > 0) {
+        resultText += `\nZwrot: ${element.zwrot} PLN`;
+    }
+    if (element.stcOption > 0) {
+        resultText += `\nSTC: ${element.stcOption} PLN`;
+    }
+    if (element.international > 0) {
+        resultText += `\nWZG: ${element.international} PLN`;
+    }
+    if (element.wpg > 0) {
+        resultText += `\nWydanie poza godzinami: ${element.wpg} PLN`;
+    }
+    if (element.zpg > 0) {
+        resultText += `\nZwrot poza godzinami: ${element.zpg} PLN`;
+    }
+    if (element.zwio > 0) {
+        resultText += `\nZwrot w innym oddziale: ${element.zwio} PLN`;
+    }
+    if (element.fcs > 0) {
+        resultText += `\nFull Cleaning Service: ${element.fcs} PLN`;
+    }
+    
+    resultText += `
+Rabat: ${element.discount}%
+Koszt wynajmu samochodu: ${element.totalPrice.toFixed(2)} PLN
+Depozyt: ${element.deposit.toFixed(2)} PLN`;
+
+    navigator.clipboard.writeText(resultText).then(() => {
+        alert("Skopiowano do schowka: " + resultText);
+    });
+}
 
         // Funkcja renderująca listę historii
         function renderHistoryList() {
@@ -601,7 +644,8 @@ ${
           <p><b>Rabat:</b> ${discount}%</p>
           <p><b>Koszt wynajmu samochodu:</b> ${totalPrice.toFixed(2)} PLN</p>
           <p><b>Depozyt:</b> ${deposit.toFixed(2)} PLN</p>
-          <button class="delete-button" onclick="deleteCalculation(${index})">Usuń</button>
+          <button class="delete-button" onclick="deleteCalculation(${index})" style="width:49%; background-color: lightcoral; "><i class="fa fa-trash"></i></button>
+         <button class="copy-button" onclick="copyToClipboard(${index})" style="width:49%; background-color: #3f51b5;"><i class="fa fa-clipboard"></i></button>
         `;
 
                 historyList.appendChild(calculationElement);
