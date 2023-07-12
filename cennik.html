@@ -126,7 +126,7 @@ button {
   padding: 20px;
   margin-left: 20px;
   overflow-y: auto;
-  max-height: 1000px;
+  max-height: 900px;
 }
 
 .car-description h2 {
@@ -523,7 +523,7 @@ const carClasses = {
 
         const calculationElement = document.createElement("div");
         calculationElement.innerHTML = `
-          <h2> #${index + 1} </h2>
+          <h2 style='margin-top: 10px;'> #${index + 1} </h2>
           <p> Klasa pojazdu: ${carClass} </p>
           <p >Dni: ${rentalPeriod} </p>
 <p >Stawka dobowa wynajmu: ${daily} PLN</p>
