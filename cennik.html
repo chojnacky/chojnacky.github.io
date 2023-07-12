@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AMJ CENNIK</title>
+  <title>Kalkulator wynajmu samochodu</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script>let nolist = 0</script>
   <style>
@@ -126,7 +126,7 @@ button {
   padding: 20px;
   margin-left: 20px;
   overflow-y: auto;
-  max-height: 1000px;
+  max-height: 900px;
 }
 
 .car-description h2 {
@@ -206,21 +206,25 @@ button {
     margin-top: 20px; /* Dodana właściwość */
   }
 }
-      
+
   </style>
 </head>
 <body>
-<script>       function updateSTCOption() {
-    var carClass = document.getElementById("carClass").value;
-    var stcOption = document.getElementById("stcOption");
-    var selectedValue = stcOption.value;
+    <script>
+        
+        function updateSTCOption() {
+            var carClass123 = document.getElementById("carClass").value;
+            var stcOption123 = document.getElementById("stcOption");
+            var selectedValue123 = stcOption123.value;
 
-    if (selectedValue === "daily") {
-      stcOption.options[2].text = "STC - dobowo (+" + carSTC[carClass][0] + " PLN/doba)";
-    } else if (selectedValue === "package") {
-      stcOption.options[3].text = "STC - pakiet (+" + carSTC[carClass][1] + " PLN)";
-    }
-  }</script>
+            if (selectedValue123 === "daily") {
+                stcOption123.options[2].text = "STC - dobowo (+" + carSTC[carClass123][0] + " PLN/doba)";
+            } else if (selectedValue123 === "package") {
+                stcOption123.options[3].text = "STC - pakiet (+" + carSTC[carClass123][1] + " PLN)";
+            }
+        }
+
+    </script>
   <div class="container">
     <div class="calculator">
           <h1>
@@ -261,17 +265,19 @@ button {
           </select>
         </div>
 
-        <label for="rentalPeriod">Okres wynajmu (w dniach):</label>
-        <input type="number" id="rentalPeriod" min="1" value="1">
+                       <div style="display:flex; align-items: center;margin-top: 5px;">
+                    <label for="rentalPeriod">Okres wynajmu (w dniach):</label>
+                    <input type="number" id="rentalPeriod" min="1" value="1" style="width: 100px; height: 30px; margin-left: 105px; margin-top: 12px;">
+                </div>
 
         <div class="select-container">
-          <select id="stcOption" onchange="updateSTCOption()">
-            <option value="none" disabled selected>Wybierz STC</option>
-            <option value="none">STC - brak</option>
-            <option value="daily">STC - dobowo (+ ? PLN/doba) </option>
-            <option value="package">STC - pakiet (+ ? PLN)</option>
-          </select>
-        </div>
+                    <select id="stcOption" onchange="updateSTCOption()">
+                        <option value="none" disabled selected>Wybierz STC</option>
+                        <option value="none">STC - brak</option>
+                        <option value="daily">STC - dobowo (+ ? PLN/doba) </option>
+                        <option value="package">STC - pakiet (+ ? PLN)</option>
+                    </select>
+                </div>
           
             <div class="checkbox-container">
           <input type="checkbox" id="podst">
@@ -312,8 +318,10 @@ button {
           <label class="checkbox-label" for="FCS">Full Cleaning Service (+99 PLN/STC PAK. +50PLN)</label>
         </div>
 
-        <label for="discount">Rabat (% na stawkę dobową):</label>
-        <input type="number" id="discount" min="0" max="10" value="0">
+                        <div style="display:flex; align-items: center; margin-top: 5px; margin-bottom: 20px;">
+                    <label for="discount">Rabat (% na stawkę dobową):</label>
+                    <input type="number" id="discount" min="0" max="10" value="0" style="width: 100px; height: 30px; margin-left: 85px; margin-top: 12px;">
+                </div>
 
         <button type="button" onclick="calculateRentalPrice()">Oblicz cenę wynajmu</button>
       
@@ -534,7 +542,7 @@ const carClasses = {
 
         const calculationElement = document.createElement("div");
         calculationElement.innerHTML = `
-          <h2 style='margin-top: 10px;> #${index + 1} </h2>
+          <h2 style='margin-top: 10px;'> #${index + 1} </h2>
           <p> Klasa pojazdu: ${carClass} </p>
           <p >Dni: ${rentalPeriod} </p>
 <p >Stawka dobowa wynajmu: ${daily} PLN</p>
@@ -708,15 +716,15 @@ ${
 
       calculations.unshift(calculation); // Dodanie wyliczenia do historii
       renderHistoryList(); // Ponowne renderowanie listy historii
-        
-    var stcOptionXX = document.getElementById("stcOption");
-    var selectedValue = stcOptionXX.value;
 
-    if (selectedValue === "daily") {
-      stcOptionXX.options[2].text = "STC - dobowo (+ ? PLN/doba)";
-    } else if (selectedValue === "package") {
-      stcOptionXX.options[3].text = "STC - pakiet (+ ? PLN)";
-    }
+            var stcOptionXX = document.getElementById("stcOption");
+            var selectedValue = stcOptionXX.value;
+
+            if (selectedValue === "daily") {
+                stcOptionXX.options[2].text = "STC - dobowo (+ ? PLN/doba)";
+            } else if (selectedValue === "package") {
+                stcOptionXX.options[3].text = "STC - pakiet (+ ? PLN)";
+            }
     }
       
     
