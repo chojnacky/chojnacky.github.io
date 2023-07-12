@@ -302,7 +302,7 @@
                     <label class="checkbox-label" for="zwrot">Zwrot</label>
                 </div>
                 <div style="display:flex; align-items: center;">
-                    <div class="checkbox-container" id="zwrot" style="display: none">
+                    <div class="checkbox-container" id="zwrot" style="display: none; color: black">
                         <div id="numberInput"> Wpisz liczbę km:
                             <input type="number" id="zwrot_km" value="0" style="width: 100px; height: 30px; margin-left: 175px; margin-top: 12px">
                         </div>
@@ -580,7 +580,7 @@ ${
         }
         ${
           stcOption > 0
-            ? `<p>Dodatek STC: ${stcOption} PLN</p>`
+            ? `<p>STC: ${stcOption} PLN</p>`
             : ""
         }
         ${international > 0 ? `<p>Wyjazd za granicę: ${international} PLN</p>` : ""}
