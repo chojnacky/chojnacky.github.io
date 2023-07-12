@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kalkulator wynajmu samochodu</title>
+    <title>AMJ CENNIK</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script>let nolist = 0</script>
   <style>
@@ -126,7 +126,7 @@ button {
   padding: 20px;
   margin-left: 20px;
   overflow-y: auto;
-  max-height: 900px;
+  max-height: 1000px;
 }
 
 .car-description h2 {
@@ -206,10 +206,21 @@ button {
     margin-top: 20px; /* Dodana właściwość */
   }
 }
-
+      
   </style>
 </head>
 <body>
+<script>       function updateSTCOption() {
+    var carClass = document.getElementById("carClass").value;
+    var stcOption = document.getElementById("stcOption");
+    var selectedValue = stcOption.value;
+
+    if (selectedValue === "daily") {
+      stcOption.options[2].text = "STC - dobowo (+" + carSTC[carClass][0] + " PLN/doba)";
+    } else if (selectedValue === "package") {
+      stcOption.options[3].text = "STC - pakiet (+" + carSTC[carClass][1] + " PLN)";
+    }
+  }</script>
   <div class="container">
     <div class="calculator">
           <h1>
@@ -219,7 +230,7 @@ button {
       <div class="form-container">
         <div class="select-container">
             
-          <select id="carClass" required>
+          <select id="carClass" required onchange="updateSTCOption()">
         <option value="" disabled selected>Wybierz klasę pojazdu</option>
             <option value="MDMR">MDMR</option>
             <option value="EDMR">EDMR</option>
@@ -254,11 +265,11 @@ button {
         <input type="number" id="rentalPeriod" min="1" value="1">
 
         <div class="select-container">
-          <select id="stcOption">
+          <select id="stcOption" onchange="updateSTCOption()">
             <option value="none" disabled selected>Wybierz STC</option>
             <option value="none">STC - brak</option>
-            <option value="daily">STC - dobowo</option>
-            <option value="package">STC - pakiet</option>
+            <option value="daily">STC - dobowo (+ ? PLN/doba) </option>
+            <option value="package">STC - pakiet (+ ? PLN)</option>
           </select>
         </div>
           
@@ -523,7 +534,7 @@ const carClasses = {
 
         const calculationElement = document.createElement("div");
         calculationElement.innerHTML = `
-          <h2 style='margin-top: 10px;'> #${index + 1} </h2>
+          <h2 style='margin-top: 10px;> #${index + 1} </h2>
           <p> Klasa pojazdu: ${carClass} </p>
           <p >Dni: ${rentalPeriod} </p>
 <p >Stawka dobowa wynajmu: ${daily} PLN</p>
@@ -697,6 +708,15 @@ ${
 
       calculations.unshift(calculation); // Dodanie wyliczenia do historii
       renderHistoryList(); // Ponowne renderowanie listy historii
+        
+    var stcOptionXX = document.getElementById("stcOption");
+    var selectedValue = stcOptionXX.value;
+
+    if (selectedValue === "daily") {
+      stcOptionXX.options[2].text = "STC - dobowo (+ ? PLN/doba)";
+    } else if (selectedValue === "package") {
+      stcOptionXX.options[3].text = "STC - pakiet (+ ? PLN)";
+    }
     }
       
     
