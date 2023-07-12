@@ -1,217 +1,224 @@
 <!DOCTYPE html>
 <html lang="pl">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kalkulator wynajmu samochodu</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script>let nolist = 0</script>
-  <style>
-* {
-  box-sizing: border-box;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator wynajmu samochodu</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script>
+        let nolist = 0
 
-body {
-  margin: 0;
-  padding: 0;
-  background-color: #f2f2f2;
-  font-family: Arial, sans-serif;
+    </script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
 
-    
-}
-.container {
-  max-width: 900px;
-  margin: 50px auto;
-  background-color: #fff;
-  border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-wrap: wrap;
-}
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
 
-.calculator {
-  flex: 1;
-  margin-bottom: 20px;
-}
 
-.calculator h1 {
-  text-align: center;
-  margin-top: 0;
-  color: #3f51b5;
-  font-size: 24px;
-  margin-bottom: 20px;
-}
+        }
 
-.form-container {
-  display: flex;
-  flex-direction: column;
-}
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-wrap: wrap;
+        }
 
-.select-container {
-  position: relative;
-  margin-top: 16px;
-}
+        .calculator {
+            flex: 1;
+            margin-bottom: 20px;
+        }
 
-.select-container::before {
-  content: "\f078";
-  font-family: FontAwesome;
-  position: absolute;
-  top: 50%;
-  right: 12px;
-  transform: translateY(-50%);
-  pointer-events: none;
-  color: #aaa;
-  font-size: 16px;
-}
+        .calculator h1 {
+            text-align: center;
+            margin-top: 0;
+            color: #3f51b5;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
 
-select {
-  appearance: none;
-  -moz-appearance: none;
-  -webkit-appearance: none;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
-  background-color: #fff;
-  color: #3f51b5;
-  cursor: pointer;
-  width: 100%;
-}
+        .form-container {
+            display: flex;
+            flex-direction: column;
+        }
 
-select:focus {
-  outline: none;
-  border-color: #4caf50;
-}
+        .select-container {
+            position: relative;
+            margin-top: 16px;
+        }
 
-label {
-  margin-top: 16px;
-  color: #555;
-  font-size: 16px;
-}
+        .select-container::before {
+            content: "\f078";
+            font-family: FontAwesome;
+            position: absolute;
+            top: 50%;
+            right: 12px;
+            transform: translateY(-50%);
+            pointer-events: none;
+            color: #aaa;
+            font-size: 16px;
+        }
 
-input[type="number"],
-button {
-  margin-top: 4px;
-  padding: 10px;
-  border: none;
-  border-radius: 4px;
-  font-size: 16px;
-  color: #fff;
-  cursor: pointer;
-  width: 100%;
-}
+        select {
+            appearance: none;
+            -moz-appearance: none;
+            -webkit-appearance: none;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            background-color: #fff;
+            color: #3f51b5;
+            cursor: pointer;
+            width: 100%;
+        }
 
-input[type="number"] {
-  background-color: #3f51b5;
-}
+        select:focus {
+            outline: none;
+            border-color: #4caf50;
+        }
 
-button {
-  background-color: #4caf50;
-}
+        label {
+            margin-top: 16px;
+            color: #555;
+            font-size: 16px;
+        }
 
-#result {
-  margin-top: 16px;
-  text-align: center;
-  font-weight: bold;
-  color: #3f51b5;
-  font-size: 18px;
-  clear: both; /* Dodana właściwość */
-}
+        input[type="number"],
+        button {
+            margin-top: 4px;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            color: #fff;
+            cursor: pointer;
+            width: 100%;
+        }
 
-.car-description {
-  flex: 1;
-  background-color: #f2f2f2;
-  border-radius: 8px;
-  padding: 20px;
-  margin-left: 20px;
-  overflow-y: auto;
-  max-height: 900px;
-}
+        input[type="number"] {
+            background-color: #3f51b5;
+        }
 
-.car-description h2 {
-  margin-top: 0;
-  color: #555;
-  font-size: 20px;
-}
+        button {
+            background-color: #4caf50;
+        }
 
-.car-description ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
+        #result {
+            margin-top: 16px;
+            text-align: center;
+            font-weight: bold;
+            color: #3f51b5;
+            font-size: 18px;
+            clear: both;
+            /* Dodana właściwość */
+        }
 
-.car-description li {
-  margin-bottom: 10px;
-}
+        .car-description {
+            flex: 1;
+            background-color: #f2f2f2;
+            border-radius: 8px;
+            padding: 20px;
+            margin-left: 20px;
+            overflow-y: auto;
+            max-height: 900px;
+        }
 
-.car-description li span {
-  font-weight: bold;
-}
+        .car-description h2 {
+            margin-top: 0;
+            color: #555;
+            font-size: 20px;
+        }
 
-.scrollable-content {
-  overflow-y: scroll;
-  max-height: 100%;
-}
+        .car-description ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
 
-.scrollable-content::-webkit-scrollbar {
-  width: 8px;
-}
+        .car-description li {
+            margin-bottom: 10px;
+        }
 
-.scrollable-content::-webkit-scrollbar-thumb {
-  background-color: #4caf50;
-  border-radius: 4px;
-}
+        .car-description li span {
+            font-weight: bold;
+        }
 
-.scrollable-content::-webkit-scrollbar-track {
-  background-color: #f2f2f2;
-  border-radius: 4px;
-}
+        .scrollable-content {
+            overflow-y: scroll;
+            max-height: 100%;
+        }
 
-/* Modyfikacje checkboxów */
-.checkbox-container {
-  display: flex;
-  align-items: center;
-  margin-top: 8px;
-}
-    
+        .scrollable-content::-webkit-scrollbar {
+            width: 8px;
+        }
 
-.checkbox-container input[type="checkbox"] {
-  -webkit-appearance: none;
-  width: 20px;
-  height: 20px;
-  border: 2px solid #ccc;
-  border-radius: 4px;
-  margin-right: 8px;
-  cursor: pointer;
-}
+        .scrollable-content::-webkit-scrollbar-thumb {
+            background-color: #4caf50;
+            border-radius: 4px;
+        }
 
-.checkbox-container input[type="checkbox"]:checked {
-  background-color: #4caf50;
-  border-color: #4caf50;
-}
+        .scrollable-content::-webkit-scrollbar-track {
+            background-color: #f2f2f2;
+            border-radius: 4px;
+        }
 
-.checkbox-label {
-  font-size: 16px;
-}
+        /* Modyfikacje checkboxów */
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            margin-top: 8px;
+        }
 
-/* Responsywność układu */
-@media (max-width: 600px) {
-  .container {
-    flex-direction: column;
-  }
-  
-  .car-description {
-    margin-left: 0;
-    margin-top: 20px; /* Dodana właściwość */
-  }
-}
 
-  </style>
+        .checkbox-container input[type="checkbox"] {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            margin-right: 8px;
+            cursor: pointer;
+        }
+
+        .checkbox-container input[type="checkbox"]:checked {
+            background-color: #4caf50;
+            border-color: #4caf50;
+        }
+
+        .checkbox-label {
+            font-size: 16px;
+        }
+
+        /* Responsywność układu */
+        @media (max-width: 600px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .car-description {
+                margin-left: 0;
+                margin-top: 20px;
+                /* Dodana właściwość */
+            }
+        }
+
+    </style>
 </head>
+
 <body>
     <script>
-        
         function updateSTCOption() {
             var carClass123 = document.getElementById("carClass").value;
             var stcOption123 = document.getElementById("stcOption");
@@ -225,52 +232,52 @@ button {
         }
 
     </script>
-  <div class="container">
-    <div class="calculator">
-          <h1>
-        Kalkulator wynajmu samochodu
-      </h1>
+    <div class="container">
+        <div class="calculator">
+            <h1>
+                Kalkulator wynajmu samochodu
+            </h1>
 
-      <div class="form-container">
-        <div class="select-container">
-            
-          <select id="carClass" required onchange="updateSTCOption()">
-        <option value="" disabled selected>Wybierz klasę pojazdu</option>
-            <option value="MDMR">MDMR</option>
-            <option value="EDMR">EDMR</option>
-            <option value="EDAR">EDAR</option>
-            <option value="CDMR">CDMR</option>
-              <option value="CDAR">CDAR</option>
-              <option value="CWMR">CWMR</option>
-              <option value="CWAR">CWAR</option>
-              <option value="SLMR">SLMR</option>
-              <option value="SLAR">SLAR</option>
-              <option value="SWMR">SWMR</option>
-              <option value="IGAH">IGAH</option>
-              <option value="IFMR">IFMR</option>
-              <option value="FFMR">FFMR</option>
-              <option value="FFAR">FFAR</option>
-              <option value="RLAR">RLAR</option>
-              <option value="PFAR">PFAR</option>
-              <option value="PLAR">PLAR</option>
-              <option value="LFAD">LFAD</option>
-              <option value="WLAD">WLAD</option>
-              <option value="SVMR">SVMR</option>
-              <option value="PVMD">PVMD</option>
-              <option value="EKMD">EKMD</option>
-              <option value="CKMD">CKMD</option>
-              <option value="SKMD">SKMD</option>
+            <div class="form-container">
+                <div class="select-container">
 
-              
-          </select>
-        </div>
+                    <select id="carClass" required onchange="updateSTCOption()">
+                        <option value="" disabled selected>Wybierz klasę pojazdu</option>
+                        <option value="MDMR">MDMR</option>
+                        <option value="EDMR">EDMR</option>
+                        <option value="EDAR">EDAR</option>
+                        <option value="CDMR">CDMR</option>
+                        <option value="CDAR">CDAR</option>
+                        <option value="CWMR">CWMR</option>
+                        <option value="CWAR">CWAR</option>
+                        <option value="SLMR">SLMR</option>
+                        <option value="SLAR">SLAR</option>
+                        <option value="SWMR">SWMR</option>
+                        <option value="IGAH">IGAH</option>
+                        <option value="IFMR">IFMR</option>
+                        <option value="FFMR">FFMR</option>
+                        <option value="FFAR">FFAR</option>
+                        <option value="RLAR">RLAR</option>
+                        <option value="PFAR">PFAR</option>
+                        <option value="PLAR">PLAR</option>
+                        <option value="LFAD">LFAD</option>
+                        <option value="WLAD">WLAD</option>
+                        <option value="SVMR">SVMR</option>
+                        <option value="PVMD">PVMD</option>
+                        <option value="EKMD">EKMD</option>
+                        <option value="CKMD">CKMD</option>
+                        <option value="SKMD">SKMD</option>
 
-                       <div style="display:flex; align-items: center;margin-top: 5px;">
+
+                    </select>
+                </div>
+
+                <div style="display:flex; align-items: center;margin-top: 5px;">
                     <label for="rentalPeriod">Okres wynajmu (w dniach):</label>
                     <input type="number" id="rentalPeriod" min="1" value="1" style="width: 100px; height: 30px; margin-left: 105px; margin-top: 12px;">
                 </div>
 
-        <div class="select-container">
+                <div class="select-container">
                     <select id="stcOption" onchange="updateSTCOption()">
                         <option value="none" disabled selected>Wybierz STC</option>
                         <option value="none">STC - brak</option>
@@ -278,269 +285,289 @@ button {
                         <option value="package">STC - pakiet (+ ? PLN)</option>
                     </select>
                 </div>
-          
-            <div class="checkbox-container">
-          <input type="checkbox" id="podst">
-          <label class="checkbox-label" for="podst">Podstawienie</label>
-          </div>
-        <div class="checkbox-container" id="podst" style="display: none;">
-        <div id="numberInput" > Wpisz liczbę km:
-        <input type="number" id="podst_km" value ="0">
-        </div>
-                        </div>
-           <div class="checkbox-container">
-          <input type="checkbox" id="zwrot">
-          <label class="checkbox-label" for="zwrot">Zwrot</label>
-          </div>
-        <div class="checkbox-container" id="zwrot" style="display: none; color: black">
-        <div id="numberInput" > Wpisz liczbę km:
-        <input type="number" id="zwrot_km" value ="0">
-        </div>
-                        </div>
-        <div class="checkbox-container">
-          <input type="checkbox" id="international">
-          <label class="checkbox-label" for="international">Wyjazd za granicę (+200 PLN)</label>
-        </div>
-        <div class="checkbox-container">
-          <input type="checkbox" id="WPG">
-          <label class="checkbox-label" for="WPG">Wydanie poza godzinami (+60 PLN)</label>
-        </div>
-        <div class="checkbox-container">
-          <input type="checkbox" id="ZPG">
-          <label class="checkbox-label" for="ZPG">Zwrot poza godzinami (+60 PLN)</label>
-        </div>
-        <div class="checkbox-container">
-          <input type="checkbox" id="ZWIO">
-          <label class="checkbox-label" for="ZWIO">Zwrot w innym oddziale (+500 PLN)</label>
-        </div>
-        <div class="checkbox-container">
-          <input type="checkbox" id="FCS">
-          <label class="checkbox-label" for="FCS">Full Cleaning Service (+99 PLN/STC PAK. +50PLN)</label>
-        </div>
 
-                        <div style="display:flex; align-items: center; margin-top: 5px; margin-bottom: 20px;">
+                <div class="checkbox-container">
+                    <input type="checkbox" id="podst">
+                    <label class="checkbox-label" for="podst">Podstawienie</label>
+                </div>
+                <div style="display:flex; align-items: center;">
+                    <div class="checkbox-container" id="podst" style="display: none;">
+                        <div id="numberInput"> Wpisz liczbę km:
+                            <input type="number" id="podst_km" value="0" style="width: 100px; height: 30px; margin-left: 175px; margin-top: 12px">
+                        </div>
+                    </div>
+                </div>
+                <div class="checkbox-container">
+                    <input type="checkbox" id="zwrot">
+                    <label class="checkbox-label" for="zwrot">Zwrot</label>
+                </div>
+                <div style="display:flex; align-items: center;">
+                    <div class="checkbox-container" id="zwrot" style="display: none">
+                        <div id="numberInput"> Wpisz liczbę km:
+                            <input type="number" id="zwrot_km" value="0" style="width: 100px; height: 30px; margin-left: 175px; margin-top: 12px">
+                        </div>
+                    </div>
+                </div>
+                <div class="checkbox-container">
+                    <input type="checkbox" id="international">
+                    <label class="checkbox-label" for="international">Wyjazd za granicę (+200 PLN)</label>
+                </div>
+                <div class="checkbox-container">
+                    <input type="checkbox" id="WPG">
+                    <label class="checkbox-label" for="WPG">Wydanie poza godzinami (+60 PLN)</label>
+                </div>
+                <div class="checkbox-container">
+                    <input type="checkbox" id="ZPG">
+                    <label class="checkbox-label" for="ZPG">Zwrot poza godzinami (+60 PLN)</label>
+                </div>
+                <div class="checkbox-container">
+                    <input type="checkbox" id="ZWIO">
+                    <label class="checkbox-label" for="ZWIO">Zwrot w innym oddziale (+500 PLN)</label>
+                </div>
+                <div class="checkbox-container">
+                    <input type="checkbox" id="FCS">
+                    <label class="checkbox-label" for="FCS">Full Cleaning Service (+99 PLN/STC PAK. +50PLN)</label>
+                </div>
+
+                <div style="display:flex; align-items: center; margin-top: 5px; margin-bottom: 20px;">
                     <label for="discount">Rabat (% na stawkę dobową):</label>
                     <input type="number" id="discount" min="0" max="10" value="0" style="width: 100px; height: 30px; margin-left: 85px; margin-top: 12px;">
                 </div>
 
-        <button type="button" onclick="calculateRentalPrice()">Oblicz cenę wynajmu</button>
-      
+                <button type="button" onclick="calculateRentalPrice()">Oblicz cenę wynajmu</button>
 
-        <div id="result"></div>
-      </div>
+
+                <div id="result"></div>
+            </div>
+        </div>
+        <div class="car-description">
+            <h2 style="text-align: center;">Historia wyliczeń</h2>
+            <div id="historyList"></div>
+        </div>
+
     </div>
-    <div class="car-description">
-      <h2 style="text-align: center;">Historia wyliczeń</h2>
-      <div id="historyList"></div>
-    </div>
-    
-  </div>
     <div class="container">
         <div class="car-description">
-      <h2>Opis klas samochodów</h2>
-      <div class="scrollable-content">
-        <ul>
-          <li><span>MDMR (A):</span> BRAK</li>
-          <li><span>EDMR (B):</span> Skoda Fabia, Dacia Sandero Stepway</li>
-          <li><span>EDAR (B AT):</span> Kia Rio</li>
-            <li><span>CDMR (C):</span> Toyota Corolla</li>
-            <li><span>CDAR (C AT):</span> Toyota Corolla AT</li>
-            <li><span>CWMR (C KB / AT):</span> Hyundai i30, oyota Corolla KB AT</li>
-            <li><span>SLMR (D):</span> BRAK</li>
-            <li><span>SLAR (D AT):</span> Skoda Superb</li>
-            <li><span>SWMR (D KB):</span> BRAK</li>
-            <li><span>IGAH (CR AT):</span> Toyota C-HR</li>
-            <li><span>IFMR (CR):</span> Seat Arona</li>
-            <li><span>FFMR (SUV):</span> Brak</li>
-            <li><span>FFAR (SUV AT):</span> Nissan Qashqai, Seat Ateca, Seat Arona, Skoda Kodiaq</li>
-            <li><span>RLAR (D PR):</span> Audi A4</li>
-            <li><span>PFAR:</span> Audi A6, BMW 5</li>
-            <li><span>PLAR:</span> Audi Q5, Volvo  XC60, BMW X4, LR Discovery Sport, Lexus NX300H</li>
-            <li><span>LFAD (LUX):</span> BMW X5, Volvo XC90, Audi A7, Cupra Formentor</li>
-            <li><span>WLAD (LUX ELITE):</span> Audi Q8, Audi A8, Porsche Macan</li>
-            <li><span>SVMR (VAN 7os):</span> Dacia Jogger</li>
-            <li><span>PVMD (9os):</span> BRAK</li>
-            <li><span>EKMD (M. dost.):</span> Toyota Proace City</li>
-            <li><span>CKMD (Śr. dost.):</span> Toyota Proace</li>
-            <li><span>SKMD (D. dost.):</span> Mercedes Sprinter (L4H2), Citroen Jumper (L3H2)</li>
-            
-            
-            
-          <!-- Dodaj więcej klas tutaj -->
-        </ul>
-      </div>
+            <h2>Opis klas samochodów</h2>
+            <div class="scrollable-content">
+                <ul>
+                    <li><span>MDMR (A):</span> BRAK</li>
+                    <li><span>EDMR (B):</span> Skoda Fabia, Dacia Sandero Stepway</li>
+                    <li><span>EDAR (B AT):</span> Kia Rio</li>
+                    <li><span>CDMR (C):</span> Toyota Corolla</li>
+                    <li><span>CDAR (C AT):</span> Toyota Corolla AT</li>
+                    <li><span>CWMR (C KB / AT):</span> Hyundai i30, oyota Corolla KB AT</li>
+                    <li><span>SLMR (D):</span> BRAK</li>
+                    <li><span>SLAR (D AT):</span> Skoda Superb</li>
+                    <li><span>SWMR (D KB):</span> BRAK</li>
+                    <li><span>IGAH (CR AT):</span> Toyota C-HR</li>
+                    <li><span>IFMR (CR):</span> Seat Arona</li>
+                    <li><span>FFMR (SUV):</span> Brak</li>
+                    <li><span>FFAR (SUV AT):</span> Nissan Qashqai, Seat Ateca, Seat Arona, Skoda Kodiaq</li>
+                    <li><span>RLAR (D PR):</span> Audi A4</li>
+                    <li><span>PFAR:</span> Audi A6, BMW 5</li>
+                    <li><span>PLAR:</span> Audi Q5, Volvo XC60, BMW X4, LR Discovery Sport, Lexus NX300H</li>
+                    <li><span>LFAD (LUX):</span> BMW X5, Volvo XC90, Audi A7, Cupra Formentor</li>
+                    <li><span>WLAD (LUX ELITE):</span> Audi Q8, Audi A8, Porsche Macan</li>
+                    <li><span>SVMR (VAN 7os):</span> Dacia Jogger</li>
+                    <li><span>PVMD (9os):</span> BRAK</li>
+                    <li><span>EKMD (M. dost.):</span> Toyota Proace City</li>
+                    <li><span>CKMD (Śr. dost.):</span> Toyota Proace</li>
+                    <li><span>SKMD (D. dost.):</span> Mercedes Sprinter (L4H2), Citroen Jumper (L3H2)</li>
+
+
+
+                    <!-- Dodaj więcej klas tutaj -->
+                </ul>
+            </div>
+        </div>
     </div>
-    </div>
-<script>
- const checkbox = document.getElementById('podst');
-  const numberInputContainer = document.querySelector('.checkbox-container[style="display: none;"]');
-const numberInput = document.getElementById('podst_km');
-  checkbox.addEventListener('change', function() {
-    if (this.checked) {
-      numberInputContainer.style.display = 'block';
-    } else {
-        numberInput.value = 0;
-      numberInputContainer.style.display = 'none';
-    }
-  });
-</script>
-    
     <script>
- const checkbox1 = document.getElementById('zwrot');
-  const numberInputContainer1 = document.querySelector('.checkbox-container[style="display: none; color: black"]');
+        const checkbox = document.getElementById('podst');
+        const numberInputContainer = document.querySelector('.checkbox-container[style="display: none;"]');
+        const numberInput = document.getElementById('podst_km');
+        checkbox.addEventListener('change', function() {
+            if (this.checked) {
+                numberInputContainer.style.display = 'block';
+            } else {
+                numberInput.value = 0;
+                numberInputContainer.style.display = 'none';
+            }
+        });
+
+    </script>
+
+    <script>
+        const checkbox1 = document.getElementById('zwrot');
+        const numberInputContainer1 = document.querySelector('.checkbox-container[style="display: none; color: black"]');
         const numberInput1 = document.getElementById('zwrot_km');
 
-  checkbox1.addEventListener('change', function() {
-    if (this.checked) {
-      numberInputContainer1.style.display = 'block';
-    } else {
-        numberInput1.value = 0;
-      numberInputContainer1.style.display = 'none';
-    }
-  });
-</script>
-  <script>
-      
-             const historyList = document.getElementById("historyList");
-    const calculations = [];
-      const carSTC = {
-          MDMR : [30, 199, 2000],
-          EDAR : [30, 199, 2000],
-          CDMR : [30, 199, 2500],
-          CDAR : [30, 199, 2500],
-          CWMR : [30, 199, 2500],
-          CWAR : [30, 199, 2500],
-          SLMR : [40, 399, 3000],
-          SLAR : [40, 399, 3000],
-          SWMR : [40, 399, 3000],
-          IGAH : [30, 199, 2500],
-          IFMR : [30, 199, 2500],
-          FFMR : [40, 399, 3000],
-          FFAR : [40, 399, 3000],
-          RLAR : [60, 399, 4000],
-          PFAR : [60, 399, 4000],
-          PLAR : [60, 399, 4000],
-          LFAD : [80, 399, 5000],
-          WLAD : [80, 399, 5000],
-          SVMR : [40, 399, 3000],
-          PVMD : [60, 399, 3000],
-          EKMD : [30, 199, 2000],
-          CKMD : [40, 399, 2000],
-          SKMD : [60, 399, 3000],
-          
-          
-      };
-const carClasses = {
-  MDMR: [179, 172, 150, 145, 140, 140, 110, 110],
-  EDMR: [189, 180, 180, 160, 140, 135, 110, 105],
-  EDAR: [205, 192, 185, 170, 145, 140, 120, 120],
-  EDAH: [205, 192, 185, 170, 145, 140, 120, 120],
-  EWMR: [0, 0, 0, 0, 0, 0, 0, 0],
-  EXMR: [0, 0, 0, 0, 0, 0, 0, 0],
-  CDMR: [199, 199, 199, 180, 165, 155, 140, 130],
-  CDAE: [0, 0, 0, 0, 0, 0, 0, 0],
-  CDAR: [215, 206, 198, 188, 160, 150, 140, 130],
-  CDAH: [215, 206, 198, 188, 160, 150, 140, 130],
-  CGAH: [0, 0, 0, 0, 0, 0, 0, 0],
-  CLMD: [199, 199, 199, 180, 165, 155, 140, 130],
-  CLMR: [199, 199, 199, 180, 165, 155, 140, 130],
-  CLAR: [215, 206, 198, 188, 160, 150, 140, 130],
-  CLAH: [215, 206, 198, 188, 160, 150, 140, 130],
-  CWMR: [215, 206, 198, 188, 160, 150, 140, 130],
-  CWAR: [0, 0, 0, 0, 0, 0, 0, 0],
-  CWAH: [0, 0, 0, 0, 0, 0, 0, 0],
-  SLMR: [330, 315, 305, 300, 225, 225, 210, 200],
-  SLMD: [330, 315, 305, 300, 225, 225, 210, 200],
-  SLAR: [385, 360, 345, 330, 225, 225, 210, 200],
-  SWMR: [330, 315, 305, 300, 225, 225, 210, 200],
-  SWMD: [330, 315, 305, 300, 225, 225, 210, 200],
-  SWAR: [0, 0, 0, 0, 0, 0, 0, 0],
-  SWAD: [0, 0, 0, 0, 0, 0, 0, 0],
-  CGAR: [0, 0, 0, 0, 0, 0, 0, 0],
-  CGMR: [0, 0, 0, 0, 0, 0, 0, 0],
-  IGMR: [0, 0, 0, 0, 0, 0, 0, 0],
-  IGAH: [285, 250, 220, 220, 220, 190, 190, 180],
-  IFMR: [285, 250, 220, 220, 220, 190, 190, 180],
-  IFAR: [0, 0, 0, 0, 0, 0, 0, 0],
-  IVMR: [0, 0, 0, 0, 0, 0, 0, 0],
-  FFMR: [385, 360, 345, 330, 225, 225, 210, 200],
-  FFAR: [385, 360, 345, 330, 225, 225, 210, 200],
-  FFAH: [385, 360, 345, 330, 225, 225, 210, 200],
-  FFBH: [385, 360, 345, 330, 225, 225, 210, 200],
-  FQBD: [0, 0, 0, 0, 0, 0, 0, 0],
-  FQMD: [0, 0, 0, 0, 0, 0, 0, 0],
-  RLAR: [400, 360, 345, 330, 310, 300, 285, 250],
-  RLAD: [400, 360, 345, 330, 310, 300, 285, 250],
-  RLAH: [400, 360, 345, 330, 310, 300, 285, 250],
-  RWAR: [0, 0, 0, 0, 0, 0, 0, 0],
-  RWAD: [0, 0, 0, 0, 0, 0, 0, 0],
-  RGAR: [0, 0, 0, 0, 0, 0, 0, 0],
-  PGAD: [0, 0, 0, 0, 0, 0, 0, 0],
-  PGAH: [0, 0, 0, 0, 0, 0, 0, 0],
-  PGAR: [0, 0, 0, 0, 0, 0, 0, 0],
-  PGBR: [0, 0, 0, 0, 0, 0, 0, 0],
-  PGBD: [0, 0, 0, 0, 0, 0, 0, 0],
-  PLAR: [610, 590, 515, 515, 515, 515, 480, 395],
-  PLAD: [610, 590, 515, 515, 515, 515, 480, 395],
-  PLAH: [610, 590, 515, 515, 515, 515, 480, 395],
-  PLBD: [610, 590, 515, 515, 515, 515, 480, 395],
-  PLBI: [610, 590, 515, 515, 515, 515, 480, 395],
-  PWAR: [0, 0, 0, 0, 0, 0, 0, 0],
-  PWBR: [0, 0, 0, 0, 0, 0, 0, 0],
-  PWBD: [0, 0, 0, 0, 0, 0, 0, 0],
-  PFAR: [510, 490, 415, 415, 415, 415, 380, 295],
-  PFAD: [510, 490, 415, 415, 415, 415, 380, 295],
-  PFBR: [510, 490, 415, 415, 415, 415, 380, 295],
-  PFBD: [510, 490, 415, 415, 415, 415, 380, 295],
-  PFBH: [510, 490, 415, 415, 415, 415, 380, 295],
-  PLBR: [0, 0, 0, 0, 0, 0, 0, 0],
-  ULAR: [0, 0, 0, 0, 0, 0, 0, 0],
-  ULAD: [0, 0, 0, 0, 0, 0, 0, 0],
-  ULBR: [0, 0, 0, 0, 0, 0, 0, 0],
-  LFAD: [750, 725, 725, 700, 615, 615, 450, 400],
-  LFAH: [750, 725, 725, 700, 615, 615, 450, 400],
-  LFBR: [750, 725, 725, 700, 615, 615, 450, 400],
-  LFBD: [750, 725, 725, 700, 615, 615, 450, 400],
-  LFBH: [750, 725, 725, 700, 615, 615, 450, 400],
-  LXBD: [0, 0, 0, 0, 0, 0, 0, 0],
-  WLAD: [1500, 1500, 1100, 1000, 890, 850, 850, 750],
-  WLBD: [1500, 1500, 1100, 1000, 890, 850, 850, 750],
-  WFBR: [0, 0, 0, 0, 0, 0, 0, 0],
-  WFBD: [0, 0, 0, 0, 0, 0, 0, 0],
-  SVMR: [360, 350, 340, 330, 300, 300, 280, 180],
-  SVMD: [360, 350, 340, 330, 300, 300, 280, 180],
-  SVAR: [0, 0, 0, 0, 0, 0, 0, 0],
-  FVAD: [0, 0, 0, 0, 0, 0, 0, 0],
-  PVMD: [399, 399, 399, 350, 350, 350, 330, 300],
-  PVAD: [615, 580, 550, 520, 500, 480, 430, 380],
-  EKAD: [],
-  EKMD: [270, 250, 230, 210, 210, 210, 190, 175],
-  CKAD: [0, 0, 0, 0, 0, 0, 0, 0],
-  CKMD: [270, 250, 230, 210, 210, 210, 190, 175],
-  SKMD: [350, 350, 350, 300, 300, 300, 246, 246],
-  XKMD: [0, 0, 0, 0, 0, 0, 0, 0],
-  SVAD: [0, 0, 0, 0, 0, 0, 0, 0],
-  FFBD: [0, 0, 0, 0, 0, 0, 0, 0],
-  RWBI: [0, 0, 0, 0, 0, 0, 0, 0]
-};
-      
-       // Funkcja do usuwania wyliczenia z historii
-    function deleteCalculation(index) {
-      calculations.splice(index, 1); // Usunięcie wyliczenia z tablicy
-      renderHistoryList(); // Ponowne renderowanie listy historii
-    }
+        checkbox1.addEventListener('change', function() {
+            if (this.checked) {
+                numberInputContainer1.style.display = 'block';
+            } else {
+                numberInput1.value = 0;
+                numberInputContainer1.style.display = 'none';
+            }
+        });
 
-    // Funkcja renderująca listę historii
-    function renderHistoryList() {
+    </script>
+    <script>
+        const historyList = document.getElementById("historyList");
+        const calculations = [];
+        const carSTC = {
+            MDMR: [30, 199, 2000],
+            EDAR: [30, 199, 2000],
+            CDMR: [30, 199, 2500],
+            CDAR: [30, 199, 2500],
+            CWMR: [30, 199, 2500],
+            CWAR: [30, 199, 2500],
+            SLMR: [40, 399, 3000],
+            SLAR: [40, 399, 3000],
+            SWMR: [40, 399, 3000],
+            IGAH: [30, 199, 2500],
+            IFMR: [30, 199, 2500],
+            FFMR: [40, 399, 3000],
+            FFAR: [40, 399, 3000],
+            RLAR: [60, 399, 4000],
+            PFAR: [60, 399, 4000],
+            PLAR: [60, 399, 4000],
+            LFAD: [80, 399, 5000],
+            WLAD: [80, 399, 5000],
+            SVMR: [40, 399, 3000],
+            PVMD: [60, 399, 3000],
+            EKMD: [30, 199, 2000],
+            CKMD: [40, 399, 2000],
+            SKMD: [60, 399, 3000],
 
-      const historyList = document.getElementById("historyList");
-      historyList.innerHTML = ""; // Wyczyszczenie listy przed ponownym renderowaniem
 
-      calculations.forEach((calculation, index) => {
-        const { carClass, rentalPeriod, daily, discount, stcOption, international, wpg, zpg, zwio, fcs, podst, zwrot, totalPrice, deposit } = calculation;
+        };
+        const carClasses = {
+            MDMR: [179, 172, 150, 145, 140, 140, 110, 110],
+            EDMR: [189, 180, 180, 160, 140, 135, 110, 105],
+            EDAR: [205, 192, 185, 170, 145, 140, 120, 120],
+            EDAH: [205, 192, 185, 170, 145, 140, 120, 120],
+            EWMR: [0, 0, 0, 0, 0, 0, 0, 0],
+            EXMR: [0, 0, 0, 0, 0, 0, 0, 0],
+            CDMR: [199, 199, 199, 180, 165, 155, 140, 130],
+            CDAE: [0, 0, 0, 0, 0, 0, 0, 0],
+            CDAR: [215, 206, 198, 188, 160, 150, 140, 130],
+            CDAH: [215, 206, 198, 188, 160, 150, 140, 130],
+            CGAH: [0, 0, 0, 0, 0, 0, 0, 0],
+            CLMD: [199, 199, 199, 180, 165, 155, 140, 130],
+            CLMR: [199, 199, 199, 180, 165, 155, 140, 130],
+            CLAR: [215, 206, 198, 188, 160, 150, 140, 130],
+            CLAH: [215, 206, 198, 188, 160, 150, 140, 130],
+            CWMR: [215, 206, 198, 188, 160, 150, 140, 130],
+            CWAR: [0, 0, 0, 0, 0, 0, 0, 0],
+            CWAH: [0, 0, 0, 0, 0, 0, 0, 0],
+            SLMR: [330, 315, 305, 300, 225, 225, 210, 200],
+            SLMD: [330, 315, 305, 300, 225, 225, 210, 200],
+            SLAR: [385, 360, 345, 330, 225, 225, 210, 200],
+            SWMR: [330, 315, 305, 300, 225, 225, 210, 200],
+            SWMD: [330, 315, 305, 300, 225, 225, 210, 200],
+            SWAR: [0, 0, 0, 0, 0, 0, 0, 0],
+            SWAD: [0, 0, 0, 0, 0, 0, 0, 0],
+            CGAR: [0, 0, 0, 0, 0, 0, 0, 0],
+            CGMR: [0, 0, 0, 0, 0, 0, 0, 0],
+            IGMR: [0, 0, 0, 0, 0, 0, 0, 0],
+            IGAH: [285, 250, 220, 220, 220, 190, 190, 180],
+            IFMR: [285, 250, 220, 220, 220, 190, 190, 180],
+            IFAR: [0, 0, 0, 0, 0, 0, 0, 0],
+            IVMR: [0, 0, 0, 0, 0, 0, 0, 0],
+            FFMR: [385, 360, 345, 330, 225, 225, 210, 200],
+            FFAR: [385, 360, 345, 330, 225, 225, 210, 200],
+            FFAH: [385, 360, 345, 330, 225, 225, 210, 200],
+            FFBH: [385, 360, 345, 330, 225, 225, 210, 200],
+            FQBD: [0, 0, 0, 0, 0, 0, 0, 0],
+            FQMD: [0, 0, 0, 0, 0, 0, 0, 0],
+            RLAR: [400, 360, 345, 330, 310, 300, 285, 250],
+            RLAD: [400, 360, 345, 330, 310, 300, 285, 250],
+            RLAH: [400, 360, 345, 330, 310, 300, 285, 250],
+            RWAR: [0, 0, 0, 0, 0, 0, 0, 0],
+            RWAD: [0, 0, 0, 0, 0, 0, 0, 0],
+            RGAR: [0, 0, 0, 0, 0, 0, 0, 0],
+            PGAD: [0, 0, 0, 0, 0, 0, 0, 0],
+            PGAH: [0, 0, 0, 0, 0, 0, 0, 0],
+            PGAR: [0, 0, 0, 0, 0, 0, 0, 0],
+            PGBR: [0, 0, 0, 0, 0, 0, 0, 0],
+            PGBD: [0, 0, 0, 0, 0, 0, 0, 0],
+            PLAR: [610, 590, 515, 515, 515, 515, 480, 395],
+            PLAD: [610, 590, 515, 515, 515, 515, 480, 395],
+            PLAH: [610, 590, 515, 515, 515, 515, 480, 395],
+            PLBD: [610, 590, 515, 515, 515, 515, 480, 395],
+            PLBI: [610, 590, 515, 515, 515, 515, 480, 395],
+            PWAR: [0, 0, 0, 0, 0, 0, 0, 0],
+            PWBR: [0, 0, 0, 0, 0, 0, 0, 0],
+            PWBD: [0, 0, 0, 0, 0, 0, 0, 0],
+            PFAR: [510, 490, 415, 415, 415, 415, 380, 295],
+            PFAD: [510, 490, 415, 415, 415, 415, 380, 295],
+            PFBR: [510, 490, 415, 415, 415, 415, 380, 295],
+            PFBD: [510, 490, 415, 415, 415, 415, 380, 295],
+            PFBH: [510, 490, 415, 415, 415, 415, 380, 295],
+            PLBR: [0, 0, 0, 0, 0, 0, 0, 0],
+            ULAR: [0, 0, 0, 0, 0, 0, 0, 0],
+            ULAD: [0, 0, 0, 0, 0, 0, 0, 0],
+            ULBR: [0, 0, 0, 0, 0, 0, 0, 0],
+            LFAD: [750, 725, 725, 700, 615, 615, 450, 400],
+            LFAH: [750, 725, 725, 700, 615, 615, 450, 400],
+            LFBR: [750, 725, 725, 700, 615, 615, 450, 400],
+            LFBD: [750, 725, 725, 700, 615, 615, 450, 400],
+            LFBH: [750, 725, 725, 700, 615, 615, 450, 400],
+            LXBD: [0, 0, 0, 0, 0, 0, 0, 0],
+            WLAD: [1500, 1500, 1100, 1000, 890, 850, 850, 750],
+            WLBD: [1500, 1500, 1100, 1000, 890, 850, 850, 750],
+            WFBR: [0, 0, 0, 0, 0, 0, 0, 0],
+            WFBD: [0, 0, 0, 0, 0, 0, 0, 0],
+            SVMR: [360, 350, 340, 330, 300, 300, 280, 180],
+            SVMD: [360, 350, 340, 330, 300, 300, 280, 180],
+            SVAR: [0, 0, 0, 0, 0, 0, 0, 0],
+            FVAD: [0, 0, 0, 0, 0, 0, 0, 0],
+            PVMD: [399, 399, 399, 350, 350, 350, 330, 300],
+            PVAD: [615, 580, 550, 520, 500, 480, 430, 380],
+            EKAD: [],
+            EKMD: [270, 250, 230, 210, 210, 210, 190, 175],
+            CKAD: [0, 0, 0, 0, 0, 0, 0, 0],
+            CKMD: [270, 250, 230, 210, 210, 210, 190, 175],
+            SKMD: [350, 350, 350, 300, 300, 300, 246, 246],
+            XKMD: [0, 0, 0, 0, 0, 0, 0, 0],
+            SVAD: [0, 0, 0, 0, 0, 0, 0, 0],
+            FFBD: [0, 0, 0, 0, 0, 0, 0, 0],
+            RWBI: [0, 0, 0, 0, 0, 0, 0, 0]
+        };
 
-        const calculationElement = document.createElement("div");
-        calculationElement.innerHTML = `
+        // Funkcja do usuwania wyliczenia z historii
+        function deleteCalculation(index) {
+            calculations.splice(index, 1); // Usunięcie wyliczenia z tablicy
+            renderHistoryList(); // Ponowne renderowanie listy historii
+        }
+
+        // Funkcja renderująca listę historii
+        function renderHistoryList() {
+
+            const historyList = document.getElementById("historyList");
+            historyList.innerHTML = ""; // Wyczyszczenie listy przed ponownym renderowaniem
+
+            calculations.forEach((calculation, index) => {
+                const {
+                    carClass,
+                    rentalPeriod,
+                    daily,
+                    discount,
+                    stcOption,
+                    international,
+                    wpg,
+                    zpg,
+                    zwio,
+                    fcs,
+                    podst,
+                    zwrot,
+                    totalPrice,
+                    deposit
+                } = calculation;
+
+                const calculationElement = document.createElement("div");
+                calculationElement.innerHTML = `
           <h2 style='margin-top: 10px;'> #${index + 1} </h2>
           <p> Klasa pojazdu: ${carClass} </p>
           <p >Dni: ${rentalPeriod} </p>
@@ -575,112 +602,112 @@ ${
           <button class="delete-button" onclick="deleteCalculation(${index})">Usuń</button>
         `;
 
-        historyList.appendChild(calculationElement);
-      });
-    }
-
-
-    function calculateRentalPrice() {
-      nolist += 1;
-      const carClass = document.getElementById("carClass").value;
-      const rentalPeriod = document.getElementById("rentalPeriod").valueAsNumber;
-      const stcOption = document.getElementById("stcOption").value;
-      const international = document.getElementById("international").checked;
-      const WPG = document.getElementById("WPG").checked;
-      const ZPG = document.getElementById("ZPG").checked;
-      const ZWIO = document.getElementById("ZWIO").checked;
-      let FCS = document.getElementById("FCS").checked;
-        let zwrot = document.getElementById("zwrot").checked;
-        let podst = document.getElementById("podst").checked;
-      const discount = document.getElementById("discount").value;
-        const podstkm = document.getElementById("podst_km").value;
-        const zwrotkm = document.getElementById("zwrot_km").value;
-                 if (carClass === "") {
-      alert("Proszę wybrać klasę pojazdu!");
-    }
-
-      const rateIndex = rentalPeriod >= 8 ? 7 : rentalPeriod - 1;
-      let rate = carClasses[carClass][rateIndex];
-      let totalPrice = 0;
-      let totalPriceSTC = 0;
-      let totalPriceWZG = 0;
-      let totalPriceZPG = 0;
-      let totalPriceWPG = 0;
-      let totalPriceZWIO = 0;
-      let totalPriceFCS = 0;
-      let deposit = carSTC[carClass][2];
-      let totalPricePodst = 0;
-      let totalPriceZwrot = 0;
-        
-        if(zwrot) {
-            totalPriceZwrot += (zwrotkm * 2 * 3);
-            totalPrice += totalPriceZwrot;
-        }
-        if(podst) {
-            totalPricePodst += (podstkm * 2 * 3);
-            totalPrice += totalPricePodst;
+                historyList.appendChild(calculationElement);
+            });
         }
 
-      if (international) {
-        totalPriceWZG += 200;
-        totalPrice += totalPriceWZG;
-      }
-      if (ZPG) {
-        totalPriceZPG += 60;
-        totalPrice += totalPriceZPG;
-      }
-      if (WPG) {
-        totalPriceWPG += 60;
-        totalPrice += totalPriceWPG;
-      }
-      if (ZWIO) {
-        totalPriceZWIO += 500;
-        totalPrice += totalPriceZWIO;
-      }
-      if (FCS) {
-          if (stcOption === "package"){
-              totalPriceFCS += 50;
-        totalPrice += totalPriceFCS;
-          } else {
-        totalPriceFCS += 99;
-        totalPrice += totalPriceFCS;
-          }
-      }
-        
-     if (stcOption === "daily") {
-        totalPriceSTC += carSTC[carClass][0] * rentalPeriod;
-        totalPrice += totalPriceSTC;
-        deposit *= 0.5;
-      } else if (stcOption === "package") {
-        totalPriceSTC += carSTC[carClass][1];
-        totalPrice += totalPriceSTC;
-        deposit *= 0.5;
-      }
 
-      const discountRate = rate * (1 - discount / 100);
-      let discountedTotalPrice = discountRate * rentalPeriod + totalPrice;
+        function calculateRentalPrice() {
+            nolist += 1;
+            const carClass = document.getElementById("carClass").value;
+            const rentalPeriod = document.getElementById("rentalPeriod").valueAsNumber;
+            const stcOption = document.getElementById("stcOption").value;
+            const international = document.getElementById("international").checked;
+            const WPG = document.getElementById("WPG").checked;
+            const ZPG = document.getElementById("ZPG").checked;
+            const ZWIO = document.getElementById("ZWIO").checked;
+            let FCS = document.getElementById("FCS").checked;
+            let zwrot = document.getElementById("zwrot").checked;
+            let podst = document.getElementById("podst").checked;
+            const discount = document.getElementById("discount").value;
+            const podstkm = document.getElementById("podst_km").value;
+            const zwrotkm = document.getElementById("zwrot_km").value;
+            if (carClass === "") {
+                alert("Proszę wybrać klasę pojazdu!");
+            }
+
+            const rateIndex = rentalPeriod >= 8 ? 7 : rentalPeriod - 1;
+            let rate = carClasses[carClass][rateIndex];
+            let totalPrice = 0;
+            let totalPriceSTC = 0;
+            let totalPriceWZG = 0;
+            let totalPriceZPG = 0;
+            let totalPriceWPG = 0;
+            let totalPriceZWIO = 0;
+            let totalPriceFCS = 0;
+            let deposit = carSTC[carClass][2];
+            let totalPricePodst = 0;
+            let totalPriceZwrot = 0;
+
+            if (zwrot) {
+                totalPriceZwrot += (zwrotkm * 2 * 3);
+                totalPrice += totalPriceZwrot;
+            }
+            if (podst) {
+                totalPricePodst += (podstkm * 2 * 3);
+                totalPrice += totalPricePodst;
+            }
+
+            if (international) {
+                totalPriceWZG += 200;
+                totalPrice += totalPriceWZG;
+            }
+            if (ZPG) {
+                totalPriceZPG += 60;
+                totalPrice += totalPriceZPG;
+            }
+            if (WPG) {
+                totalPriceWPG += 60;
+                totalPrice += totalPriceWPG;
+            }
+            if (ZWIO) {
+                totalPriceZWIO += 500;
+                totalPrice += totalPriceZWIO;
+            }
+            if (FCS) {
+                if (stcOption === "package") {
+                    totalPriceFCS += 50;
+                    totalPrice += totalPriceFCS;
+                } else {
+                    totalPriceFCS += 99;
+                    totalPrice += totalPriceFCS;
+                }
+            }
+
+            if (stcOption === "daily") {
+                totalPriceSTC += carSTC[carClass][0] * rentalPeriod;
+                totalPrice += totalPriceSTC;
+                deposit *= 0.5;
+            } else if (stcOption === "package") {
+                totalPriceSTC += carSTC[carClass][1];
+                totalPrice += totalPriceSTC;
+                deposit *= 0.5;
+            }
+
+            const discountRate = rate * (1 - discount / 100);
+            let discountedTotalPrice = discountRate * rentalPeriod + totalPrice;
 
 
 
-      const calculation = {
-        carClass,
-        rentalPeriod,
-        daily: discountRate.toFixed(2),
-        stcOption: totalPriceSTC,
-        international: totalPriceWZG,
-        wpg: totalPriceWPG,
-        zpg: totalPriceZPG,
-        zwio: totalPriceZWIO,
-        fcs: totalPriceFCS,
-        podst: totalPricePodst,
-        zwrot: totalPriceZwrot,
-        discount,
-        totalPrice: discountedTotalPrice,
-        deposit,
-      };
+            const calculation = {
+                carClass,
+                rentalPeriod,
+                daily: discountRate.toFixed(2),
+                stcOption: totalPriceSTC,
+                international: totalPriceWZG,
+                wpg: totalPriceWPG,
+                zpg: totalPriceZPG,
+                zwio: totalPriceZWIO,
+                fcs: totalPriceFCS,
+                podst: totalPricePodst,
+                zwrot: totalPriceZwrot,
+                discount,
+                totalPrice: discountedTotalPrice,
+                deposit,
+            };
 
-      calculations.unshift(calculation); // Dodanie wyliczenia do historii
-      renderHistoryList(); // Ponowne renderowanie listy historii
+            calculations.unshift(calculation); // Dodanie wyliczenia do historii
+            renderHistoryList(); // Ponowne renderowanie listy historii
 
             var stcOptionXX = document.getElementById("stcOption");
             var selectedValue = stcOptionXX.value;
@@ -690,10 +717,10 @@ ${
             } else if (selectedValue === "package") {
                 stcOptionXX.options[3].text = "STC - pakiet (+ ? PLN)";
             }
-    }
-      
-    
-  </script>
+        }
+
+    </script>
 
 </body>
+
 </html>
