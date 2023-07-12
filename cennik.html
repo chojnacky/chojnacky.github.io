@@ -7,7 +7,8 @@
     <title>Kalkulator wynajmu samochodu</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script>
-        let nolist = 0
+        let no = 0;
+        let nolist = [];
 
     </script>
     <style>
@@ -568,7 +569,7 @@
 
                 const calculationElement = document.createElement("div");
                 calculationElement.innerHTML = `
-          <h2 style='margin-top: 10px;'> #${index + 1} </h2>
+          <h2 style='margin-top: 10px;'> #${nolist[index]} </h2>
           <p> Klasa pojazdu: ${carClass} </p>
           <p >Dni: ${rentalPeriod} </p>
 <p >Stawka dobowa wynajmu: ${daily} PLN</p>
@@ -608,7 +609,8 @@ ${
 
 
         function calculateRentalPrice() {
-            nolist += 1;
+            no += 1;
+            nolist.unshift(no);
             const carClass = document.getElementById("carClass").value;
             const rentalPeriod = document.getElementById("rentalPeriod").valueAsNumber;
             const stcOption = document.getElementById("stcOption").value;
