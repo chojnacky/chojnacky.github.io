@@ -661,41 +661,7 @@ ${
       const discountRate = rate * (1 - discount / 100);
       let discountedTotalPrice = discountRate * rentalPeriod + totalPrice;
 
-      const resultElement = document.getElementById("result");
-      resultElement.innerHTML = `
-<p> Klasa pojazdu: ${carClass} </p>
-<p >Dni: ${rentalPeriod} </p>
-        <p >Stawka dobowa wynajmu: ${discountRate.toFixed(2)} PLN</p>
 
-${
-          podst ? `<p>Podstawienie: ${totalPricePodst} PLN</p>` : ""
-        }
-${
-          zwrot ? `<p>Podstawienie: ${totalPriceZwrot} PLN</p>` : ""
-        }
-        ${
-          stcOption !== "none"
-            ? `<p>Dodatek STC: ${totalPriceSTC} PLN</p>`
-            : ""
-        }
-        ${international ? `<p>Wyjazd za granicę: ${totalPriceWZG} PLN</p>` : ""}
-        ${
-          WPG ? `<p>Wydanie poza godzinami: ${totalPriceWPG} PLN</p>` : ""
-        }
-        ${
-          ZPG ? `<p>Zwrot poza godzinami: ${totalPriceZPG} PLN</p>` : ""
-        }
-        ${
-          ZWIO ? `<p>Zwrot w innym oddziale: ${totalPriceZWIO} PLN</p>` : ""
-        }
-        ${
-          FCS ? `<p>Full Cleaning Service: ${totalPriceFCS} PLN</p>` : ""
-        }
-<hr style="margin: 10px 0;">
-        <p>Rabat: ${discount}%</p>
-        <p>Koszt wynajmu samochodu: ${discountedTotalPrice.toFixed(2)} PLN</p>
-        <p>Depozyt: ${deposit.toFixed(2)} PLN</p>
-      `;
 
       const calculation = {
         carClass,
