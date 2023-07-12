@@ -293,7 +293,7 @@
                 </div>
                 <div style="display:flex; align-items: center;">
                     <div class="checkbox-container" id="podst" style="display: none;">
-                        <div id="numberInput"> Wpisz liczbę km:
+                        <div id="numberInput"> Ilość km:
                             <input type="number" id="podst_km" value="0" style="width: 100px; height: 30px; margin-left: 175px; margin-top: 12px">
                         </div>
                     </div>
@@ -304,7 +304,7 @@
                 </div>
                 <div style="display:flex; align-items: center;">
                     <div class="checkbox-container" id="zwrot" style="display: none; color: black">
-                        <div id="numberInput"> Wpisz liczbę km:
+                        <div id="numberInput"> Ilość km:
                             <input type="number" id="zwrot_km" value="0" style="width: 100px; height: 30px; margin-left: 175px; margin-top: 12px">
                         </div>
                     </div>
@@ -540,7 +540,8 @@
         // Funkcja do usuwania wyliczenia z historii
         function deleteCalculation(index) {
             calculations.splice(index, 1); // Usunięcie wyliczenia z tablicy
-            renderHistoryList(); // Ponowne renderowanie listy historii
+            renderHistoryList(); // Ponowne renderowanie listy historii // Usunięcie wyliczenia z tablicy
+            nolist.slice(index+1);
         }
 
         // Funkcja renderująca listę historii
@@ -569,37 +570,37 @@
 
                 const calculationElement = document.createElement("div");
                 calculationElement.innerHTML = `
-          <h2 style='margin-top: 10px;'> #${nolist[index]} </h2>
-          <p> Klasa pojazdu: ${carClass} </p>
-          <p >Dni: ${rentalPeriod} </p>
-<p >Stawka dobowa wynajmu: ${daily} PLN</p>
+       
+          <p> <b>Klasa pojazdu:</b> ${carClass} </p>
+          <p ><b>Dni:</b> ${rentalPeriod} </p>
+<p ><b>Stawka dobowa wynajmu:</b> ${daily} PLN</p>
 ${
-          podst > 0 ? `<p>Podstawienie: ${podst} PLN</p>` : ""
+          podst > 0 ? `<p><b>Podstawienie:</b> ${podst} PLN</p>` : ""
         }
 ${
-          zwrot > 0? `<p>Podstawienie: ${zwort} PLN</p>` : ""
+          zwrot > 0? `<p><b>Zwrot:</b> ${zwrot} PLN</p>` : ""
         }
         ${
           stcOption > 0
-            ? `<p>STC: ${stcOption} PLN</p>`
+            ? `<p><b>STC:</b> ${stcOption} PLN</p>`
             : ""
         }
-        ${international > 0 ? `<p>Wyjazd za granicę: ${international} PLN</p>` : ""}
+        ${international > 0 ? `<p><b>WZG:</b> ${international} PLN</p>` : ""}
         ${
-          wpg > 0 ? `<p>Wydanie poza godzinami: ${wpg} PLN</p>` : ""
+          wpg > 0 ? `<p><b>Wydanie poza godzinami:</b> ${wpg} PLN</p>` : ""
         }
         ${
-          zpg > 0 ? `<p>Zwrot poza godzinami: ${zpg} PLN</p>` : ""
+          zpg > 0 ? `<p><b>Zwrot poza godzinami:</b> ${zpg} PLN</p>` : ""
         }
         ${
-          zwio > 0 ? `<p>Zwrot w innym oddziale: ${zwio} PLN</p>` : ""
+          zwio > 0 ? `<p><b>Zwrot w innym oddziale:</b> ${zwio} PLN</p>` : ""
         }
         ${
-          fcs > 0 ? `<p>Full Cleaning Service: ${fcs} PLN</p>` : ""
+          fcs > 0 ? `<p><b>Full Cleaning Service:</b> ${fcs} PLN</p>` : ""
         }
-          <p>Rabat: ${discount}%</p>
-          <p>Koszt wynajmu samochodu: ${totalPrice.toFixed(2)} PLN</p>
-          <p>Depozyt: ${deposit.toFixed(2)} PLN</p>
+          <p><b>Rabat:</b> ${discount}%</p>
+          <p><b>Koszt wynajmu samochodu:</b> ${totalPrice.toFixed(2)} PLN</p>
+          <p><b>Depozyt:</b> ${deposit.toFixed(2)} PLN</p>
           <button class="delete-button" onclick="deleteCalculation(${index})">Usuń</button>
         `;
 
