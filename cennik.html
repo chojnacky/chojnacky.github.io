@@ -614,8 +614,8 @@ Depozyt: ${element.deposit.toFixed(2)} PLN`;
 
                 const calculationElement = document.createElement("div");
                 calculationElement.innerHTML = `
-       
-          <p> <b>Klasa pojazdu:</b> ${carClass} </p>
+             <div style="border: 1px solid #ccc; border-radius: 5px; padding: 10px;">
+          <p style="margin-top: -3px;"> <b>Klasa pojazdu:</b> ${carClass} </p>
           <p ><b>Dni:</b> ${rentalPeriod} </p>
 <p ><b>Stawka dobowa wynajmu:</b> ${daily} PLN</p>
 ${
@@ -647,6 +647,7 @@ ${
           <p><b>Depozyt:</b> ${deposit.toFixed(2)} PLN</p>
           <button class="delete-button" onclick="deleteCalculation(${index})" style="width:49%; background-color: lightcoral; "><i class="fa fa-trash"></i></button>
          <button class="copy-button" onclick="copyToClipboard(${index})" style="width:49%; background-color: #3f51b5;"><i class="fa fa-copy"></i></button>
+    </div>
         `;
 
                 historyList.appendChild(calculationElement);
