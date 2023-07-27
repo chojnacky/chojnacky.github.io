@@ -694,8 +694,16 @@ elehisElement.addEventListener("mouseleave", function() {
                 discountX.value = 10;
                 alert("Maksymalny rabat to 10%. Zmniejszono automatycznie.");
             }
-
-            const rateIndex = rentalPeriod >= 8 ? 7 : rentalPeriod - 1;
+            
+if (rentalPeriod == 1) { rateIndex = 0; }
+else if (rentalPeriod == 2) { rateIndex = 1; }
+else if (rentalPeriod == 3) { rateIndex = 2; }
+else if (rentalPeriod == 4) { rateIndex = 3; }
+else if (rentalPeriod == 5) { rateIndex = 4; }
+else if (rentalPeriod == 6) { rateIndex = 5; }
+else if (rentalPeriod >= 7 && rentalPeriod <= 14) { rateIndex = 6; }
+else if (rentalPeriod >= 15) { rateIndex = 7; }
+            
             let rate = carClasses[carClass][rateIndex];
             let totalPrice = 0;
             let totalPriceSTC = 0;
