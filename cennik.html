@@ -60,6 +60,34 @@ const carClasses = {
             CKMD: [270, 250, 230, 210, 210, 210, 190, 175],
             SKMD: [350, 350, 350, 300, 300, 300, 246, 246],
         };
+        
+                const carSTC = {
+            MDMR: [30, 199, 2000],
+            EDMR: [30, 199, 2000],
+            EDAR: [30, 199, 2000],
+            CDMR: [30, 199, 2500],
+            CDAR: [30, 199, 2500],
+            CWMR: [30, 199, 2500],
+            SLMR: [40, 399, 3000],
+            SLAR: [40, 399, 3000],
+            SWMR: [40, 399, 3000],
+            IGAH: [30, 199, 2500],
+            IFMR: [30, 199, 2500],
+            FFMR: [40, 399, 3000],
+            FFAR: [40, 399, 3000],
+            RLAR: [60, 399, 4000],
+            PFAR: [60, 399, 4000],
+            PLAR: [60, 399, 4000],
+            LFAD: [80, 399, 5000],
+            WLAD: [80, 399, 5000],
+            SVMR: [40, 399, 3000],
+            PVMD: [60, 399, 3000],
+            EKMD: [30, 199, 2000],
+            CKMD: [40, 399, 2000],
+            SKMD: [60, 399, 3000],
+
+
+        };
     </script>
 
     <style>
@@ -461,7 +489,6 @@ const carClasses = {
     </div>
         <div class="container">
         <div class="car-description" >
-            <h2>Cennik</h2>
             <div class="scrollable-content">
      <table border="1" id="carClassesTable">
     <tr>
@@ -474,16 +501,19 @@ const carClasses = {
       <th>6 dni</th>
       <th>7-14 dni</th>
       <th>15+ dni</th>
+       <th>Depozyt</th>
     </tr>
     <script>
 
-      for (const classKey in carClasses) {
+      for (const classKey in carSTC) {
+        let vl = carSTC[classKey][2];
         document.write('<tr>');
         document.write('<td>' + classKey + '</td>');
         const values = carClasses[classKey];
         for (const value of values) {
           document.write('<td>' + value + '</td>');
         }
+        document.write('<td>' + vl + '</td>');
         document.write('</tr>');
       }
     </script>
@@ -526,34 +556,7 @@ const carClasses = {
     <script>
         const historyList = document.getElementById("historyList");
         const calculations = [];
-        const carSTC = {
-            MDMR: [30, 199, 2000],
-            EDMR: [30, 199, 2000],
-            EDAR: [30, 199, 2000],
-            CDMR: [30, 199, 2500],
-            CDAR: [30, 199, 2500],
-            CWMR: [30, 199, 2500],
-            CWAR: [30, 199, 2500],
-            SLMR: [40, 399, 3000],
-            SLAR: [40, 399, 3000],
-            SWMR: [40, 399, 3000],
-            IGAH: [30, 199, 2500],
-            IFMR: [30, 199, 2500],
-            FFMR: [40, 399, 3000],
-            FFAR: [40, 399, 3000],
-            RLAR: [60, 399, 4000],
-            PFAR: [60, 399, 4000],
-            PLAR: [60, 399, 4000],
-            LFAD: [80, 399, 5000],
-            WLAD: [80, 399, 5000],
-            SVMR: [40, 399, 3000],
-            PVMD: [60, 399, 3000],
-            EKMD: [30, 199, 2000],
-            CKMD: [40, 399, 2000],
-            SKMD: [60, 399, 3000],
 
-
-        };
         
 
         // Funkcja do usuwania wyliczenia z historii
