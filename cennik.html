@@ -492,7 +492,7 @@ const carClasses = {
             <div class="scrollable-content">
      <table border="1" id="carClassesTable">
     <tr>
-      <th>Klasas</th>
+      <th>Klasa</th>
       <th>1 dzień</th>
       <th>2 dni</th>
       <th>3 dni</th>
@@ -502,18 +502,21 @@ const carClasses = {
       <th>7-14 dni</th>
       <th>15+ dni</th>
        <th>Depozyt</th>
+        <th>STC Pakiet</th>
+        <th>STC dzień</th>
     </tr>
     <script>
 
       for (const classKey in carSTC) {
-        let vl = carSTC[classKey][2];
         document.write('<tr>');
         document.write('<td>' + classKey + '</td>');
         const values = carClasses[classKey];
         for (const value of values) {
           document.write('<td>' + value + '</td>');
         }
-        document.write('<td>' + vl + '</td>');
+        document.write('<td>' + carSTC[classKey][2] + '</td>');
+        document.write('<td>' + carSTC[classKey][1] + '</td>');
+          document.write('<td>' + carSTC[classKey][0] + '</td>');
         document.write('</tr>');
       }
     </script>
