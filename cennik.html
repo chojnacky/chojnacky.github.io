@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-2WF6TMwB+3OSI1CxOxvqW8t6zCX9dEqbYYWATUO7UqY2pfsz8Wx7H6hIbb8zrg1s" crossorigin="anonymous">
     <script>
-const carClasses = {
+        const carClasses = {
             MDMR: [179, 172, 150, 145, 140, 140, 110, 110],
             EDMR: [189, 180, 180, 160, 140, 135, 110, 105],
             EDAR: [205, 192, 185, 170, 145, 140, 120, 120],
@@ -60,8 +60,8 @@ const carClasses = {
             CKMD: [270, 250, 230, 210, 210, 210, 190, 175],
             SKMD: [350, 350, 350, 300, 300, 300, 246, 246],
         };
-        
-                const carSTC = {
+
+        const carSTC = {
             MDMR: [30, 199, 2000],
             EDMR: [30, 199, 2000],
             EDAR: [30, 199, 2000],
@@ -88,6 +88,33 @@ const carClasses = {
 
 
         };
+
+        const carClassesData = {
+            MDMR: ["Brak"],
+            EDMR: ["Skoda Fabia", "Dacia Sandero Stepway"],
+            EDAR: ["Kia Rio"],
+            CDMR: ["Toyota Corolla"],
+            CDAR: ["Toyota Corolla AT"],
+            CWMR: ["Hyundai i30", "Toyota Corolla KB AT"],
+            SLMR: ["Brak"],
+            SLAR: ["Skoda Superb"],
+            SWMR: ["Brak"],
+            IGAH: ["Toyota C-HR"],
+            IFMR: ["Seat Arona"],
+            FFMR: ["Brak"],
+            FFAR: ["Nissan Qashqai", "Seat Ateca", "Seat Arona", "Skoda Kodiaq"],
+            RLAR: ["Audi A4"],
+            PFAR: ["Audi A6", "BMW 5"],
+            PLAR: ["Audi Q5", "Volvo XC60", "BMW X4", "LR Discovery Sport", "Lexus NX300H"],
+            LFAD: ["BMW X5", "Volvo XC90", "Audi A7", "Cupra Formentor"],
+            WLAD: ["Audi Q8", "Audi A8", "Porsche Macan"],
+            SVMR: ["Dacia Jogger"],
+            PVMD: ["Brak"],
+            EKMD: ["Toyota Proace City"],
+            CKMD: ["Toyota Proace"],
+            SKMD: ["Mercedes Sprinter (L4H2)", "Citroen Jumper (L3H2)"],
+        };
+
     </script>
 
     <style>
@@ -293,28 +320,30 @@ const carClasses = {
                 /* Dodana właściwość */
             }
         }
-            table {
-      width: 100%;
-      border-collapse: collapse;
-    }
 
-    th, td {
-      padding: 8px;
-      text-align: center;
-      border: 1px solid #ccc;
-    }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
 
-    th {
-      background-color: #f2f2f2;
-    }
+        th,
+        td {
+            padding: 8px;
+            text-align: center;
+            border: 1px solid #ccc;
+        }
 
-    tr:nth-child(even) {
-      background-color: #f2f2f2;
-    }
+        th {
+            background-color: #f2f2f2;
+        }
 
-    tr:hover {
-      background-color: #e0e0e0;
-    }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #e0e0e0;
+        }
 
     </style>
 </head>
@@ -334,7 +363,7 @@ const carClasses = {
         }
 
     </script>
-    
+
     <div class="container">
         <div class="calculator">
             <h1>
@@ -477,55 +506,58 @@ const carClasses = {
                     <li><span>EKMD (M. dost.):</span> Toyota Proace City</li>
                     <li><span>CKMD (Śr. dost.):</span> Toyota Proace</li>
                     <li><span>SKMD (D. dost.):</span> Mercedes Sprinter (L4H2), Citroen Jumper (L3H2)</li>
-                    
+
 
 
                     <!-- Dodaj więcej klas tutaj -->
                 </ul>
-                
-                 
+
+
             </div>
         </div>
     </div>
-        <div class="container">
+    <div class="container">
         <div class="car-description" >
             <div class="scrollable-content">
-     <table border="1" id="carClassesTable">
-    <tr>
-      <th>Klasa</th>
-      <th>1 dzień</th>
-      <th>2 dni</th>
-      <th>3 dni</th>
-      <th>4 dni</th>
-      <th>5 dni</th>
-      <th>6 dni</th>
-      <th>7-14 dni</th>
-      <th>15+ dni</th>
-       <th>Depozyt</th>
-        <th>STC Pakiet</th>
-        <th>STC dzień</th>
-    </tr>
-    <script>
+                <table border="1" id="carClassesTable">
+                    <tr>
+                        <th>Klasa</th>
+                        <th>Modele</th>
+                        <th>Depozyt</th>
+                        <th>1 dzień</th>
+                        <th>2 dni</th>
+                        <th>3 dni</th>
+                        <th>4 dni</th>
+                        <th>5 dni</th>
+                        <th>6 dni</th>
+                        <th>7-14 dni</th>
+                        <th>15+ dni</th>
+                        <th>STC Pakiet</th>
+                        <th>STC dzień</th>
+                    </tr>
+                    <script>
+                        for (const classKey in carSTC) {
+                            document.write('<tr>');
+                            document.write('<td><b>' + classKey + '</b></td>');
+                            document.write('<td>' + carClassesData[classKey] + '</td>');
+                            document.write('<td>' + carSTC[classKey][2] + '</td>');
+                            const values = carClasses[classKey];
+                            for (const value of values) {
+                                document.write('<td>' + value + '</td>');
+                            }
 
-      for (const classKey in carSTC) {
-        document.write('<tr>');
-        document.write('<td>' + classKey + '</td>');
-        const values = carClasses[classKey];
-        for (const value of values) {
-          document.write('<td>' + value + '</td>');
-        }
-        document.write('<td>' + carSTC[classKey][2] + '</td>');
-        document.write('<td>' + carSTC[classKey][1] + '</td>');
-          document.write('<td>' + carSTC[classKey][0] + '</td>');
-        document.write('</tr>');
-      }
-    </script>
-  </table>
+                            document.write('<td>' + carSTC[classKey][1] + '</td>');
+                            document.write('<td>' + carSTC[classKey][0] + '</td>');
+                            document.write('</tr>');
+                        }
+
+                    </script>
+                </table>
             </div>
-            </div>
+        </div>
     </div>
-    
-    
+
+
     <script>
         const checkbox = document.getElementById('podst');
         const numberInputContainer = document.querySelector('.checkbox-container[style="display: none;"]');
@@ -560,56 +592,56 @@ const carClasses = {
         const historyList = document.getElementById("historyList");
         const calculations = [];
 
-        
+
 
         // Funkcja do usuwania wyliczenia z historii
         function deleteCalculation(index) {
             calculations.splice(index, 1); // Usunięcie wyliczenia z tablicy
             renderHistoryList(); // Ponowne renderowanie listy historii // Usunięcie wyliczenia z tablicy
-            nolist.slice(index+1);
+            nolist.slice(index + 1);
         }
-        
-function copyToClipboard(index) {
-    var element = calculations[index];
-    let resultText = `Klasa pojazdu: ${element.carClass}
+
+        function copyToClipboard(index) {
+            var element = calculations[index];
+            let resultText = `Klasa pojazdu: ${element.carClass}
 Dni: ${element.rentalPeriod}
 Stawka dobowa wynajmu: ${element.daily} PLN`;
 
-    // Sprawdź dostępność dodatków i dodaj odpowiednie linie do resultText
-    if (element.podst > 0) {
-        resultText += `\nPodstawienie: ${element.podst} PLN`;
-    }
-    if (element.zwrot > 0) {
-        resultText += `\nZwrot: ${element.zwrot} PLN`;
-    }
-    if (element.stcOption > 0) {
-        resultText += `\nSTC: ${element.stcOption} PLN`;
-    }
-    if (element.international > 0) {
-        resultText += `\nWZG: ${element.international} PLN`;
-    }
-    if (element.wpg > 0) {
-        resultText += `\nWydanie poza godzinami: ${element.wpg} PLN`;
-    }
-    if (element.zpg > 0) {
-        resultText += `\nZwrot poza godzinami: ${element.zpg} PLN`;
-    }
-    if (element.zwio > 0) {
-        resultText += `\nZwrot w innym oddziale: ${element.zwio} PLN`;
-    }
-    if (element.fcs > 0) {
-        resultText += `\nFull Cleaning Service: ${element.fcs} PLN`;
-    }
-    
-    resultText += `
+            // Sprawdź dostępność dodatków i dodaj odpowiednie linie do resultText
+            if (element.podst > 0) {
+                resultText += `\nPodstawienie: ${element.podst} PLN`;
+            }
+            if (element.zwrot > 0) {
+                resultText += `\nZwrot: ${element.zwrot} PLN`;
+            }
+            if (element.stcOption > 0) {
+                resultText += `\nSTC: ${element.stcOption} PLN`;
+            }
+            if (element.international > 0) {
+                resultText += `\nWZG: ${element.international} PLN`;
+            }
+            if (element.wpg > 0) {
+                resultText += `\nWydanie poza godzinami: ${element.wpg} PLN`;
+            }
+            if (element.zpg > 0) {
+                resultText += `\nZwrot poza godzinami: ${element.zpg} PLN`;
+            }
+            if (element.zwio > 0) {
+                resultText += `\nZwrot w innym oddziale: ${element.zwio} PLN`;
+            }
+            if (element.fcs > 0) {
+                resultText += `\nFull Cleaning Service: ${element.fcs} PLN`;
+            }
+
+            resultText += `
 Rabat: ${element.discount}%
 Koszt wynajmu samochodu: ${element.totalPrice.toFixed(2)} PLN
 Depozyt: ${element.deposit.toFixed(2)} PLN`;
 
-    navigator.clipboard.writeText(resultText).then(() => {
-        alert("Skopiowano do schowka: " + resultText);
-    });
-}
+            navigator.clipboard.writeText(resultText).then(() => {
+                alert("Skopiowano do schowka: " + resultText);
+            });
+        }
 
 
         // Funkcja renderująca listę historii
@@ -673,16 +705,16 @@ ${
          <button class="copy-button" onclick="copyToClipboard(${index})" style="width:49%; background-color: #3f51b5;"><i class="fa fa-copy"></i></button>
     </div>
         `;
-                
+
                 const elehisElement = calculationElement.querySelector("#elehis");
 
-elehisElement.addEventListener("mouseenter", function() {
-  elehisElement.style.backgroundColor = "#EBEBEB"; // Tutaj możesz zmienić kolor tła po najechaniu
-});
+                elehisElement.addEventListener("mouseenter", function() {
+                    elehisElement.style.backgroundColor = "#EBEBEB"; // Tutaj możesz zmienić kolor tła po najechaniu
+                });
 
-elehisElement.addEventListener("mouseleave", function() {
-  elehisElement.style.backgroundColor = ""; // Tutaj możesz ustawić domyślny kolor tła po opuszczeniu myszką
-});
+                elehisElement.addEventListener("mouseleave", function() {
+                    elehisElement.style.backgroundColor = ""; // Tutaj możesz ustawić domyślny kolor tła po opuszczeniu myszką
+                });
                 historyList.appendChild(calculationElement);
             });
         }
@@ -707,23 +739,32 @@ elehisElement.addEventListener("mouseleave", function() {
             if (carClass === "") {
                 alert("Proszę wybrać klasę pojazdu!");
             }
-            
+
             let discountX = document.getElementById("discount");
-            if (discount > 15){
+            if (discount > 15) {
                 discount = 10;
                 discountX.value = 10;
                 alert("Maksymalny rabat to 10%. Zmniejszono automatycznie.");
             }
-            
-if (rentalPeriod == 1) { rateIndex = 0; }
-else if (rentalPeriod == 2) { rateIndex = 1; }
-else if (rentalPeriod == 3) { rateIndex = 2; }
-else if (rentalPeriod == 4) { rateIndex = 3; }
-else if (rentalPeriod == 5) { rateIndex = 4; }
-else if (rentalPeriod == 6) { rateIndex = 5; }
-else if (rentalPeriod >= 7 && rentalPeriod <= 14) { rateIndex = 6; }
-else if (rentalPeriod >= 15) { rateIndex = 7; }
-            
+
+            if (rentalPeriod == 1) {
+                rateIndex = 0;
+            } else if (rentalPeriod == 2) {
+                rateIndex = 1;
+            } else if (rentalPeriod == 3) {
+                rateIndex = 2;
+            } else if (rentalPeriod == 4) {
+                rateIndex = 3;
+            } else if (rentalPeriod == 5) {
+                rateIndex = 4;
+            } else if (rentalPeriod == 6) {
+                rateIndex = 5;
+            } else if (rentalPeriod >= 7 && rentalPeriod <= 14) {
+                rateIndex = 6;
+            } else if (rentalPeriod >= 15) {
+                rateIndex = 7;
+            }
+
             let rate = carClasses[carClass][rateIndex];
             let totalPrice = 0;
             let totalPriceSTC = 0;
