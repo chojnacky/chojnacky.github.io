@@ -4,6 +4,7 @@
 // @grant    GM_addStyle
 // @run-at   document-start
 // ==/UserScript==
+// @updateURL https://raw.githubusercontent.com/chojnacky/chojnacky.github.io/main/OneRent%20CSS.user.js
 
 GM_addStyle ( `
    .side-buttons .side-buttons-sticky {
