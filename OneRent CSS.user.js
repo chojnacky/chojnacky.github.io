@@ -6,7 +6,7 @@
 // ==/UserScript==
 // @updateURL https://raw.githubusercontent.com/chojnacky/chojnacky.github.io/main/OneRent%20CSS.user.js
 
-GM_addStyle ( `
+GM_addStyle(`
    .side-buttons .side-buttons-sticky {
      width: 120px;
      position: sticky;
@@ -51,6 +51,7 @@ GM_addStyle ( `
 ul.timeline > li:before {
     border: 3px solid #ea2f74 !important;
 }
-
-    }
-` );
+.modal-xl {
+    max-width: 1600px !important;
+}
+`);
