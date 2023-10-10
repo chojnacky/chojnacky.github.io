@@ -2,9 +2,12 @@
 // @name     OneRent CSS
 // @match  https://prod.onerent.zone/*
 // @grant    GM_addStyle
+// @version 1.0.1
 // @run-at   document-start
 // ==/UserScript==
+// @downloadURL https://raw.githubusercontent.com/chojnacky/chojnacky.github.io/main/OneRent%20CSS.user.js
 // @updateURL https://raw.githubusercontent.com/chojnacky/chojnacky.github.io/main/OneRent%20CSS.user.js
+// ==/UserScript==
 
 GM_addStyle(`
    .side-buttons .side-buttons-sticky {
