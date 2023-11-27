@@ -31,7 +31,8 @@
         { name: 'Lublin', address: 'ul. Abramowice Prywatne 42B' },
         { name: 'Chorzów', address: 'ul. Katowicka 160' },
         { name: 'Kraków', address: 'ul. Dobrego Pasterza 43' },
-        { name: 'Toruń', address: 'ul. Polna 128/132' }
+        { name: 'Toruń', address: 'ul. Polna 128/132' },
+        { name: 'Katowice', address: 'ul. Jankego 11' }
         // Dodaj pozostałe oddziały według tego samego wzoru
     ];
 
