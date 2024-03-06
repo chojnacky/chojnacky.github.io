@@ -12,27 +12,30 @@
     // Definicja tablicy z oddziałami
     var oddzialy = [
         { region: 'Północ', name: 'Gorzów Wielkopolski', address: 'ul. Mieszka I 65' },
-        { region: 'Północ', name: 'Szczecin', address: 'ul. Torfowa 3a' },
+        { region: 'Północ', name: 'Szczecin', address: 'al. Wojska Polskiego 70' },
         { region: 'Północ', name: 'Koszalin', address: 'ul. Andersa 16a' },
-        { region: 'Północ', name: 'Gdańsk', address: 'ul. Grunwaldzka 339' },
+        { region: 'Północ', name: 'Gdańsk', address: 'ul. Litewska 12' },
         { region: 'Północ', name: 'Słupsk', address: 'ul. Leszczyńskiego 10A' },
         { region: 'Północ', name: 'Gryfice', address: 'ul. Piłsudskiego 34A' },
-        { region: 'Północ', name: 'Piła', address: 'ul. Grunwaldzka 2' },
         { region: 'Północ', name: 'Chojnice', address: 'ul. Bydgoska 16' },
         { region: 'Północ', name: 'Giżycko', address: 'ul. Kolejowa 18' },
+        { region: 'Północ', name: 'Olsztyn', address: 'ul. Sokola 6C' },
         { region: 'Zachód', name: 'Zielona Góra', address: 'ul. Kręta 2' },
         { region: 'Zachód', name: 'Poznań', address: 'ul. Murawy 12' },
         { region: 'Zachód', name: 'Leszno', address: 'ul. 3 maja 12' },
         { region: 'Zachód', name: 'Lubin', address: 'ul. Curie-Skłodowskiej 172' },
-        { region: 'Zachód', name: 'Jelenia Góra', address: 'ul. Zgorzelecka 9' },
+        { region: 'Południe', name: 'Jelenia Góra', address: 'ul. Zgorzelecka 9' },
         { region: 'Zachód', name: 'Toruń', address: 'ul. Polna 128/132' },
-        { region: 'Wschód', name: 'Warszawa', address: 'ul. Ciszewskiego 7' },
+        { region: 'Zachód', name: 'Piła', address: 'ul. Grunwaldzka 2' },
+        { region: 'Zachód', name: 'Bydgoszcz', address: 'ul. Z. Augusta 7' },
+        { region: 'Wschód', name: 'Warszawa', address: 'ul. Puławska 405' },
         { region: 'Wschód', name: 'Łódź', address: 'ul. Częstochowska 43' },
         { region: 'Wschód', name: 'Lublin', address: 'ul. Abramowice Prywatne 42B' },
         { region: 'Południe', name: 'Wrocław', address: 'ul. Olsztyńska 2' },
         { region: 'Południe', name: 'Chorzów', address: 'ul. Katowicka 160' },
         { region: 'Południe', name: 'Kraków', address: 'ul. Dobrego Pasterza 43' },
-        { region: 'Południe', name: 'Katowice', address: 'ul. Jankego 11' }
+        { region: 'Południe', name: 'Katowice', address: 'ul. Jankego 11' },
+        { region: 'Południe', name: 'Opole', address: 'ul. Wiejska 22' }
         // Dodaj pozostałe oddziały według tego samego wzoru
     ];
 
