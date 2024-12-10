@@ -56,13 +56,6 @@
             border-collapse: collapse;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             background-color: #fff;
-            transition: background-color 0.3s ease;
-            /* Dodano efekt przejścia */
-        }
-
-        table.refreshed {
-            background-color: #d9f7d9;
-            /* Zielony akcent */
         }
 
         th,
@@ -100,6 +93,13 @@
             /* Jasnoniebieski na hover */
         }
 
+        #refresh-timer {
+            text-align: center;
+            font-size: 0.9em;
+            color: #555;
+            margin-top: 10px;
+        }
+
         footer {
             margin-top: 20px;
             text-align: center;
@@ -119,6 +119,11 @@
         <label for="regionFilter">Filtruj według regionu:</label>
         <select id="regionFilter">
             <option value="All">Wszystkie</option>
+            <option value="Północ">Północ</option>
+            <option value="Wschód">Wschód</option>
+            <option value="Centrum">Centrum</option>
+            <option value="Zachód">Zachód</option>
+            <option value="Południe">Południe</option>
         </select>
     </div>
     <table id="data-table">
@@ -140,6 +145,9 @@
             <!-- Dynamic data will be injected here -->
         </tbody>
     </table>
+    <div id="refresh-timer">
+        Odświeżenie za: <span id="countdown">45</span> sekund
+    </div>
     <footer>
         &copy; 2024 OneRent - Wszystkie prawa zastrzeżone.
     </footer>
@@ -147,13 +155,14 @@
     <script>
         let allData = []; // Zmienna globalna przechowująca wszystkie dane
         let regionFilter = "All"; // Domyślna wartość filtra
+        let refreshInterval = 45; // Interwał odświeżania w sekundach
+        let countdown = refreshInterval; // Licznik odliczania
 
         async function fetchData() {
             try {
                 const response = await fetch('tabela.csv'); // Pobierz plik CSV
                 const data = await response.text();
                 processData(data);
-                showTableRefreshedEffect(); // Pokaż efekt odświeżenia tabeli
             } catch (error) {
                 console.error('Błąd podczas pobierania danych:', error);
             }
@@ -162,28 +171,7 @@
         function processData(csvData) {
             const rows = csvData.split('\n').map(row => row.split(';'));
             allData = rows.filter((row, index) => row.length > 1 && index > 0); // Filtruj puste wiersze i nagłówki
-
-            populateFilterOptions(allData);
             updateTable(); // Wyświetl tabelę na podstawie filtra
-        }
-
-        function populateFilterOptions(data) {
-            const select = document.getElementById("regionFilter");
-            select.innerHTML = '<option value="All">Wszystkie</option>'; // Reset listy rozwijanej
-
-            const regions = [...new Set(data.map(row => row[8].trim()))]; // Pobierz unikalne wartości z kolumny "Region"
-
-            regions.forEach(region => {
-                const option = document.createElement("option");
-                option.value = region;
-                option.textContent = region;
-                select.appendChild(option);
-            });
-
-            select.addEventListener("change", (event) => {
-                regionFilter = event.target.value; // Zaktualizuj filtr
-                updateTable();
-            });
         }
 
         function updateTable() {
@@ -232,21 +220,31 @@
             });
         }
 
-        function showTableRefreshedEffect() {
-            const table = document.getElementById('data-table');
-            table.classList.add('refreshed'); // Dodaj klasę animacji
-            setTimeout(() => {
-                table.classList.remove('refreshed'); // Usuń klasę po 1 sekundzie
+        function startCountdown() {
+            const countdownSpan = document.getElementById("countdown");
+
+            const timer = setInterval(() => {
+                countdown--;
+                countdownSpan.textContent = countdown;
+
+                if (countdown <= 0) {
+                    clearInterval(timer);
+                    fetchData();
+                    countdown = refreshInterval; // Resetuj licznik
+                    startCountdown(); // Rozpocznij odliczanie ponownie
+                }
             }, 1000);
         }
 
+        // Nasłuchiwanie zmiany filtra
+        document.getElementById("regionFilter").addEventListener("change", (event) => {
+            regionFilter = event.target.value; // Zaktualizuj filtr
+            updateTable();
+        });
+
         // Pobierz dane przy starcie
         fetchData();
-
-        // Ustaw automatyczne odświeżanie co 45 sekund
-        setInterval(() => {
-            fetchData();
-        }, 45000);
+        startCountdown();
 
     </script>
 </body>
