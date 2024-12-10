@@ -1,226 +1,234 @@
-    <!DOCTYPE html>
-    <html lang="en">
+<!DOCTYPE html>
+<html lang="pl">
 
-    <head>
-        <title>SoRentDocs - wszystko w pigułce</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wallboard - OneRent</title>
+    <style>
+        /* Reset stylów */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-        <!-- Meta -->
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="SoRentDocs - wszystko w pigułce">
-        <meta name="author" content="Xiaoying Riley at 3rd Wave Media">
-        <link rel="shortcut icon" href="favicon.ico">
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
 
-        <!-- Google Font -->
-        <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap" rel="stylesheet">
+        header {
+            background-color: #003366;
+            /* Ciemny niebieski */
+            color: #fff;
+            padding: 15px 20px;
+            text-align: center;
+            font-size: 1.5em;
+        }
 
-        <!-- FontAwesome JS-->
-        <script defer src="assets/fontawesome/js/all.min.js"></script>
+        .filter {
+            margin: 20px auto;
+            text-align: center;
+            padding: 10px;
+        }
 
-        <!-- Theme CSS -->
-        <link id="theme-style" rel="stylesheet" href="assets/css/theme.css">
+        .filter label {
+            font-weight: bold;
+            font-size: 1.1em;
+            color: #003366;
+        }
 
-    </head>
+        .filter select {
+            padding: 8px 12px;
+            font-size: 1em;
+            margin-left: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
 
-    <body>
-        <header class="header fixed-top">
+        table {
+            width: 90%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
 
-            <div class="branding docs-branding">
-                <div class="container-fluid position-relative py-2">
-                    <div class="docs-logo-wrapper">
-                        <div class="site-logo"><a class="navbar-brand" href="index.html"><img class="logo-icon me-2" src="assets/images/coderdocs-logo.svg" alt="logo"><span class="logo-text">SoRent<span class="text-alt">Docs</span></span></a></div>
-                    </div>
-                    <!--//docs-logo-wrapper-->
-                    <div class="docs-top-utilities d-flex justify-content-end align-items-center">
-                    </div>
-                    <!--//docs-top-utilities-->
-                </div>
-                <!--//container-->
-            </div>
-            <!--//branding-->
-        </header>
-        <!--//header-->
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+            font-size: 1em;
+        }
 
+        th {
+            background-color: #003366;
+            /* Niebieski */
+            color: white;
+            font-weight: bold;
+        }
 
-        <div class="page-header theme-bg-dark py-5 text-center position-relative">
-            <div class="theme-bg-shapes-right"></div>
-            <div class="theme-bg-shapes-left"></div>
-            <div class="container">
-                <h1 class="page-heading single-col-max mx-auto">Documentation</h1>
-                <div class="page-intro single-col-max mx-auto">Everything you need to get your software documentation online.</div>
-                <div class="main-search-box pt-3 d-block mx-auto">
-                    <form class="search-form w-100">
-                        <input type="text" placeholder="Search the docs..." name="search" class="form-control search-input">
-                        <button type="submit" class="btn search-btn" value="Search"><i class="fas fa-search"></i></button>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <!--//page-header-->
-        <div class="page-content">
-            <div class="container">
-                <div class="docs-overview py-5">
-                    <div class="row justify-content-center">
-                        <div class="col-12 col-lg-4 py-3">
-                            <div class="card shadow-sm">
-                                <div class="card-body">
-                                    <h5 class="card-title mb-3">
-                                        <span class="theme-icon-holder card-icon-holder me-2">
-                                            <i class="fas fa-portrait"></i>
-                                        </span>
-                                        <!--//card-icon-holder-->
-                                        <span class="card-title-text">Rezerwacje</span>
-                                    </h5>
-                                    <div class="card-text">
-                                        Rezerwacje assistance, oc sprawcy, prywatne, długoterminowe, www oraz brokerskie.<br>
-                                        Dodawanie najmow wstecz, zarzadzanie odmowami.<br>
-                                        Lista brokerow, ściaga VIG i FAQ.
-                                    </div>
-                                    <a class="card-link-mask" href="docs-rzr.html#section-1"></a>
-                                </div>
-                                <!--//card-body-->
-                            </div>
-                            <!--//card-->
-                        </div>
-                        <!--//col-->
-                        <div class="col-12 col-lg-4 py-3">
-                            <div class="card shadow-sm">
-                                <div class="card-body">
-                                    <h5 class="card-title mb-3">
-                                        <span class="theme-icon-holder card-icon-holder me-2">
-                                            <i class="fas fa-money-bill-wave"></i>
-                                        </span>
-                                        <!--//card-icon-holder-->
-                                        <span class="card-title-text">Faktury</span>
-                                    </h5>
-                                    <div class="card-text">
-                                        Dodawanie faktur, not obciążeniowych i proform.
-                                    </div>
-                                    <a class="card-link-mask" href="docs-fv.html#section-1"></a>
-                                </div>
-                                <!--//card-body-->
-                            </div>
-                            <!--//card-->
-                        </div>
-                        <!--//col-->
-                        <div class="col-12 col-lg-4 py-3">
-                            <div class="card shadow-sm">
-                                <div class="card-body">
-                                    <h5 class="card-title mb-3">
-                                        <span class="theme-icon-holder card-icon-holder me-2">
-                                            <i class="fas fa-id-card"></i>
-                                        </span>
-                                        <!--//card-icon-holder-->
-                                        <span class="card-title-text">Organizacja</span>
-                                    </h5>
-                                    <div class="card-text">
-                                        Zarządzanie kontami agentow.<br>
-                                        Dodawanie i weryfikacja zadan.<br>
-                                        Grafik zadan.<br>
-                                        Wynagrodzenia i koszty pracownicze.
-                                    </div>
-                                    <a class="card-link-mask" href="docs-org.html#section-1"></a>
-                                </div>
-                                <!--//card-body-->
-                            </div>
-                            <!--//card-->
-                        </div>
-                        <!--//col-->
-                        <div class="col-12 col-lg-4 py-3">
-                            <div class="card shadow-sm">
-                                <div class="card-body">
-                                    <h5 class="card-title mb-3">
-                                        <span class="theme-icon-holder card-icon-holder me-2">
-                                            <i class="fas fa-briefcase"></i>
-                                        </span>
-                                        <!--//card-icon-holder-->
-                                        <span class="card-title-text">Cenniki, kontrakty i kontrahenci</span>
-                                    </h5>
-                                    <div class="card-text">
-                                        Dodawanie kontraktow, cennikow i kontrahentow.<br>
-                                    </div>
-                                    <a class="card-link-mask" href="docs-cenniki.html#section-1"></a>
-                                </div>
-                                <!--//card-body-->
-                            </div>
-                            <!--//card-->
-                        </div>
-                        <div class="col-12 col-lg-4 py-3">
-                            <div class="card shadow-sm">
-                                <div class="card-body">
-                                    <h5 class="card-title mb-3">
-                                        <span class="theme-icon-holder card-icon-holder me-2">
-                                            <i class="fas fa-briefcase"></i>
-                                        </span>
-                                        <!--//card-icon-holder-->
-                                        <span class="card-title-text">Samochody</span>
-                                    </h5>
-                                    <div class="card-text">
-                                        Zarządzanie flotą.<br>
-                                        Kontrola przebiegow i stanu pojazdow.<br>
-                                        Telemetria.<br>
-                                        Archiwum.<br>
-                                    </div>
-                                    <a class="card-link-mask" href="docs-flota.html#section-1"></a>
-                                </div>
-                                <!--//card-body-->
-                            </div>
-                            <!--//card-->
-                        </div>
-                        <!--//col-->
-                        <div class="col-12 col-lg-4 py-3">
-                            <div class="card shadow-sm">
-                                <div class="card-body">
-                                    <h5 class="card-title mb-3">
-                                        <span class="theme-icon-holder card-icon-holder me-2">
-                                            <i class="fas fa-briefcase"></i>
-                                        </span>
-                                        <!--//card-icon-holder-->
-                                        <span class="card-title-text">Serwisy</span>
-                                    </h5>
-                                    <div class="card-text">
-                                        Zlecenia serwisowe - przeglądy, naprawy.<br>
-                                        Lista szkod.
-                                    </div>
-                                    <a class="card-link-mask" href="docs-serwisy.html#section-1"></a>
-                                </div>
-                                <!--//card-body-->
-                            </div>
-                            <!--//card-->
-                        </div>
-                        <!--//col-->
-                    </div>
-                    <!--//row-->
-                </div>
-                <!--//container-->
-            </div>
-            <!--//container-->
-        </div>
-        <!--//page-content-->
-        <footer class="footer">
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+            /* Jasnoszary */
+        }
 
-            <div class="footer-bottom text-center py-5">
-                <!--/* This template is free as long as you keep the footer attribution link. If you'd like to use the template without the attribution link, you can buy the commercial license via our website: themes.3rdwavemedia.com Thank you for your support. :) */-->
-                <small class="copyright">Designed with <i class="fas fa-heart" style="color: #fb866a;"></i> by <a class="theme-link" href="http://themes.3rdwavemedia.com" target="_blank">Xiaoying Riley</a> for developers</small>
+        tr.highlight {
+            background-color: #ffeb99;
+            /* Żółty akcent */
+        }
 
+        tr.expired {
+            background-color: #ff9999;
+            /* Czerwony dla przedawnionych */
+        }
 
-            </div>
+        tr:hover {
+            background-color: #ddeeff;
+            /* Jasnoniebieski na hover */
+        }
 
-        </footer>
+        footer {
+            margin-top: 20px;
+            text-align: center;
+            padding: 10px 0;
+            font-size: 0.9em;
+            color: #666;
+        }
 
-        <!-- Javascript -->
-        <script src="assets/plugins/popper.min.js"></script>
-        <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    </style>
+</head>
 
-        <!-- Page Specific JS -->
-        <script src="assets/plugins/smoothscroll.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
-        <script src="assets/js/highlight-custom.js"></script>
-        <script src="assets/plugins/simplelightbox/simple-lightbox.min.js"></script>
-        <script src="assets/plugins/gumshoe/gumshoe.polyfills.min.js"></script>
-        <script src="assets/js/docs.js"></script>
+<body>
+    <header>
+        Wallboard - OneRent
+    </header>
+    <div class="filter">
+        <label for="regionFilter">Filtruj według regionu:</label>
+        <select id="regionFilter">
+            <option value="All">Wszystkie</option>
+        </select>
+    </div>
+    <table id="data-table">
+        <thead>
+            <tr>
+                <th>Data i godzina</th>
+                <th>ID</th>
+                <th>Operacja</th>
+                <th>Wykonujący</th>
+                <th>Rejestracja</th>
+                <th>Adres</th>
+                <th>Miasto</th>
+                <th>Region</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Dynamic data will be injected here -->
+        </tbody>
+    </table>
+    <footer>
+        &copy; 2024 OneRent - Wszystkie prawa zastrzeżone.
+    </footer>
 
-    </body>
+    <script>
+        let allData = []; // Zmienna globalna przechowująca wszystkie dane
+        let regionFilter = "All"; // Domyślna wartość filtra
 
-    </html>
+        async function fetchData() {
+            try {
+                const response = await fetch('tabela.csv'); // Pobierz plik CSV
+                const data = await response.text();
+                processData(data);
+            } catch (error) {
+                console.error('Błąd podczas pobierania danych:', error);
+            }
+        }
+
+        function processData(csvData) {
+            const rows = csvData.split('\n').map(row => row.split(';'));
+            allData = rows.filter((row, index) => row.length > 1 && index > 0); // Filtruj puste wiersze i nagłówki
+
+            populateFilterOptions(allData);
+            updateTable(); // Wyświetl tabelę na podstawie filtra
+        }
+
+        function populateFilterOptions(data) {
+            const select = document.getElementById("regionFilter");
+            const regions = [...new Set(data.map(row => row[7].trim()))]; // Pobierz unikalne wartości z kolumny "Region"
+
+            regions.forEach(region => {
+                const option = document.createElement("option");
+                option.value = region;
+                option.textContent = region;
+                select.appendChild(option);
+            });
+
+            select.addEventListener("change", (event) => {
+                regionFilter = event.target.value; // Zaktualizuj filtr
+                updateTable();
+            });
+        }
+
+        function updateTable() {
+            const tbody = document.getElementById('data-table').querySelector('tbody');
+            tbody.innerHTML = ''; // Wyczyść istniejące dane
+
+            const now = new Date();
+            const twentyFourHoursFromNow = new Date(now.getTime() + 24 * 60 * 60 * 1000);
+            const fourHoursFromNow = new Date(now.getTime() + 4 * 60 * 60 * 1000);
+
+            // Filtrowanie na podstawie regionu i daty
+            const filteredData = allData.filter(row => {
+                const region = row[7].trim();
+                const dateTime = new Date(row[0].trim());
+                return (regionFilter === "All" || region === regionFilter) &&
+                    dateTime <= twentyFourHoursFromNow;
+            });
+
+            // Sortowanie danych według kolumny "Data i godzina"
+            filteredData.sort((a, b) => {
+                const dateA = new Date(a[0].trim());
+                const dateB = new Date(b[0].trim());
+                return dateA - dateB;
+            });
+
+            filteredData.forEach(row => {
+                const tr = document.createElement('tr');
+
+                // Sprawdź datę i godzinę (pierwsza kolumna)
+                const dateTimeStr = row[0].trim();
+                const dateTime = new Date(dateTimeStr);
+
+                if (dateTime < now) {
+                    tr.classList.add('expired'); // Dodaj klasę dla przedawnionych
+                } else if (dateTime <= fourHoursFromNow) {
+                    tr.classList.add('highlight'); // Dodaj klasę dla zadań do 4 godzin
+                }
+
+                row.forEach(cell => {
+                    const td = document.createElement('td');
+                    td.textContent = cell.trim();
+                    tr.appendChild(td);
+                });
+
+                tbody.appendChild(tr);
+            });
+        }
+
+        // Pobierz dane przy starcie
+        fetchData();
+
+        // Ustaw automatyczne odświeżanie co 45 sekund
+        setInterval(() => {
+            fetchData();
+        }, 45000);
+
+    </script>
+</body>
+
+</html>
