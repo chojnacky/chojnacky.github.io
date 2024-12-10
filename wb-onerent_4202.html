@@ -155,12 +155,16 @@
     <script>
         let allData = []; // Zmienna globalna przechowująca wszystkie dane
         let regionFilter = "All"; // Domyślna wartość filtra
-        let refreshInterval = 45; // Interwał odświeżania w sekundach
+        let refreshInterval = 75; // Interwał odświeżania w sekundach
         let countdown = refreshInterval; // Licznik odliczania
 
         async function fetchData() {
             try {
-                const response = await fetch('tabela.csv'); // Pobierz plik CSV
+                // Dodaj znacznik czasu jako parametr zapytania, aby uniknąć buforowania
+                const response = await fetch(`tabela.csv?nocache=${new Date().getTime()}`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
                 const data = await response.text();
                 processData(data);
             } catch (error) {
