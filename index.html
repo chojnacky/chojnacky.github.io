@@ -56,6 +56,13 @@
             border-collapse: collapse;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             background-color: #fff;
+            transition: background-color 0.3s ease;
+            /* Dodano efekt przejścia */
+        }
+
+        table.refreshed {
+            background-color: #d9f7d9;
+            /* Zielony akcent */
         }
 
         th,
@@ -146,6 +153,7 @@
                 const response = await fetch('tabela.csv'); // Pobierz plik CSV
                 const data = await response.text();
                 processData(data);
+                showTableRefreshedEffect(); // Pokaż efekt odświeżenia tabeli
             } catch (error) {
                 console.error('Błąd podczas pobierania danych:', error);
             }
@@ -160,3 +168,87 @@
         }
 
         function populateFilterOptions(data) {
+            const select = document.getElementById("regionFilter");
+            select.innerHTML = '<option value="All">Wszystkie</option>'; // Reset listy rozwijanej
+
+            const regions = [...new Set(data.map(row => row[9].trim()))]; // Pobierz unikalne wartości z kolumny "Region"
+
+            regions.forEach(region => {
+                const option = document.createElement("option");
+                option.value = region;
+                option.textContent = region;
+                select.appendChild(option);
+            });
+
+            select.addEventListener("change", (event) => {
+                regionFilter = event.target.value; // Zaktualizuj filtr
+                updateTable();
+            });
+        }
+
+        function updateTable() {
+            const tbody = document.getElementById('data-table').querySelector('tbody');
+            tbody.innerHTML = ''; // Wyczyść istniejące dane
+
+            const now = new Date();
+            const twentyFourHoursFromNow = new Date(now.getTime() + 24 * 60 * 60 * 1000);
+            const fourHoursFromNow = new Date(now.getTime() + 4 * 60 * 60 * 1000);
+
+            // Filtrowanie na podstawie regionu i daty
+            const filteredData = allData.filter(row => {
+                const region = row[9].trim();
+                const dateTime = new Date(row[0].trim());
+                return (regionFilter === "All" || region === regionFilter) &&
+                    dateTime <= twentyFourHoursFromNow;
+            });
+
+            // Sortowanie danych według kolumny "Data i godzina"
+            filteredData.sort((a, b) => {
+                const dateA = new Date(a[0].trim());
+                const dateB = new Date(b[0].trim());
+                return dateA - dateB;
+            });
+
+            filteredData.forEach(row => {
+                const tr = document.createElement('tr');
+
+                // Sprawdź datę i godzinę (pierwsza kolumna)
+                const dateTimeStr = row[0].trim();
+                const dateTime = new Date(dateTimeStr);
+
+                if (dateTime < now) {
+                    tr.classList.add('expired'); // Dodaj klasę dla przedawnionych
+                } else if (dateTime <= fourHoursFromNow) {
+                    tr.classList.add('highlight'); // Dodaj klasę dla zadań do 4 godzin
+                }
+
+                row.forEach(cell => {
+                    const td = document.createElement('td');
+                    td.textContent = cell.trim();
+                    tr.appendChild(td);
+                });
+
+                tbody.appendChild(tr);
+            });
+        }
+
+        function showTableRefreshedEffect() {
+            const table = document.getElementById('data-table');
+            table.classList.add('refreshed'); // Dodaj klasę animacji
+            setTimeout(() => {
+                table.classList.remove('refreshed'); // Usuń klasę po 1 sekundzie
+            }, 1000);
+        }
+
+        // Pobierz dane przy starcie
+        fetchData();
+
+        // Ustaw automatyczne odświeżanie co 45 sekund
+        setInterval(() => {
+            fetchData();
+        }, 45000);
+
+    </script>
+</body>
+
+</html>
