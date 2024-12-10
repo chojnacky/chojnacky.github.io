@@ -51,13 +51,12 @@
         }
 
         table {
-            width: 90%;
+            width: 100%;
             margin: 20px auto;
             border-collapse: collapse;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             background-color: #fff;
             transition: background-color 0.3s ease;
-            /* Dodano efekt przejścia */
         }
 
         table.refreshed {
@@ -68,9 +67,9 @@
         th,
         td {
             border: 1px solid #ddd;
-            padding: 12px;
+            padding: 8px;
             text-align: center;
-            font-size: 1em;
+            font-size: 0.9em;
         }
 
         th {
@@ -106,6 +105,70 @@
             padding: 10px 0;
             font-size: 0.9em;
             color: #666;
+        }
+
+        /* Wersja mobilna */
+        @media (max-width: 768px) {
+            header {
+                font-size: 1.2em;
+                padding: 10px;
+            }
+
+            .filter {
+                font-size: 0.9em;
+                margin: 10px auto;
+                padding: 5px;
+            }
+
+            .filter select {
+                font-size: 0.9em;
+                padding: 6px;
+            }
+
+            table {
+                font-size: 0.8em;
+            }
+
+            th,
+            td {
+                padding: 6px;
+            }
+
+            table,
+            thead,
+            tbody,
+            th,
+            td,
+            tr {
+                display: block;
+            }
+
+            tr {
+                margin-bottom: 10px;
+            }
+
+            th {
+                text-align: left;
+                background-color: #003366;
+                color: white;
+                padding: 10px;
+            }
+
+            td {
+                text-align: left;
+                padding-left: 50%;
+                position: relative;
+            }
+
+            td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 10px;
+                top: 50%;
+                transform: translateY(-50%);
+                font-weight: bold;
+                color: #003366;
+            }
         }
 
     </style>
@@ -222,9 +285,10 @@
                     tr.classList.add('highlight'); // Dodaj klasę dla zadań do 4 godzin
                 }
 
-                row.forEach(cell => {
+                row.forEach((cell, index) => {
                     const td = document.createElement('td');
                     td.textContent = cell.trim();
+                    td.setAttribute('data-label', document.querySelectorAll('th')[index].innerText);
                     tr.appendChild(td);
                 });
 
