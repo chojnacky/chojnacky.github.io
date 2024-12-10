@@ -70,7 +70,7 @@
             border: 1px solid #ddd;
             padding: 12px;
             text-align: center;
-            font-size: 1em;
+            font-size: 0.6em;
         }
 
         th {
@@ -222,7 +222,10 @@
                     tr.classList.add('highlight'); // Dodaj klasę dla zadań do 4 godzin
                 }
 
-                row.forEach(cell => {
+                row.forEach((cell, index) => {
+                    // Pomijaj kolumnę "Adres" (index 6)
+                    if (index === 6) return;
+
                     const td = document.createElement('td');
                     td.textContent = cell.trim();
                     tr.appendChild(td);
