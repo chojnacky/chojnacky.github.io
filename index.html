@@ -51,12 +51,13 @@
         }
 
         table {
-            width: 100%;
+            width: 90%;
             margin: 20px auto;
             border-collapse: collapse;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             background-color: #fff;
             transition: background-color 0.3s ease;
+            /* Dodano efekt przejścia */
         }
 
         table.refreshed {
@@ -67,9 +68,9 @@
         th,
         td {
             border: 1px solid #ddd;
-            padding: 8px;
+            padding: 12px;
             text-align: center;
-            font-size: 0.9em;
+            font-size: 1em;
         }
 
         th {
@@ -105,70 +106,6 @@
             padding: 10px 0;
             font-size: 0.9em;
             color: #666;
-        }
-
-        /* Wersja mobilna */
-        @media (max-width: 768px) {
-            header {
-                font-size: 1.2em;
-                padding: 10px;
-            }
-
-            .filter {
-                font-size: 0.9em;
-                margin: 10px auto;
-                padding: 5px;
-            }
-
-            .filter select {
-                font-size: 0.9em;
-                padding: 6px;
-            }
-
-            table {
-                font-size: 0.8em;
-            }
-
-            th,
-            td {
-                padding: 6px;
-            }
-
-            table,
-            thead,
-            tbody,
-            th,
-            td,
-            tr {
-                display: block;
-            }
-
-            tr {
-                margin-bottom: 10px;
-            }
-
-            th {
-                text-align: left;
-                background-color: #003366;
-                color: white;
-                padding: 10px;
-            }
-
-            td {
-                text-align: left;
-                padding-left: 50%;
-                position: relative;
-            }
-
-            td::before {
-                content: attr(data-label);
-                position: absolute;
-                left: 10px;
-                top: 50%;
-                transform: translateY(-50%);
-                font-weight: bold;
-                color: #003366;
-            }
         }
 
     </style>
@@ -273,46 +210,372 @@
             });
 
             filteredData.forEach(row => {
-                const tr = document.createElement('tr');
+                        const tr = document.createElement('tr');
 
-                // Sprawdź datę i godzinę (pierwsza kolumna)
-                const dateTimeStr = row[0].trim();
-                const dateTime = new Date(dateTimeStr);
+                        // Sprawdź datę i godzinę (pierwsza kolumna)
+                        const dateTimeStr = row[0].trim();
+                        const dateTime = new Date(dateTimeStr);
 
-                if (dateTime < now) {
-                    tr.classList.add('expired'); // Dodaj klasę dla przedawnionych
-                } else if (dateTime <= fourHoursFromNow) {
-                    tr.classList.add('highlight'); // Dodaj klasę dla zadań do 4 godzin
-                }
+                        if (dateTime < now) {
+                            tr.classList.add('expired'); // Dodaj klasę dla przedawnionych
+                        } else if (dateTime <= fourHoursFromNow) {
+                            tr.classList.add('highlight'); // Dodaj klasę dla zadań do 4 godzin
+                        }
 
-                row.forEach((cell, index) => {
-                    const td = document.createElement('td');
-                    td.textContent = cell.trim();
-                    td.setAttribute('data-label', document.querySelectorAll('th')[index].innerText);
-                    tr.appendChild(td);
-                });
+                        row.forEach(cell => {
+                            const td = document.createElement('td');
+                            td.textContent = cell.trim();
+                            tr.appendChild(td);
+                        });
 
-                tbody.appendChild(tr);
-            });
+                        tbody.appendChild(tr); < !DOCTYPE html >
+                            <
+                            html lang = "pl" >
+
+                            <
+                            head >
+                            <
+                            meta charset = "UTF-8" >
+                            <
+                            meta name = "viewport"
+                        content = "width=device-width, initial-scale=1.0" >
+                            <
+                            title > Wallboard - OneRent < /title> <
+                        style >
+                            /* Reset stylów */
+                            *
+                            {
+                                margin: 0;
+                                padding: 0;
+                                box - sizing: border - box;
+                            }
+
+                        body {
+                            font - family: 'Arial', sans - serif;
+                            margin: 0;
+                            padding: 0;
+                            background - color: #f9f9f9;
+                            color: #333;
         }
 
-        function showTableRefreshedEffect() {
-            const table = document.getElementById('data-table');
-            table.classList.add('refreshed'); // Dodaj klasę animacji
-            setTimeout(() => {
-                table.classList.remove('refreshed'); // Usuń klasę po 1 sekundzie
-            }, 1000);
+        header {
+            background-color: # 003366;
+                            /* Ciemny niebieski */
+                            color: #fff;
+                            padding: 15 px 20 px;
+                            text - align: center;
+                            font - size: 1.5 em;
+                        }
+
+                        .filter {
+                            margin: 20 px auto;
+                            text - align: center;
+                            padding: 10 px;
+                        }
+
+                        .filter label {
+                            font - weight: bold;
+                            font - size: 1.1 em;
+                            color: #003366;
         }
 
-        // Pobierz dane przy starcie
-        fetchData();
+        .filter select {
+            padding: 8px 12px;
+            font-size: 1em;
+            margin-left: 10px;
+            border: 1px solid # ccc;
+                            border - radius: 4 px;
+                        }
 
-        // Ustaw automatyczne odświeżanie co 45 sekund
-        setInterval(() => {
-            fetchData();
-        }, 45000);
+                        table {
+                            width: 100 % ;
+                            margin: 20 px auto;
+                            border - collapse: collapse;
+                            box - shadow: 0 4 px 6 px rgba(0, 0, 0, 0.1);
+                            background - color: #fff;
+                            transition: background - color 0.3 s ease;
+                        }
+
+                        table.refreshed {
+                            background - color: #d9f7d9;
+                            /* Zielony akcent */
+                        }
+
+                        th,
+                        td {
+                            border: 1 px solid #ddd;
+                            padding: 8 px;
+                            text - align: center;
+                            font - size: 0.9 em;
+                        }
+
+                        th {
+                            background - color: #003366;
+            /* Niebieski */
+            color: white;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: # f2f2f2;
+                            /* Jasnoszary */
+                        }
+
+                        tr.highlight {
+                            background - color: #ffeb99;
+                            /* Żółty akcent */
+                        }
+
+                        tr.expired {
+                            background - color: #ff9999;
+                            /* Czerwony dla przedawnionych */
+                        }
+
+                        tr: hover {
+                            background - color: #ddeeff;
+                            /* Jasnoniebieski na hover */
+                        }
+
+                        footer {
+                            margin - top: 20 px;
+                            text - align: center;
+                            padding: 10 px 0;
+                            font - size: 0.9 em;
+                            color: #666;
+        }
+
+        /* Wersja mobilna */
+        @media (max-width: 768px) {
+            header {
+                font-size: 1.2em;
+                padding: 10px;
+            }
+
+            .filter {
+                font-size: 0.9em;
+                margin: 10px auto;
+                padding: 5px;
+            }
+
+            .filter select {
+                font-size: 0.9em;
+                padding: 6px;
+            }
+
+            table {
+                font-size: 0.8em;
+            }
+
+            th, td {
+                padding: 6px;
+            }
+
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+
+            tr {
+                margin-bottom: 10px;
+            }
+
+            th {
+                text-align: left;
+                background-color: # 003366;
+                            color: white;
+                            padding: 10 px;
+                        }
+
+                        td {
+                            text - align: left;
+                            padding - left: 50 % ;
+                            position: relative;
+                        }
+
+                        td::before {
+                                content: attr(data - label);
+                                position: absolute;
+                                left: 10 px;
+                                top: 50 % ;
+                                transform: translateY(-50 % );
+                                font - weight: bold;
+                                color: #003366;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        Wallboard - OneRent
+    </header>
+    <div class= "filter" >
+                                    <
+                                    label
+                                for = "regionFilter" > Filtruj według regionu: < /label> <
+                                select id = "regionFilter" >
+                                <
+                                option value = "All" > Wszystkie < /option> < /
+                                select > <
+                                /div> <
+                                table id = "data-table" >
+                                <
+                                thead >
+                                <
+                                tr >
+                                <
+                                th > Data i godzina < /th> <
+                                th > ID < /th> <
+                                th > Typ < /th> <
+                                th > Operacja < /th> <
+                                th > Wykonujący < /th> <
+                                th > Rejestracja < /th> <
+                                th > Adres < /th> <
+                                th > Miasto < /th> <
+                                th > Region < /th> <
+                                th > Uwagi < /th> < /
+                                tr > <
+                                /thead> <
+                                tbody >
+                                <
+                                !--Dynamic data will be injected here-- >
+                                <
+                                /tbody> < /
+                                table > <
+                                footer >
+                                &
+                                copy;2024 OneRent - Wszystkie prawa zastrzeżone. <
+                                /footer>
+
+                                <
+                                script >
+                                let allData = []; // Zmienna globalna przechowująca wszystkie dane
+                                let regionFilter = "All"; // Domyślna wartość filtra
+
+                                async function fetchData() {
+                                    try {
+                                        const response = await fetch('tabela.csv'); // Pobierz plik CSV
+                                        const data = await response.text();
+                                        processData(data);
+                                        showTableRefreshedEffect(); // Pokaż efekt odświeżenia tabeli
+                                    } catch (error) {
+                                        console.error('Błąd podczas pobierania danych:', error);
+                                    }
+                                }
+
+                                function processData(csvData) {
+                                    const rows = csvData.split('\n').map(row => row.split(';'));
+                                    allData = rows.filter((row, index) => row.length > 1 && index > 0); // Filtruj puste wiersze i nagłówki
+
+                                    populateFilterOptions(allData);
+                                    updateTable(); // Wyświetl tabelę na podstawie filtra
+                                }
+
+                                function populateFilterOptions(data) {
+                                    const select = document.getElementById("regionFilter");
+                                    select.innerHTML = '<option value="All">Wszystkie</option>'; // Reset listy rozwijanej
+
+                                    const regions = [...new Set(data.map(row => row[8].trim()))]; // Pobierz unikalne wartości z kolumny "Region"
+
+                                    regions.forEach(region => {
+                                        const option = document.createElement("option");
+                                        option.value = region;
+                                        option.textContent = region;
+                                        select.appendChild(option);
+                                    });
+
+                                    select.addEventListener("change", (event) => {
+                                        regionFilter = event.target.value; // Zaktualizuj filtr
+                                        updateTable();
+                                    });
+                                }
+
+                                function updateTable() {
+                                    const tbody = document.getElementById('data-table').querySelector('tbody');
+                                    tbody.innerHTML = ''; // Wyczyść istniejące dane
+
+                                    const now = new Date();
+                                    const twentyFourHoursFromNow = new Date(now.getTime() + 24 * 60 * 60 * 1000);
+                                    const fourHoursFromNow = new Date(now.getTime() + 4 * 60 * 60 * 1000);
+
+                                    // Filtrowanie na podstawie regionu i daty
+                                    const filteredData = allData.filter(row => {
+                                        const region = row[8].trim();
+                                        const dateTime = new Date(row[0].trim());
+                                        return (regionFilter === "All" || region === regionFilter) &&
+                                            dateTime <= twentyFourHoursFromNow;
+                                    });
+
+                                    // Sortowanie danych według kolumny "Data i godzina"
+                                    filteredData.sort((a, b) => {
+                                        const dateA = new Date(a[0].trim());
+                                        const dateB = new Date(b[0].trim());
+                                        return dateA - dateB;
+                                    });
+
+                                    filteredData.forEach(row => {
+                                        const tr = document.createElement('tr');
+
+                                        // Sprawdź datę i godzinę (pierwsza kolumna)
+                                        const dateTimeStr = row[0].trim();
+                                        const dateTime = new Date(dateTimeStr);
+
+                                        if (dateTime < now) {
+                                            tr.classList.add('expired'); // Dodaj klasę dla przedawnionych
+                                        } else if (dateTime <= fourHoursFromNow) {
+                                            tr.classList.add('highlight'); // Dodaj klasę dla zadań do 4 godzin
+                                        }
+
+                                        row.forEach((cell, index) => {
+                                            const td = document.createElement('td');
+                                            td.textContent = cell.trim();
+                                            td.setAttribute('data-label', document.querySelectorAll('th')[index].innerText);
+                                            tr.appendChild(td);
+                                        });
+
+                                        tbody.appendChild(tr);
+                                    });
+                                }
+
+                                function showTableRefreshedEffect() {
+                                    const table = document.getElementById('data-table');
+                                    table.classList.add('refreshed'); // Dodaj klasę animacji
+                                    setTimeout(() => {
+                                        table.classList.remove('refreshed'); // Usuń klasę po 1 sekundzie
+                                    }, 1000);
+                                }
+
+                                // Pobierz dane przy starcie
+                                fetchData();
+
+                                // Ustaw automatyczne odświeżanie co 45 sekund
+                                setInterval(() => {
+                                    fetchData();
+                                }, 45000);
 
     </script>
+</body>
+
+</html>
+});
+}
+
+function showTableRefreshedEffect() {
+const table = document.getElementById('data-table');
+table.classList.add('refreshed'); // Dodaj klasę animacji
+setTimeout(() => {
+table.classList.remove('refreshed'); // Usuń klasę po 1 sekundzie
+}, 1000);
+}
+
+// Pobierz dane przy starcie
+fetchData();
+
+// Ustaw automatyczne odświeżanie co 45 sekund
+setInterval(() => {
+fetchData();
+}, 45000);
+
+</script>
 </body>
 
 </html>
