@@ -214,7 +214,7 @@
                     tr.classList.add('highlight'); // Dodaj klasę dla zadań do 4 godzin
                 }
 
-                row.forEach(cell => {
+                row.forEach((cell, index) => {
                     if (index === 6) return;
                     const td = document.createElement('td');
                     td.textContent = cell.trim();
