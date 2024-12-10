@@ -130,10 +130,10 @@
                 <th>Operacja</th>
                 <th>Wykonujący</th>
                 <th>Rejestracja</th>
-                <th>Uwagi</th>
                 <th>Adres</th>
                 <th>Miasto</th>
                 <th>Region</th>
+                <th>Uwagi</th>
             </tr>
         </thead>
         <tbody>
@@ -171,7 +171,7 @@
             const select = document.getElementById("regionFilter");
             select.innerHTML = '<option value="All">Wszystkie</option>'; // Reset listy rozwijanej
 
-            const regions = [...new Set(data.map(row => row[9].trim()))]; // Pobierz unikalne wartości z kolumny "Region"
+            const regions = [...new Set(data.map(row => row[8].trim()))]; // Pobierz unikalne wartości z kolumny "Region"
 
             regions.forEach(region => {
                 const option = document.createElement("option");
@@ -196,7 +196,7 @@
 
             // Filtrowanie na podstawie regionu i daty
             const filteredData = allData.filter(row => {
-                const region = row[9].trim();
+                const region = row[8].trim();
                 const dateTime = new Date(row[0].trim());
                 return (regionFilter === "All" || region === regionFilter) &&
                     dateTime <= twentyFourHoursFromNow;
