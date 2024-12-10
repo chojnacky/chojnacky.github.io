@@ -1,13 +1,13 @@
 
-2024-12-11 08:30;23454;OC Sprawcy;Wydaj pojazd;;KTA0095L;gwarancja manual;sielska 40, 11-041 Olsztyn, Polska;Olsztyn;Północ
-2024-12-11 09:00;23540;OC Sprawcy;Wydaj pojazd;;WT7741E;uw2000 stc20b/db do sprzedania 3/x;Szosa Kisielińska 20, 65-001 Zielona Góra, Polska;Zielona Góra;Zachód
-2024-12-11 11:00;23224;OC Sprawcy;Wydaj pojazd;;PY3619A;gwarancja;Góra Libertowska 10, 30-444 Libertów, Polska;Kraków;Południe
-2024-12-11 11:00;23426;OC Sprawcy;Wydaj pojazd;;PP7955T;gwarancja 6/x db firma netto 50%;PRZĄSŁĄW 1a, 28-300 Jędrzejów;Kielce;Południe
-2024-12-11 11:45;23101;Assistance;Wydaj pojazd;;WW637AM;uw1000 stc227 na sprzedaż 10/10 pełny bak;Kazimierzowo 4B, 82-310 Kazimierzowo, Polska;Elbląg;Północ
-2024-12-11 13:30;23414;Assistance;Wydaj pojazd;;WJ2458N;uw1000 stc227 na sprzedaż 1/3 automat;Brzezińska 26, 92-103 Łódź, Polska;Łódź;Wschód
-2024-12-11 17:00;23466;Assistance;Wydaj pojazd;;KTA7382K;uw 1000 stc 227 wst5;Częstochowska 204, 42-244 Jaskrów, Polska;Częstochowa;Południe
-2024-12-11 17:00;23363;OC Sprawcy;Wydaj pojazd;;EL2KS86;gwarancja firma ?%;Rolnicza 38, 42-500 Będzin;Częstochowa;Południe
-2024-12-15 10:00;23562;Indywidualny P.H.;Wydaj pojazd;;PY3534E;;;Poznań;Centrum
+2024-12-11 08:30;23454;OC Sprawcy;Wydaj pojazd;;KTA0095L;sielska 40, 11-041 Olsztyn, Polska;Olsztyn;Północ;gwarancja manual
+2024-12-11 09:00;23540;OC Sprawcy;Wydaj pojazd;;WT7741E;Szosa Kisielińska 20, 65-001 Zielona Góra, Polska;Zielona Góra;Zachód;uw2000 stc20b/db do sprzedania 3/x
+2024-12-11 11:00;23224;OC Sprawcy;Wydaj pojazd;;PY3619A;Góra Libertowska 10, 30-444 Libertów, Polska;Kraków;Południe;gwarancja
+2024-12-11 11:00;23426;OC Sprawcy;Wydaj pojazd;;PP7955T;PRZĄSŁĄW 1a, 28-300 Jędrzejów;Kielce;Południe;gwarancja 6/x db firma netto 50%
+2024-12-11 11:45;23101;Assistance;Wydaj pojazd;;WW637AM;Kazimierzowo 4B, 82-310 Kazimierzowo, Polska;Elbląg;Północ;uw1000 stc227 na sprzedaż 10/10 pełny bak
+2024-12-11 13:30;23414;Assistance;Wydaj pojazd;;WJ2458N;Brzezińska 26, 92-103 Łódź, Polska;Łódź;Wschód;uw1000 stc227 na sprzedaż 1/3 automat
+2024-12-11 17:00;23466;Assistance;Wydaj pojazd;;KTA7382K;Częstochowska 204, 42-244 Jaskrów, Polska;Częstochowa;Południe;uw 1000 stc 227 wst5
+2024-12-11 17:00;23363;OC Sprawcy;Wydaj pojazd;;EL2KS86;Rolnicza 38, 42-500 Będzin;Częstochowa;Południe;gwarancja firma ?%
+2024-12-15 10:00;23562;Indywidualny P.H.;Wydaj pojazd;;PY3534E;;Poznań;Centrum;
 
 2024-12-10 16:30;22949;OC Sprawcy;Odbierz pojazd;;EL3LR58;;klonowa 3, 66-600 Połupin, Polska;Zielona Góra;Zachód
 2024-12-10 17:30;19854;OC Sprawcy;Odbierz pojazd;;WW633AM;;Parkowa 63, 47-220 Kędzierzyn-Koźle, Polska;Opole;Zachód
