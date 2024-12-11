@@ -56,8 +56,6 @@
             margin: 20px 0;
             border-collapse: collapse;
             background-color: #FFFFFF;
-            overflow-x: auto;
-            display: block;
         }
 
         th,
@@ -104,73 +102,48 @@
             background-color: #F8F9FA;
         }
 
-        /* Stylizacja dla urządzeń mobilnych */
+        /* Kafelki na urządzeniach mobilnych */
         @media (max-width: 768px) {
-            body {
-                font-size: 0.9em;
+            table {
+                display: none;
             }
 
-            header {
-                font-size: 1.5em;
+            .card-container {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 20px;
+                padding: 20px;
+                justify-content: center;
+            }
+
+            .card {
+                background-color: #F8F9FA;
+                border: 1px solid #ddd;
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
                 padding: 15px;
-            }
-
-            .filter {
-                margin: 15px auto;
-                text-align: center;
-            }
-
-            .filter label {
-                display: block;
-                margin-bottom: 8px;
-                font-size: 1em;
-            }
-
-            .filter select {
                 width: 100%;
                 max-width: 300px;
-                font-size: 1em;
-            }
-
-            table {
-                width: 100%;
-                display: block;
-                overflow-x: auto;
-                white-space: nowrap;
-            }
-
-            th,
-            td {
-                font-size: 0.8em;
-                padding: 10px;
-            }
-
-            footer {
-                font-size: 0.7em;
-                padding: 10px;
-            }
-        }
-
-        /* Stylizacja dla bardzo małych ekranów (telefony) */
-        @media (max-width: 480px) {
-            header {
-                font-size: 1.3em;
-                padding: 10px;
-            }
-
-            th,
-            td {
-                font-size: 0.75em;
-                padding: 8px;
-            }
-
-            .filter label,
-            .filter select {
                 font-size: 0.9em;
+                color: #18305B;
             }
 
-            footer {
-                font-size: 0.6em;
+            .card.highlight {
+                background-color: #FFE1E9;
+            }
+
+            .card.expired {
+                background-color: #FFD3D3;
+            }
+
+            .card div {
+                margin-bottom: 10px;
+            }
+
+            .card div strong {
+                font-weight: bold;
+                display: block;
+                margin-bottom: 5px;
             }
         }
 
@@ -211,6 +184,9 @@
             <!-- Dynamic data will be injected here -->
         </tbody>
     </table>
+    <div class="card-container">
+        <!-- Dynamic cards will be injected here -->
+    </div>
     <div id="refresh-timer">
         Odświeżenie za: <span id="countdown">75</span> sekund
     </div>
@@ -245,7 +221,9 @@
 
         function updateTable() {
             const tbody = document.getElementById('data-table').querySelector('tbody');
+            const cardContainer = document.querySelector('.card-container');
             tbody.innerHTML = '';
+            cardContainer.innerHTML = '';
 
             const now = new Date();
             const twentyFourHoursFromNow = new Date(now.getTime() + 24 * 60 * 60 * 1000);
@@ -265,41 +243,37 @@
             });
 
             filteredData.forEach(row => {
-                const tr = document.createElement('tr');
-
                 const dateTimeStr = row[0].trim();
                 const dateTime = new Date(dateTimeStr);
 
+                const tr = document.createElement('tr');
+                const card = document.createElement('div');
+                card.classList.add('card');
+
                 if (dateTime < now) {
                     tr.classList.add('expired');
+                    card.classList.add('expired');
                 } else if (dateTime <= fourHoursFromNow) {
                     tr.classList.add('highlight');
+                    card.classList.add('highlight');
                 }
 
-                row.forEach(cell => {
+                row.forEach((cell, index) => {
                     const td = document.createElement('td');
                     td.textContent = cell.trim();
                     tr.appendChild(td);
+
+                    const cardDetail = document.createElement('div');
+                    const strong = document.createElement('strong');
+                    strong.textContent = document.querySelector('th:nth-child(' + (index + 1) + ')').textContent;
+                    cardDetail.appendChild(strong);
+                    cardDetail.appendChild(document.createTextNode(cell.trim()));
+                    card.appendChild(cardDetail);
                 });
 
                 tbody.appendChild(tr);
+                cardContainer.appendChild(card);
             });
-        }
-
-        function startCountdown() {
-            const countdownSpan = document.getElementById("countdown");
-
-            const timer = setInterval(() => {
-                countdown--;
-                countdownSpan.textContent = countdown;
-
-                if (countdown <= 0) {
-                    clearInterval(timer);
-                    fetchData();
-                    countdown = refreshInterval;
-                    startCountdown();
-                }
-            }, 1000);
         }
 
         document.getElementById("regionFilter").addEventListener("change", (event) => {
@@ -308,7 +282,6 @@
         });
 
         fetchData();
-        startCountdown();
 
     </script>
 </body>
