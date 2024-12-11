@@ -17,86 +17,84 @@
             font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f9f9f9;
-            color: #333;
+            background-color: #FFFFFF;
+            color: #18305B;
         }
 
         header {
-            background-color: #003366;
-            /* Ciemny niebieski */
-            color: #fff;
-            padding: 15px 20px;
+            background-color: #E8336F;
+            color: #FFFFFF;
+            padding: 20px;
             text-align: center;
-            font-size: 1.5em;
+            font-size: 1.8em;
+            font-weight: bold;
         }
 
         .filter {
             margin: 20px auto;
             text-align: center;
-            padding: 10px;
         }
 
         .filter label {
             font-weight: bold;
-            font-size: 1.1em;
-            color: #003366;
+            font-size: 1em;
+            color: #18305B;
         }
 
         .filter select {
-            padding: 8px 12px;
+            padding: 10px 15px;
             font-size: 1em;
             margin-left: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            border: 1px solid #18305B;
+            border-radius: 8px;
+            background-color: #FFFFFF;
+            color: #18305B;
         }
 
         table {
-            width: 90%;
+            width: 95%;
+            max-width: 1200px;
             margin: 20px auto;
             border-collapse: collapse;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            background-color: #fff;
+            background-color: #FFFFFF;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         th,
         td {
-            border: 1px solid #ddd;
-            padding: 12px;
+            padding: 12px 15px;
             text-align: center;
-            font-size: 0.83em;
+            font-size: 0.9em;
         }
 
         th {
-            background-color: #003366;
-            /* Niebieski */
-            color: white;
+            background-color: #18305B;
+            color: #FFFFFF;
             font-weight: bold;
         }
 
         tr:nth-child(even) {
-            background-color: #f2f2f2;
-            /* Jasnoszary */
+            background-color: #F8F9FA;
         }
 
         tr.highlight {
-            background-color: #ffeb99;
-            /* Żółty akcent */
+            background-color: #FFE1E9;
         }
 
         tr.expired {
-            background-color: #ff9999;
-            /* Czerwony dla przedawnionych */
+            background-color: #FFD3D3;
         }
 
         tr:hover {
-            background-color: #ddeeff;
-            /* Jasnoniebieski na hover */
+            background-color: #F1F5FF;
         }
 
         #refresh-timer {
             text-align: center;
             font-size: 0.9em;
-            color: #555;
+            color: #18305B;
             margin-top: 10px;
         }
 
@@ -104,8 +102,27 @@
             margin-top: 20px;
             text-align: center;
             padding: 10px 0;
-            font-size: 0.9em;
-            color: #666;
+            font-size: 0.8em;
+            color: #18305B;
+            background-color: #F8F9FA;
+        }
+
+        @media (max-width: 768px) {
+
+            th,
+            td {
+                font-size: 0.8em;
+                padding: 8px;
+            }
+
+            header {
+                font-size: 1.5em;
+            }
+
+            .filter label,
+            .filter select {
+                font-size: 0.9em;
+            }
         }
 
     </style>
@@ -153,14 +170,13 @@
     </footer>
 
     <script>
-        let allData = []; // Zmienna globalna przechowująca wszystkie dane
-        let regionFilter = "All"; // Domyślna wartość filtra
-        let refreshInterval = 75; // Interwał odświeżania w sekundach
-        let countdown = refreshInterval; // Licznik odliczania
+        let allData = [];
+        let regionFilter = "All";
+        let refreshInterval = 75;
+        let countdown = refreshInterval;
 
         async function fetchData() {
             try {
-                // Dodaj znacznik czasu jako parametr zapytania, aby uniknąć buforowania
                 const response = await fetch(`tabela.csv?nocache=${new Date().getTime()}`);
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
@@ -174,19 +190,18 @@
 
         function processData(csvData) {
             const rows = csvData.split('\n').map(row => row.split(';'));
-            allData = rows.filter((row, index) => row.length > 1 && index > 0); // Filtruj puste wiersze i nagłówki
-            updateTable(); // Wyświetl tabelę na podstawie filtra
+            allData = rows.filter((row, index) => row.length > 1 && index > 0);
+            updateTable();
         }
 
         function updateTable() {
             const tbody = document.getElementById('data-table').querySelector('tbody');
-            tbody.innerHTML = ''; // Wyczyść istniejące dane
+            tbody.innerHTML = '';
 
             const now = new Date();
             const twentyFourHoursFromNow = new Date(now.getTime() + 24 * 60 * 60 * 1000);
             const fourHoursFromNow = new Date(now.getTime() + 4 * 60 * 60 * 1000);
 
-            // Filtrowanie na podstawie regionu i daty
             const filteredData = allData.filter(row => {
                 const region = row[8].trim();
                 const dateTime = new Date(row[0].trim());
@@ -194,7 +209,6 @@
                     dateTime <= twentyFourHoursFromNow;
             });
 
-            // Sortowanie danych według kolumny "Data i godzina"
             filteredData.sort((a, b) => {
                 const dateA = new Date(a[0].trim());
                 const dateB = new Date(b[0].trim());
@@ -204,14 +218,13 @@
             filteredData.forEach(row => {
                 const tr = document.createElement('tr');
 
-                // Sprawdź datę i godzinę (pierwsza kolumna)
                 const dateTimeStr = row[0].trim();
                 const dateTime = new Date(dateTimeStr);
 
                 if (dateTime < now) {
-                    tr.classList.add('expired'); // Dodaj klasę dla przedawnionych
+                    tr.classList.add('expired');
                 } else if (dateTime <= fourHoursFromNow) {
-                    tr.classList.add('highlight'); // Dodaj klasę dla zadań do 4 godzin
+                    tr.classList.add('highlight');
                 }
 
                 row.forEach(cell => {
@@ -234,19 +247,17 @@
                 if (countdown <= 0) {
                     clearInterval(timer);
                     fetchData();
-                    countdown = refreshInterval; // Resetuj licznik
-                    startCountdown(); // Rozpocznij odliczanie ponownie
+                    countdown = refreshInterval;
+                    startCountdown();
                 }
             }, 1000);
         }
 
-        // Nasłuchiwanie zmiany filtra
         document.getElementById("regionFilter").addEventListener("change", (event) => {
-            regionFilter = event.target.value; // Zaktualizuj filtr
+            regionFilter = event.target.value;
             updateTable();
         });
 
-        // Pobierz dane przy starcie
         fetchData();
         startCountdown();
 
