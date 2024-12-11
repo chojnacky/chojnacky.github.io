@@ -353,7 +353,7 @@
             const fourHoursFromNow = new Date(now.getTime() + 4 * 60 * 60 * 1000);
 
             const filteredData = allData.filter(row => {
-                const region = row[8]?.trim();
+                const region = row[7]?.trim();
                 return regionFilter === "All" || region === regionFilter;
             });
 
