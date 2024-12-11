@@ -84,8 +84,17 @@
             color: #FFFFFF;
         }
 
-        tr:hover {
+        tr:hover:not(.highlight):not(.expired) {
             background-color: #F9F9F9;
+        }
+
+        tr.highlight:hover {
+            background-color: #FAC898;
+        }
+
+        tr.expired:hover {
+            background-color: #FAA0A0;
+            color: #FFFFFF;
         }
 
         #refresh-timer {
@@ -104,9 +113,19 @@
             background-color: #F8F9FA;
         }
 
-        /* Kafelki na urządzeniach mobilnych */
-        @media (max-width: 768px),
-        (orientation: landscape) {
+        /* Tabela wyłącznie na komputerach (769px i więcej) */
+        @media (min-width: 769px) {
+            .card-container {
+                display: none;
+            }
+
+            table {
+                display: table;
+            }
+        }
+
+        /* Kafelki wyłącznie na urządzeniach mobilnych (768px i mniej) */
+        @media (max-width: 768px) {
             table {
                 display: none;
             }
@@ -114,9 +133,14 @@
             .card-container {
                 display: flex;
                 flex-wrap: wrap;
-                gap: 10px;
+                gap: 15px;
                 padding: 10px;
                 justify-content: center;
+            }
+
+            .card {
+                width: 100%;
+                max-width: 100%;
             }
         }
 
@@ -132,6 +156,7 @@
             color: #18305B;
             cursor: pointer;
             position: relative;
+            transition: background-color 0.2s ease, color 0.2s ease;
         }
 
         .card.highlight {
@@ -139,6 +164,19 @@
         }
 
         .card.expired {
+            background-color: #FAA0A0;
+            color: #FFFFFF;
+        }
+
+        .card:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .card.highlight:hover {
+            background-color: #FAC898;
+        }
+
+        .card.expired:hover {
             background-color: #FAA0A0;
             color: #FFFFFF;
         }
@@ -174,19 +212,9 @@
             margin-bottom: 3px;
         }
 
-        /* Widok na PC */
-        @media (min-width: 769px) and (orientation: portrait) {
-            .card-container {
-                display: none;
-            }
-
-            table {
-                display: table;
-            }
-        }
-
     </style>
 </head>
+
 
 <body>
     <header>
