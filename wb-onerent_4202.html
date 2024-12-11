@@ -366,17 +366,21 @@
         }
 
         function startCountdown() {
+            let countdown = 75; // Inicjalizacja wartości odliczania
             const countdownSpan = document.getElementById("countdown");
 
+            // Odświeżanie co sekundę
             const timer = setInterval(() => {
                 countdown--;
-                countdownSpan.textContent = countdown;
+                if (countdown >= 0) {
+                    countdownSpan.textContent = countdown; // Aktualizacja tekstu
+                }
 
                 if (countdown <= 0) {
                     clearInterval(timer);
-                    fetchData();
-                    countdown = refreshInterval; // Resetuj licznik
-                    startCountdown(); // Rozpocznij odliczanie ponownie
+                    fetchData(); // Wywołanie funkcji odświeżania
+                    countdown = 75; // Reset licznika
+                    startCountdown(); // Ponowne uruchomienie odliczania
                 }
             }, 1000);
         }
