@@ -52,38 +52,31 @@
         }
 
         table {
-            width: 100%;
-            margin: 20px 0;
+            width: 95%;
+            margin: 20px auto;
             border-collapse: collapse;
             background-color: #FFFFFF;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
         }
 
         th,
         td {
             padding: 12px 15px;
             text-align: center;
-            font-size: 0.9em;
+            font-size: 1em;
+            border-bottom: 1px solid #E0E0E0;
         }
 
         th {
             background-color: #18305B;
             color: #FFFFFF;
-        }
-
-        tr:nth-child(even) {
-            background-color: #F8F9FA;
-        }
-
-        tr.highlight {
-            background-color: #FFE1E9;
-        }
-
-        tr.expired {
-            background-color: #FFD3D3;
+            font-weight: bold;
         }
 
         tr:hover {
-            background-color: #F1F5FF;
+            background-color: #F9F9F9;
         }
 
         #refresh-timer {
@@ -111,21 +104,23 @@
             .card-container {
                 display: flex;
                 flex-wrap: wrap;
-                gap: 20px;
-                padding: 20px;
+                gap: 10px;
+                padding: 10px;
                 justify-content: center;
             }
 
             .card {
                 background-color: #F8F9FA;
                 border: 1px solid #ddd;
-                border-radius: 10px;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                padding: 15px;
+                border-radius: 8px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                padding: 10px;
                 width: 100%;
-                max-width: 300px;
-                font-size: 0.9em;
+                max-width: 250px;
+                font-size: 0.8em;
                 color: #18305B;
+                display: flex;
+                flex-direction: column;
             }
 
             .card.highlight {
@@ -137,41 +132,24 @@
             }
 
             .card div {
-                margin-bottom: 10px;
+                margin-bottom: 5px;
+                display: flex;
+                justify-content: space-between;
             }
 
             .card div strong {
                 font-weight: bold;
-                display: block;
-                margin-bottom: 5px;
             }
         }
 
-    </style>
-    <style>
         /* Widok na PC */
         @media (min-width: 769px) {
             .card-container {
                 display: none;
-                /* Ukryj kafelki */
             }
 
             table {
                 display: table;
-                /* Wyświetl tabelę */
-            }
-        }
-
-        /* Widok na urządzenia mobilne */
-        @media (max-width: 768px) {
-            table {
-                display: none;
-                /* Ukryj tabelę */
-            }
-
-            .card-container {
-                display: flex;
-                /* Wyświetl kafelki */
             }
         }
 
@@ -258,20 +236,20 @@
             const fourHoursFromNow = new Date(now.getTime() + 4 * 60 * 60 * 1000);
 
             const filteredData = allData.filter(row => {
-                const region = row[8].trim();
-                const dateTime = new Date(row[0].trim());
+                const region = row[8]?.trim();
+                const dateTime = new Date(row[0]?.trim());
                 return (regionFilter === "All" || region === regionFilter) &&
                     dateTime <= twentyFourHoursFromNow;
             });
 
             filteredData.sort((a, b) => {
-                const dateA = new Date(a[0].trim());
-                const dateB = new Date(b[0].trim());
+                const dateA = new Date(a[0]?.trim());
+                const dateB = new Date(b[0]?.trim());
                 return dateA - dateB;
             });
 
             filteredData.forEach(row => {
-                const dateTimeStr = row[0].trim();
+                const dateTimeStr = row[0]?.trim();
                 const dateTime = new Date(dateTimeStr);
 
                 const tr = document.createElement('tr');
@@ -288,14 +266,14 @@
 
                 row.forEach((cell, index) => {
                     const td = document.createElement('td');
-                    td.textContent = cell.trim();
+                    td.textContent = cell?.trim();
                     tr.appendChild(td);
 
                     const cardDetail = document.createElement('div');
                     const strong = document.createElement('strong');
                     strong.textContent = document.querySelector('th:nth-child(' + (index + 1) + ')').textContent;
                     cardDetail.appendChild(strong);
-                    cardDetail.appendChild(document.createTextNode(cell.trim()));
+                    cardDetail.appendChild(document.createTextNode(cell?.trim()));
                     card.appendChild(cardDetail);
                 });
 
