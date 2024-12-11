@@ -15,17 +15,17 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            margin: 0;
-            padding: 0;
             background-color: #FFFFFF;
             color: #18305B;
+            margin: 0;
+            padding: 0;
         }
 
         header {
             background-color: #E8336F;
             color: #FFFFFF;
-            padding: 20px;
             text-align: center;
+            padding: 20px;
             font-size: 1.8em;
             font-weight: bold;
         }
@@ -36,8 +36,8 @@
         }
 
         .filter label {
-            font-weight: bold;
             font-size: 1em;
+            font-weight: bold;
             color: #18305B;
         }
 
@@ -52,14 +52,12 @@
         }
 
         table {
-            width: 95%;
-            max-width: 1200px;
-            margin: 20px auto;
+            width: 100%;
+            margin: 20px 0;
             border-collapse: collapse;
             background-color: #FFFFFF;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+            display: block;
         }
 
         th,
@@ -72,7 +70,6 @@
         th {
             background-color: #18305B;
             color: #FFFFFF;
-            font-weight: bold;
         }
 
         tr:nth-child(even) {
@@ -107,21 +104,73 @@
             background-color: #F8F9FA;
         }
 
+        /* Stylizacja dla urządzeń mobilnych */
         @media (max-width: 768px) {
-
-            th,
-            td {
-                font-size: 0.8em;
-                padding: 8px;
+            body {
+                font-size: 0.9em;
             }
 
             header {
                 font-size: 1.5em;
+                padding: 15px;
+            }
+
+            .filter {
+                margin: 15px auto;
+                text-align: center;
+            }
+
+            .filter label {
+                display: block;
+                margin-bottom: 8px;
+                font-size: 1em;
+            }
+
+            .filter select {
+                width: 100%;
+                max-width: 300px;
+                font-size: 1em;
+            }
+
+            table {
+                width: 100%;
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+
+            th,
+            td {
+                font-size: 0.8em;
+                padding: 10px;
+            }
+
+            footer {
+                font-size: 0.7em;
+                padding: 10px;
+            }
+        }
+
+        /* Stylizacja dla bardzo małych ekranów (telefony) */
+        @media (max-width: 480px) {
+            header {
+                font-size: 1.3em;
+                padding: 10px;
+            }
+
+            th,
+            td {
+                font-size: 0.75em;
+                padding: 8px;
             }
 
             .filter label,
             .filter select {
                 font-size: 0.9em;
+            }
+
+            footer {
+                font-size: 0.6em;
             }
         }
 
