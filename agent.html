@@ -317,103 +317,108 @@
             updateTable();
         }
 
-        function updateTable() {
-            const tbody = document.getElementById('data-table').querySelector('tbody');
-            const cardContainer = document.querySelector('.card-container');
-            tbody.innerHTML = '';
-            cardContainer.innerHTML = '';
+        <
+        script >
+            function updateTable() {
+                const tbody = document.getElementById('data-table').querySelector('tbody');
+                const cardContainer = document.querySelector('.card-container');
+                tbody.innerHTML = '';
+                cardContainer.innerHTML = '';
 
-            const now = new Date();
-            const fourHoursFromNow = new Date(now.getTime() + 4 * 60 * 60 * 1000);
+                const now = new Date();
+                const fourHoursFromNow = new Date(now.getTime() + 4 * 60 * 60 * 1000);
 
-            const filteredData = allData.filter(row => {
-                const region = row[6]?.trim();
-                return regionFilter === "All" || region === regionFilter;
-            });
+                // Prawidłowy indeks kolumny dla regionu (zgodnie z nowym układem)
+                const regionIndex = 7; // Kolumna "Region"
 
-            filteredData.forEach(row => {
-                const dateTime = new Date(row[0]?.trim());
-                const id = row[1]?.trim();
-                const isExpired = dateTime < now;
-                const isHighlight = dateTime <= fourHoursFromNow && dateTime >= now;
-
-                const tr = document.createElement('tr');
-                if (isExpired) tr.classList.add('expired');
-                if (isHighlight) tr.classList.add('highlight');
-
-                [0, 1, 2, 3, 4, 5, 6, 7].forEach(index => {
-                    const td = document.createElement('td');
-                    td.textContent = row[index]?.trim();
-                    tr.appendChild(td);
+                const filteredData = allData.filter(row => {
+                    const region = row[regionIndex]?.trim();
+                    return regionFilter === "All" || region === regionFilter;
                 });
 
-                tr.addEventListener('click', () => {
-                    const link = `https://prod.onerent.zone/os/rent/reservations/preview/${id}`;
-                    navigator.clipboard.writeText(link).then(() => {
-                        showNotification(`Skopiowano do schowka: ${link}`);
-                    }).catch(err => {
-                        console.error('Nie udało się skopiować do schowka', err);
-                        showNotification("Nie udało się skopiować linku.");
+                filteredData.forEach(row => {
+                    const dateTime = new Date(row[0]?.trim());
+                    const id = row[1]?.trim();
+                    const isExpired = dateTime < now;
+                    const isHighlight = dateTime <= fourHoursFromNow && dateTime >= now;
+
+                    // Tabela (PC)
+                    const tr = document.createElement('tr');
+                    if (isExpired) tr.classList.add('expired');
+                    if (isHighlight) tr.classList.add('highlight');
+
+                    // Kolumny do wyświetlenia (z pominięciem "Adresu", czyli indeks 6)
+                    [0, 1, 2, 3, 4, 5, 7, 8].forEach(index => {
+                        const td = document.createElement('td');
+                        td.textContent = row[index]?.trim();
+                        tr.appendChild(td);
                     });
-                });
 
-                tbody.appendChild(tr);
+                    // Kopiowanie do schowka po kliknięciu
+                    tr.addEventListener('click', () => {
+                        const link = `https://prod.onerent.zone/os/rent/reservations/preview/${id}`;
+                        navigator.clipboard.writeText(link).then(() => {
+                            showNotification(`Skopiowano do schowka: ${link}`);
+                        }).catch(err => {
+                            console.error('Nie udało się skopiować do schowka', err);
+                            showNotification("Nie udało się skopiować linku.");
+                        });
+                    });
 
-                const card = document.createElement('div');
-                card.classList.add('card');
-                if (isExpired) card.classList.add('expired');
-                if (isHighlight) card.classList.add('highlight');
+                    tbody.appendChild(tr);
 
-                const cardHeader = document.createElement('div');
-                cardHeader.classList.add('card-header');
-                cardHeader.innerHTML = `<span>${row[0]?.trim()}</span><span>${row[5]?.trim()}</span>`;
-                card.appendChild(cardHeader);
+                    // Kafelek (mobile)
+                    const card = document.createElement('div');
+                    card.classList.add('card');
+                    if (isExpired) card.classList.add('expired');
+                    if (isHighlight) card.classList.add('highlight');
 
-                const cardDetails = document.createElement('div');
-                cardDetails.classList.add('card-details');
-                [0, 1, 2, 3, 4, 5, 6, 7].forEach(index => {
-                    if (index !== 6) { // Skip the "Adres" column
+                    const cardHeader = document.createElement('div');
+                    cardHeader.classList.add('card-header');
+                    cardHeader.innerHTML = `<span>${row[0]?.trim()}</span><span>${row[5]?.trim()}</span>`;
+                    card.appendChild(cardHeader);
+
+                    const cardDetails = document.createElement('div');
+                    cardDetails.classList.add('card-details');
+                    [0, 1, 2, 3, 4, 5, 7, 8].forEach(index => {
                         const detail = document.createElement('div');
                         detail.innerHTML = `<strong>${document.querySelector('th:nth-child(' + (index + 1) + ')').textContent}:</strong> ${row[index]?.trim()}`;
                         cardDetails.appendChild(detail);
-                    }
+                    });
+
+                    card.appendChild(cardDetails);
+                    card.addEventListener('click', () => {
+                        card.classList.toggle('active');
+                    });
+
+                    cardContainer.appendChild(card);
                 });
-
-                card.appendChild(cardDetails);
-                card.addEventListener('click', () => {
-                    card.classList.toggle('active');
-                });
-
-                cardContainer.appendChild(card);
-            });
-        }
-
-        function startCountdown() {
-            let countdown = 75;
-            const countdownSpan = document.getElementById("countdown");
-
-            const timer = setInterval(() => {
-                countdown--;
-                countdownSpan.textContent = countdown;
-
-                if (countdown <= 0) {
-                    clearInterval(timer);
-                    fetchData();
-                    countdown = 75;
-                    startCountdown();
-                }
-            }, 1000);
-        }
+            }
 
         document.getElementById("regionFilter").addEventListener("change", (event) => {
             regionFilter = event.target.value;
             updateTable();
         });
 
+    </script>
+
+    function startCountdown() {
+    let countdown = 75;
+    const countdownSpan = document.getElementById("countdown");
+
+    const timer = setInterval(() => {
+    countdown--;
+    countdownSpan.textContent = countdown;
+
+    if (countdown <= 0) { clearInterval(timer); fetchData(); countdown=75; startCountdown(); } }, 1000); } document.getElementById("regionFilter").addEventListener("change", (event)=> {
+        regionFilter = event.target.value;
+        updateTable();
+        });
+
         fetchData();
         startCountdown();
 
-    </script>
+        </script>
 </body>
 
 </html>
