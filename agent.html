@@ -116,28 +116,19 @@
             background-color: #F8F9FA;
         }
 
-        .notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background-color: #18305B;
-            color: #FFFFFF;
-            padding: 15px 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            font-size: 0.9em;
-            z-index: 1000;
-            opacity: 0;
-            transform: translateY(-20px);
-            transition: opacity 0.3s ease, transform 0.3s ease;
+        /* Tabela wyłącznie na komputerach (769px i więcej) */
+        @media (min-width: 769px) {
+            .card-container {
+                display: none;
+            }
+
+            table {
+                display: table;
+            }
         }
 
-        .notification.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        @media screen and (max-width: 768px) {
+        /* Kafelki wyłącznie na urządzeniach mobilnych (768px i mniej) */
+        @media (max-width: 768px) {
             table {
                 display: none;
             }
@@ -153,6 +144,11 @@
             .card {
                 width: 100%;
                 max-width: 100%;
+            }
+
+            header {
+                width: 100vw;
+                /* Ustaw na pełną szerokość dla mobilnych */
             }
         }
 
@@ -215,6 +211,54 @@
         }
 
     </style>
+    <style>
+        /* Styl powiadomień */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #18305B;
+            color: #FFFFFF;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            font-size: 0.9em;
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .notification.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media screen and (min-width: 320px) and (max-width: 767px) and (orientation: landscape) {
+            html {
+                transform: rotate(90deg);
+                transform-origin: right top;
+                width: 100vh;
+                height: 100vw;
+                overflow-x: hidden;
+                position: absolute;
+                top: 100%;
+                right: 0;
+            }
+
+            body {
+                transform: rotate(-90deg);
+                transform-origin: left top;
+                width: 100vw;
+                height: 100vh;
+                overflow-y: auto;
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+        }
+
+    </style>
 </head>
 
 <body>
@@ -272,7 +316,6 @@
                 notification.classList.remove("show");
             }, 5000);
         }
-
         let allData = [];
         let regionFilter = "All";
 
@@ -323,12 +366,12 @@
                 const tr = document.createElement('tr');
                 if (isExpired) tr.classList.add('expired');
                 if (isHighlight) tr.classList.add('highlight');
-
-                // Pokaż tylko wymagane kolumny
-                [0, 1, 2, 3, 4, 5, 7, 8].forEach(index => {
-                    const td = document.createElement('td');
-                    td.textContent = row[index]?.trim();
-                    tr.appendChild(td);
+                row.forEach((cell, index) => {
+                    if (index !== 6) { // Skip the "Adres" column
+                        const td = document.createElement('td');
+                        td.textContent = cell?.trim();
+                        tr.appendChild(td);
+                    }
                 });
 
                 // Kopiowanie do schowka po kliknięciu
@@ -352,16 +395,20 @@
 
                 const cardHeader = document.createElement('div');
                 cardHeader.classList.add('card-header');
-                cardHeader.innerHTML = `<span>${row[0]?.trim()}</span><span>${row[5]?.trim()}</span>`;
+                cardHeader.innerHTML = `<span>${row[0]?.trim()}</span><span>${row[7]?.trim()}</span>`;
                 card.appendChild(cardHeader);
 
                 const cardDetails = document.createElement('div');
                 cardDetails.classList.add('card-details');
-                [0, 1, 2, 3, 4, 5, 7, 8].forEach(index => {
-                    const detail = document.createElement('div');
-                    detail.innerHTML = `<strong>${document.querySelector('th:nth-child(' + (index + 1) + ')').textContent}:</strong> ${row[index]?.trim()}`;
-                    cardDetails.appendChild(detail);
+                row.forEach((cell, index) => {
+                    // Pomijamy kolumnę "Adres", której indeks to 6 (liczone od 0)
+                    if (index !== 6) {
+                        const detail = document.createElement('div');
+                        detail.innerHTML = `<strong>${document.querySelector('th:nth-child(' + (index + 1) + ')').textContent}:</strong> ${cell?.trim()}`;
+                        cardDetails.appendChild(detail);
+                    }
                 });
+                card.appendChild(cardDetails);
 
                 card.appendChild(cardDetails);
                 card.addEventListener('click', () => {
