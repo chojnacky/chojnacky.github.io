@@ -234,30 +234,6 @@
             transform: translateY(0);
         }
 
-        @media screen and (min-width: 320px) and (max-width: 767px) and (orientation: landscape) {
-            html {
-                transform: rotate(90deg);
-                transform-origin: right top;
-                width: 100vh;
-                height: 100vw;
-                overflow-x: hidden;
-                position: absolute;
-                top: 100%;
-                right: 0;
-            }
-
-            body {
-                transform: rotate(-90deg);
-                transform-origin: left top;
-                width: 100vw;
-                height: 100vh;
-                overflow-y: auto;
-                position: absolute;
-                top: 0;
-                left: 0;
-            }
-        }
-
     </style>
 </head>
 
@@ -316,6 +292,7 @@
                 notification.classList.remove("show");
             }, 5000);
         }
+
         let allData = [];
         let regionFilter = "All";
 
@@ -327,8 +304,6 @@
                 }
                 const data = await response.text();
                 processData(data);
-
-                // Powiadomienie o odświeżeniu tabeli
                 showNotification("Tabela została odświeżona.");
             } catch (error) {
                 console.error('Błąd podczas pobierania danych:', error);
@@ -352,7 +327,7 @@
             const fourHoursFromNow = new Date(now.getTime() + 4 * 60 * 60 * 1000);
 
             const filteredData = allData.filter(row => {
-                const region = row[7]?.trim(); // Kolumna „Region” przesunięta po usunięciu „Adresu”
+                const region = row[6]?.trim();
                 return regionFilter === "All" || region === regionFilter;
             });
 
@@ -362,19 +337,16 @@
                 const isExpired = dateTime < now;
                 const isHighlight = dateTime <= fourHoursFromNow && dateTime >= now;
 
-                // Tabela (PC)
                 const tr = document.createElement('tr');
                 if (isExpired) tr.classList.add('expired');
                 if (isHighlight) tr.classList.add('highlight');
 
-                // Pomijanie kolumny „Adres” (indeks 6)
-                [0, 1, 2, 3, 4, 5, 7, 8].forEach(index => {
+                [0, 1, 2, 3, 4, 5, 6, 7].forEach(index => {
                     const td = document.createElement('td');
                     td.textContent = row[index]?.trim();
                     tr.appendChild(td);
                 });
 
-                // Kopiowanie do schowka po kliknięciu
                 tr.addEventListener('click', () => {
                     const link = `https://prod.onerent.zone/os/rent/reservations/preview/${id}`;
                     navigator.clipboard.writeText(link).then(() => {
@@ -387,7 +359,6 @@
 
                 tbody.appendChild(tr);
 
-                // Kafelek (mobile)
                 const card = document.createElement('div');
                 card.classList.add('card');
                 if (isExpired) card.classList.add('expired');
@@ -395,15 +366,17 @@
 
                 const cardHeader = document.createElement('div');
                 cardHeader.classList.add('card-header');
-                cardHeader.innerHTML = `<span>${row[0]?.trim()}</span><span>${row[6]?.trim()}</span>`; // „Miasto” jest teraz na pozycji 6
+                cardHeader.innerHTML = `<span>${row[0]?.trim()}</span><span>${row[5]?.trim()}</span>`;
                 card.appendChild(cardHeader);
 
                 const cardDetails = document.createElement('div');
                 cardDetails.classList.add('card-details');
-                [0, 1, 2, 3, 4, 5, 7, 8].forEach(index => {
-                    const detail = document.createElement('div');
-                    detail.innerHTML = `<strong>${document.querySelector('th:nth-child(' + (index + 1) + ')').textContent}:</strong> ${row[index]?.trim()}`;
-                    cardDetails.appendChild(detail);
+                [0, 1, 2, 3, 4, 5, 6, 7].forEach(index => {
+                    if (index !== 6) { // Skip the "Adres" column
+                        const detail = document.createElement('div');
+                        detail.innerHTML = `<strong>${document.querySelector('th:nth-child(' + (index + 1) + ')').textContent}:</strong> ${row[index]?.trim()}`;
+                        cardDetails.appendChild(detail);
+                    }
                 });
 
                 card.appendChild(cardDetails);
