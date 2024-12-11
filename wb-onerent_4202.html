@@ -81,6 +81,7 @@
 
         tr.expired {
             background-color: #FAA0A0;
+            color: #FFFFFF;
         }
 
         tr:hover {
@@ -260,6 +261,7 @@
             cardContainer.innerHTML = '';
 
             const now = new Date();
+            const fourHoursFromNow = new Date(now.getTime() + 4 * 60 * 60 * 1000);
 
             const filteredData = allData.filter(row => {
                 const region = row[8]?.trim();
@@ -268,12 +270,15 @@
 
             filteredData.forEach(row => {
                 const dateTime = new Date(row[0]?.trim());
+                const operation = row[3]?.trim();
                 const city = row[7]?.trim();
                 const isExpired = dateTime < now;
+                const isHighlight = dateTime <= fourHoursFromNow && dateTime >= now;
 
                 // Tabela (PC)
                 const tr = document.createElement('tr');
                 if (isExpired) tr.classList.add('expired');
+                if (isHighlight) tr.classList.add('highlight');
                 row.forEach(cell => {
                     const td = document.createElement('td');
                     td.textContent = cell?.trim();
@@ -285,10 +290,11 @@
                 const card = document.createElement('div');
                 card.classList.add('card');
                 if (isExpired) card.classList.add('expired');
+                if (isHighlight) card.classList.add('highlight');
 
                 const cardHeader = document.createElement('div');
                 cardHeader.classList.add('card-header');
-                cardHeader.innerHTML = `<span>${row[0]?.trim()}</span><span>${city}</span>`;
+                cardHeader.innerHTML = `<span>${row[0]?.trim()}</span><span>${operation}</span>`;
                 card.appendChild(cardHeader);
 
                 const cardDetails = document.createElement('div');
