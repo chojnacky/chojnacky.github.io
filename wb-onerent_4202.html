@@ -148,6 +148,34 @@
         }
 
     </style>
+    <style>
+        /* Widok na PC */
+        @media (min-width: 769px) {
+            .card-container {
+                display: none;
+                /* Ukryj kafelki */
+            }
+
+            table {
+                display: table;
+                /* Wyświetl tabelę */
+            }
+        }
+
+        /* Widok na urządzenia mobilne */
+        @media (max-width: 768px) {
+            table {
+                display: none;
+                /* Ukryj tabelę */
+            }
+
+            .card-container {
+                display: flex;
+                /* Wyświetl kafelki */
+            }
+        }
+
+    </style>
 </head>
 
 <body>
