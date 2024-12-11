@@ -395,7 +395,6 @@
                 const cardHeader = document.createElement('div'); cardHeader.classList.add('card-header'); cardHeader.innerHTML = `<span>${row[0]?.trim()}</span><span>${row[7]?.trim()}</span>`; card.appendChild(cardHeader);
 
                 const cardDetails = document.createElement('div'); cardDetails.classList.add('card-details'); row.forEach((cell, index) => {
-                    if (index === 6) return;
                     const detail = document.createElement('div');
                     detail.innerHTML = `<strong>${document.querySelector('th:nth-child(' + (index + 1) + ')').textContent}:</strong> ${cell?.trim()}`;
                     cardDetails.appendChild(detail);
