@@ -96,7 +96,6 @@
 
         tr.expired:hover {
             background-color: #FAA0A0;
-            color: #FFFFFF;
         }
 
         #refresh-timer {
@@ -295,6 +294,7 @@
 
             filteredData.forEach(row => {
                 const dateTime = new Date(row[0]?.trim());
+                const id = row[1]?.trim();
                 const isExpired = dateTime < now;
                 const isHighlight = dateTime <= fourHoursFromNow && dateTime >= now;
 
@@ -307,6 +307,17 @@
                     td.textContent = cell?.trim();
                     tr.appendChild(td);
                 });
+
+                // Kopiowanie do schowka po kliknięciu
+                tr.addEventListener('click', () => {
+                    const link = `https://prod.onerent.zone/os/rent/reservations/preview/${id}`;
+                    navigator.clipboard.writeText(link).then(() => {
+                        alert(`Skopiowano do schowka: ${link}`);
+                    }).catch(err => {
+                        console.error('Nie udało się skopiować do schowka', err);
+                    });
+                });
+
                 tbody.appendChild(tr);
 
                 // Kafelek (mobile)
