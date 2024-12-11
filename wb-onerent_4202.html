@@ -112,8 +112,8 @@
             .card-container {
                 display: flex;
                 flex-wrap: wrap;
-                gap: 15px;
-                padding: 15px;
+                gap: 10px;
+                padding: 10px;
                 justify-content: center;
             }
 
@@ -122,13 +122,13 @@
                 border: 1px solid #ddd;
                 border-radius: 8px;
                 box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-                padding: 15px;
+                padding: 10px;
                 width: 100%;
                 max-width: 300px;
                 font-size: 0.9em;
                 color: #18305B;
-                display: flex;
-                flex-direction: column;
+                cursor: pointer;
+                position: relative;
             }
 
             .card.highlight {
@@ -137,13 +137,35 @@
 
             .card.expired {
                 background-color: #FAA0A0;
+                color: #FFFFFF;
             }
 
-            .card div {
+            .card-header {
+                font-weight: bold;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .card-header span {
+                font-size: 1em;
+            }
+
+            .card-details {
+                display: none;
+                margin-top: 10px;
+                font-size: 0.85em;
+            }
+
+            .card.active .card-details {
+                display: block;
+            }
+
+            .card-details div {
                 margin-bottom: 8px;
             }
 
-            .card div strong {
+            .card-details div strong {
                 font-weight: bold;
                 display: block;
                 margin-bottom: 3px;
@@ -211,8 +233,6 @@
     <script>
         let allData = [];
         let regionFilter = "All";
-        let refreshInterval = 75;
-        let countdown = refreshInterval;
 
         async function fetchData() {
             try {
@@ -240,52 +260,50 @@
             cardContainer.innerHTML = '';
 
             const now = new Date();
-            const twentyFourHoursFromNow = new Date(now.getTime() + 24 * 60 * 60 * 1000);
-            const fourHoursFromNow = new Date(now.getTime() + 4 * 60 * 60 * 1000);
 
             const filteredData = allData.filter(row => {
                 const region = row[8]?.trim();
-                const dateTime = new Date(row[0]?.trim());
-                return (regionFilter === "All" || region === regionFilter) &&
-                    dateTime <= twentyFourHoursFromNow;
-            });
-
-            filteredData.sort((a, b) => {
-                const dateA = new Date(a[0]?.trim());
-                const dateB = new Date(b[0]?.trim());
-                return dateA - dateB;
+                return regionFilter === "All" || region === regionFilter;
             });
 
             filteredData.forEach(row => {
-                const dateTimeStr = row[0]?.trim();
-                const dateTime = new Date(dateTimeStr);
+                const dateTime = new Date(row[0]?.trim());
+                const city = row[7]?.trim();
+                const isExpired = dateTime < now;
 
+                // Tabela (PC)
                 const tr = document.createElement('tr');
-                const card = document.createElement('div');
-                card.classList.add('card');
-
-                if (dateTime < now) {
-                    tr.classList.add('expired');
-                    card.classList.add('expired');
-                } else if (dateTime <= fourHoursFromNow) {
-                    tr.classList.add('highlight');
-                    card.classList.add('highlight');
-                }
-
-                row.forEach((cell, index) => {
+                if (isExpired) tr.classList.add('expired');
+                row.forEach(cell => {
                     const td = document.createElement('td');
                     td.textContent = cell?.trim();
                     tr.appendChild(td);
+                });
+                tbody.appendChild(tr);
 
-                    const cardDetail = document.createElement('div');
-                    const strong = document.createElement('strong');
-                    strong.textContent = document.querySelector('th:nth-child(' + (index + 1) + ')').textContent;
-                    cardDetail.appendChild(strong);
-                    cardDetail.appendChild(document.createTextNode(cell?.trim()));
-                    card.appendChild(cardDetail);
+                // Kafelek (mobile)
+                const card = document.createElement('div');
+                card.classList.add('card');
+                if (isExpired) card.classList.add('expired');
+
+                const cardHeader = document.createElement('div');
+                cardHeader.classList.add('card-header');
+                cardHeader.innerHTML = `<span>${row[0]?.trim()}</span><span>${city}</span>`;
+                card.appendChild(cardHeader);
+
+                const cardDetails = document.createElement('div');
+                cardDetails.classList.add('card-details');
+                row.forEach((cell, index) => {
+                    const detail = document.createElement('div');
+                    detail.innerHTML = `<strong>${document.querySelector('th:nth-child(' + (index + 1) + ')').textContent}:</strong> ${cell?.trim()}`;
+                    cardDetails.appendChild(detail);
+                });
+                card.appendChild(cardDetails);
+
+                card.addEventListener('click', () => {
+                    card.classList.toggle('active');
                 });
 
-                tbody.appendChild(tr);
                 cardContainer.appendChild(card);
             });
         }
