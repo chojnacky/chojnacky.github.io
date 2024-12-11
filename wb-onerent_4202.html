@@ -347,7 +347,7 @@
 
                 // Dodanie linku do szczegółów kafelka
                 const linkDetail = document.createElement('div');
-                linkDetail.innerHTML = `<strong>Link:</strong> <a href="https://prod.onerent.zone/os/rent/reservations/preview/${id}" target="_blank" class="link-icon">&#128279;</a>`;
+                linkDetail.innerHTML = `<strong>Link:</strong> <a href="https://prod.onerent.zone/os/rent/reservations/preview/${id}" target="_blank" class="link-icon">&#x1F517;</a>`;
                 cardDetails.appendChild(linkDetail);
 
                 card.appendChild(cardDetails);
@@ -359,12 +359,29 @@
             });
         }
 
+        function startCountdown() {
+            const countdownSpan = document.getElementById("countdown");
+
+            const timer = setInterval(() => {
+                countdown--;
+                countdownSpan.textContent = countdown;
+
+                if (countdown <= 0) {
+                    clearInterval(timer);
+                    fetchData();
+                    countdown = refreshInterval; // Resetuj licznik
+                    startCountdown(); // Rozpocznij odliczanie ponownie
+                }
+            }, 1000);
+        }
+
         document.getElementById("regionFilter").addEventListener("change", (event) => {
             regionFilter = event.target.value;
             updateTable();
         });
 
         fetchData();
+        startCountdown();
 
     </script>
 </body>
