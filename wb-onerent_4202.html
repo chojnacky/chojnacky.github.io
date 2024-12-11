@@ -75,6 +75,15 @@
             font-weight: bold;
         }
 
+        tr.highlight {
+            background-color: #FAC898;
+        }
+
+        tr.expired {
+            background-color: #FAA0A0;
+            color: #FFFFFF;
+        }
+
         tr:hover {
             background-color: #F9F9F9;
         }
@@ -104,8 +113,8 @@
             .card-container {
                 display: flex;
                 flex-wrap: wrap;
-                gap: 10px;
-                padding: 10px;
+                gap: 15px;
+                padding: 15px;
                 justify-content: center;
             }
 
@@ -114,10 +123,10 @@
                 border: 1px solid #ddd;
                 border-radius: 8px;
                 box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-                padding: 10px;
+                padding: 15px;
                 width: 100%;
-                max-width: 250px;
-                font-size: 0.8em;
+                max-width: 300px;
+                font-size: 0.9em;
                 color: #18305B;
                 display: flex;
                 flex-direction: column;
@@ -129,16 +138,17 @@
 
             .card.expired {
                 background-color: #C41E3A;
+                color: #FFFFFF;
             }
 
             .card div {
-                margin-bottom: 5px;
-                display: flex;
-                justify-content: space-between;
+                margin-bottom: 8px;
             }
 
             .card div strong {
                 font-weight: bold;
+                display: block;
+                margin-bottom: 3px;
             }
         }
 
