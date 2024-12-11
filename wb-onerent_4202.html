@@ -234,6 +234,30 @@
             transform: translateY(0);
         }
 
+        @media screen and (min-width: 320px) and (max-width: 767px) and (orientation: landscape) {
+            html {
+                transform: rotate(90deg);
+                transform-origin: right top;
+                width: 100vh;
+                height: 100vw;
+                overflow-x: hidden;
+                position: absolute;
+                top: 100%;
+                right: 0;
+            }
+
+            body {
+                transform: rotate(-90deg);
+                transform-origin: left top;
+                width: 100vw;
+                height: 100vh;
+                overflow-y: auto;
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+        }
+
     </style>
 </head>
 
@@ -304,8 +328,12 @@
                 }
                 const data = await response.text();
                 processData(data);
+
+                // Powiadomienie o odświeżeniu tabeli
+                showNotification("Tabela została odświeżona.");
             } catch (error) {
                 console.error('Błąd podczas pobierania danych:', error);
+                showNotification("Błąd podczas odświeżania tabeli.");
             }
         }
 
