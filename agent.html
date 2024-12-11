@@ -90,16 +90,6 @@
             background-color: #F9F9F9;
         }
 
-        tr.highlight:hover {
-            background-color: #ffea99;
-            filter: brightness(94%);
-        }
-
-        tr.expired:hover {
-            background-color: #FAA0A9;
-            filter: brightness(94%);
-        }
-
         #refresh-timer {
             text-align: center;
             font-size: 0.9em;
@@ -145,11 +135,6 @@
                 width: 100%;
                 max-width: 100%;
             }
-
-            header {
-                width: 100vw;
-                /* Ustaw na pełną szerokość dla mobilnych */
-            }
         }
 
         .card {
@@ -175,89 +160,6 @@
             background-color: #FAA0A0;
         }
 
-        .card:hover {
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        .card-header {
-            font-weight: bold;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .card-header span {
-            font-size: 1em;
-        }
-
-        .card-details {
-            display: none;
-            margin-top: 10px;
-            font-size: 0.85em;
-        }
-
-        .card.active .card-details {
-            display: block;
-        }
-
-        .card-details div {
-            margin-bottom: 8px;
-        }
-
-        .card-details div strong {
-            font-weight: bold;
-            display: block;
-            margin-bottom: 3px;
-        }
-
-    </style>
-    <style>
-        /* Styl powiadomień */
-        .notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background-color: #18305B;
-            color: #FFFFFF;
-            padding: 15px 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            font-size: 0.9em;
-            z-index: 1000;
-            opacity: 0;
-            transform: translateY(-20px);
-            transition: opacity 0.3s ease, transform 0.3s ease;
-        }
-
-        .notification.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        @media screen and (min-width: 320px) and (max-width: 767px) and (orientation: landscape) {
-            html {
-                transform: rotate(90deg);
-                transform-origin: right top;
-                width: 100vh;
-                height: 100vw;
-                overflow-x: hidden;
-                position: absolute;
-                top: 100%;
-                right: 0;
-            }
-
-            body {
-                transform: rotate(-90deg);
-                transform-origin: left top;
-                width: 100vw;
-                height: 100vh;
-                overflow-y: auto;
-                position: absolute;
-                top: 0;
-                left: 0;
-            }
-        }
-
     </style>
 </head>
 
@@ -276,7 +178,6 @@
             <option value="Południe">Południe</option>
         </select>
     </div>
-    <div id="notification" class="notification"></div>
     <table id="data-table">
         <thead>
             <tr>
@@ -292,158 +193,63 @@
             </tr>
         </thead>
         <tbody>
-            <!-- Dynamic data will be injected here -->
+            <!-- Dynamic data -->
         </tbody>
     </table>
     <div class="card-container">
-        <!-- Dynamic cards will be injected here -->
+        <!-- Dynamic cards -->
     </div>
-    <div id="refresh-timer">
-        Odświeżenie za: <span id="countdown">75</span> sekund
-    </div>
-    <footer>
-        &copy; 2024 OneRent - Wszystkie prawa zastrzeżone.
-    </footer>
-
+    <div id="refresh-timer">Odświeżenie za: <span id="countdown">75</span> sekund</div>
+    <footer>&copy; 2024 OneRent</footer>
     <script>
-        function showNotification(message) {
-            const notification = document.getElementById("notification");
-            notification.textContent = message;
-            notification.classList.add("show");
-
-            // Ukryj powiadomienie po 5 sekundach
-            setTimeout(() => {
-                notification.classList.remove("show");
-            }, 5000);
-        }
         let allData = [];
         let regionFilter = "All";
 
         async function fetchData() {
             try {
                 const response = await fetch(`tabela.csv?nocache=${new Date().getTime()}`);
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
                 const data = await response.text();
                 processData(data);
-
-                // Powiadomienie o odświeżeniu tabeli
                 showNotification("Tabela została odświeżona.");
             } catch (error) {
-                console.error('Błąd podczas pobierania danych:', error);
-                showNotification("Błąd podczas odświeżania tabeli.");
+                console.error('Błąd:', error);
             }
         }
 
         function processData(csvData) {
             const rows = csvData.split('\n').map(row => row.split(';'));
-            allData = rows.filter((row, index) => row.length > 1 && index > 0);
+            allData = rows.slice(1).filter(row => row.length > 1);
             updateTable();
         }
 
         function updateTable() {
-            const tbody = document.getElementById('data-table').querySelector('tbody');
-            const cardContainer = document.querySelector('.card-container');
-            tbody.innerHTML = '';
-            cardContainer.innerHTML = '';
+            const tbody = document.querySelector("#data-table tbody");
+            tbody.innerHTML = "";
+            const cardContainer = document.querySelector(".card-container");
+            cardContainer.innerHTML = "";
 
-            const now = new Date();
-            const fourHoursFromNow = new Date(now.getTime() + 4 * 60 * 60 * 1000);
-
-            // Zaktualizowany indeks "Region" w danych CSV
-            const regionIndex = 6; // Zakładamy, że kolumna "Adres" (index 6) została pominięta
-
-            const filteredData = allData.filter(row => {
-                const region = row[regionIndex]?.trim();
-                return regionFilter === "All" || region === regionFilter;
-            });
+            const filteredData = allData.filter(row => regionFilter === "All" || row[7]?.trim() === regionFilter);
 
             filteredData.forEach(row => {
-                const dateTime = new Date(row[0]?.trim());
-                const id = row[1]?.trim();
-                const isExpired = dateTime < now;
-                const isHighlight = dateTime <= fourHoursFromNow && dateTime >= now;
-
-                // Tabela (PC)
-                const tr = document.createElement('tr');
-                if (isExpired) tr.classList.add('expired');
-                if (isHighlight) tr.classList.add('highlight');
-
+                const tr = document.createElement("tr");
                 row.forEach((cell, index) => {
-                    if (index !== 6) { // Skip the "Adres" column
-                        const td = document.createElement('td');
-                        td.textContent = cell?.trim();
+                    if (index !== 6) {
+                        const td = document.createElement("td");
+                        td.textContent = cell;
                         tr.appendChild(td);
                     }
                 });
-
-                tr.addEventListener('click', () => {
-                    const link = `https://prod.onerent.zone/os/rent/reservations/preview/${id}`;
-                    navigator.clipboard.writeText(link).then(() => {
-                        showNotification(`Skopiowano do schowka: ${link}`);
-                    }).catch(err => {
-                        console.error('Nie udało się skopiować do schowka', err);
-                        showNotification("Nie udało się skopiować linku.");
-                    });
-                });
-
                 tbody.appendChild(tr);
-
-                // Kafelek (mobile)
-                const card = document.createElement('div');
-                card.classList.add('card');
-                if (isExpired) card.classList.add('expired');
-                if (isHighlight) card.classList.add('highlight');
-
-                const cardHeader = document.createElement('div');
-                cardHeader.classList.add('card-header');
-                cardHeader.innerHTML = `<span>${row[0]?.trim()}</span><span>${row[regionIndex]?.trim()}</span>`;
-                card.appendChild(cardHeader);
-
-                const cardDetails = document.createElement('div');
-                cardDetails.classList.add('card-details');
-                row.forEach((cell, index) => {
-                    if (index !== 6) { // Skip the "Adres" column
-                        const detail = document.createElement('div');
-                        detail.innerHTML = `<strong>${document.querySelector('th:nth-child(' + (index + 1) + ')').textContent}:</strong> ${cell?.trim()}`;
-                        cardDetails.appendChild(detail);
-                    }
-                });
-
-                card.appendChild(cardDetails);
-                card.addEventListener('click', () => {
-                    card.classList.toggle('active');
-                });
-
-                cardContainer.appendChild(card);
             });
         }
 
-        function startCountdown() {
-            let countdown = 75;
-            const countdownSpan = document.getElementById("countdown");
-
-            const timer = setInterval(() => {
-                countdown--;
-                countdownSpan.textContent = countdown;
-
-                if (countdown <= 0) {
-                    clearInterval(timer);
-                    fetchData();
-                    countdown = 75;
-                    startCountdown();
-                }
-            }, 1000);
-        }
-
-        document.getElementById("regionFilter").addEventListener("change", (event) => {
-            regionFilter = event.target.value;
+        document.querySelector("#regionFilter").addEventListener("change", (e) => {
+            regionFilter = e.target.value;
             updateTable();
         });
 
         fetchData();
-        startCountdown();
+        setInterval(fetchData, 75000);
 
     </script>
 </body>
