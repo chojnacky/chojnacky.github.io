@@ -400,25 +400,32 @@
             updateTable();
         });
 
-    </script>
+        function startCountdown() {
+            let countdown = 75;
+            const countdownSpan = document.getElementById("countdown");
 
-    function startCountdown() {
-    let countdown = 75;
-    const countdownSpan = document.getElementById("countdown");
+            const timer = setInterval(() => {
+                countdown--;
+                countdownSpan.textContent = countdown;
 
-    const timer = setInterval(() => {
-    countdown--;
-    countdownSpan.textContent = countdown;
+                if (countdown <= 0) {
+                    clearInterval(timer);
+                    fetchData();
+                    countdown = 75;
+                    startCountdown();
+                }
+            }, 1000);
+        }
 
-    if (countdown <= 0) { clearInterval(timer); fetchData(); countdown=75; startCountdown(); } }, 1000); } document.getElementById("regionFilter").addEventListener("change", (event)=> {
-        regionFilter = event.target.value;
-        updateTable();
+        document.getElementById("regionFilter").addEventListener("change", (event) => {
+            regionFilter = event.target.value;
+            updateTable();
         });
 
         fetchData();
         startCountdown();
 
-        </script>
+    </script>
 </body>
 
 </html>
