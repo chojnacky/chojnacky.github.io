@@ -105,7 +105,8 @@
         }
 
         /* Kafelki na urządzeniach mobilnych */
-        @media (max-width: 768px) {
+        @media (max-width: 768px),
+        (orientation: landscape) {
             table {
                 display: none;
             }
@@ -117,64 +118,64 @@
                 padding: 10px;
                 justify-content: center;
             }
+        }
 
-            .card {
-                background-color: #F8F9FA;
-                border: 1px solid #ddd;
-                border-radius: 8px;
-                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-                padding: 10px;
-                width: 100%;
-                max-width: 300px;
-                font-size: 0.9em;
-                color: #18305B;
-                cursor: pointer;
-                position: relative;
-            }
+        .card {
+            background-color: #F8F9FA;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            width: 100%;
+            max-width: 300px;
+            font-size: 0.9em;
+            color: #18305B;
+            cursor: pointer;
+            position: relative;
+        }
 
-            .card.highlight {
-                background-color: #FAC898;
-            }
+        .card.highlight {
+            background-color: #FAC898;
+        }
 
-            .card.expired {
-                background-color: #FAA0A0;
-                color: #FFFFFF;
-            }
+        .card.expired {
+            background-color: #FAA0A0;
+            color: #FFFFFF;
+        }
 
-            .card-header {
-                font-weight: bold;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-            }
+        .card-header {
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-            .card-header span {
-                font-size: 1em;
-            }
+        .card-header span {
+            font-size: 1em;
+        }
 
-            .card-details {
-                display: none;
-                margin-top: 10px;
-                font-size: 0.85em;
-            }
+        .card-details {
+            display: none;
+            margin-top: 10px;
+            font-size: 0.85em;
+        }
 
-            .card.active .card-details {
-                display: block;
-            }
+        .card.active .card-details {
+            display: block;
+        }
 
-            .card-details div {
-                margin-bottom: 8px;
-            }
+        .card-details div {
+            margin-bottom: 8px;
+        }
 
-            .card-details div strong {
-                font-weight: bold;
-                display: block;
-                margin-bottom: 3px;
-            }
+        .card-details div strong {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 3px;
         }
 
         /* Widok na PC */
-        @media (min-width: 769px) {
+        @media (min-width: 769px) and (orientation: portrait) {
             .card-container {
                 display: none;
             }
@@ -270,7 +271,7 @@
 
             filteredData.forEach(row => {
                 const dateTime = new Date(row[0]?.trim());
-                const operation = row[3]?.trim();
+                const operation = row[7]?.trim();
                 const city = row[7]?.trim();
                 const isExpired = dateTime < now;
                 const isHighlight = dateTime <= fourHoursFromNow && dateTime >= now;
@@ -294,7 +295,7 @@
 
                 const cardHeader = document.createElement('div');
                 cardHeader.classList.add('card-header');
-                cardHeader.innerHTML = `<span>${row[0]?.trim()}</span><span>${operation}</span>`;
+                cardHeader.innerHTML = `<span>${row[0]?.trim()}</span><span>${city}</span>`;
                 card.appendChild(cardHeader);
 
                 const cardDetails = document.createElement('div');
