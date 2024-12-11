@@ -351,8 +351,11 @@
             const now = new Date();
             const fourHoursFromNow = new Date(now.getTime() + 4 * 60 * 60 * 1000);
 
+            // Zaktualizowany indeks "Region" w danych CSV
+            const regionIndex = 6; // Zakładamy, że kolumna "Adres" (index 6) została pominięta
+
             const filteredData = allData.filter(row => {
-                const region = row[7]?.trim();
+                const region = row[regionIndex]?.trim();
                 return regionFilter === "All" || region === regionFilter;
             });
 
@@ -366,6 +369,7 @@
                 const tr = document.createElement('tr');
                 if (isExpired) tr.classList.add('expired');
                 if (isHighlight) tr.classList.add('highlight');
+
                 row.forEach((cell, index) => {
                     if (index !== 6) { // Skip the "Adres" column
                         const td = document.createElement('td');
@@ -374,7 +378,6 @@
                     }
                 });
 
-                // Kopiowanie do schowka po kliknięciu
                 tr.addEventListener('click', () => {
                     const link = `https://prod.onerent.zone/os/rent/reservations/preview/${id}`;
                     navigator.clipboard.writeText(link).then(() => {
@@ -395,20 +398,18 @@
 
                 const cardHeader = document.createElement('div');
                 cardHeader.classList.add('card-header');
-                cardHeader.innerHTML = `<span>${row[0]?.trim()}</span><span>${row[7]?.trim()}</span>`;
+                cardHeader.innerHTML = `<span>${row[0]?.trim()}</span><span>${row[regionIndex]?.trim()}</span>`;
                 card.appendChild(cardHeader);
 
                 const cardDetails = document.createElement('div');
                 cardDetails.classList.add('card-details');
                 row.forEach((cell, index) => {
-                    // Pomijamy kolumnę "Adres", której indeks to 6 (liczone od 0)
-                    if (index !== 6) {
+                    if (index !== 6) { // Skip the "Adres" column
                         const detail = document.createElement('div');
                         detail.innerHTML = `<strong>${document.querySelector('th:nth-child(' + (index + 1) + ')').textContent}:</strong> ${cell?.trim()}`;
                         cardDetails.appendChild(detail);
                     }
                 });
-                card.appendChild(cardDetails);
 
                 card.appendChild(cardDetails);
                 card.addEventListener('click', () => {
