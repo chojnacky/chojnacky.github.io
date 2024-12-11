@@ -88,14 +88,19 @@
 
         tr:hover:not(.highlight):not(.expired) {
             background-color: #F9F9F9;
+            font-weight: bold;
         }
 
         tr.highlight:hover {
             background-color: #FAC8A2;
+            filter: brightness(50%);
+            font-weight: bold;
         }
 
         tr.expired:hover {
             background-color: #FAA0A9;
+            filter: brightness(50%);
+            font-weight: bold;
         }
 
         #refresh-timer {
@@ -209,6 +214,30 @@
         }
 
     </style>
+    <style>
+        /* Styl powiadomień */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #18305B;
+            color: #FFFFFF;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            font-size: 0.9em;
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .notification.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+    </style>
 </head>
 
 <body>
@@ -226,6 +255,7 @@
             <option value="Południe">Południe</option>
         </select>
     </div>
+    <div id="notification" class="notification"></div>
     <table id="data-table">
         <thead>
             <tr>
@@ -256,6 +286,16 @@
     </footer>
 
     <script>
+        function showNotification(message) {
+            const notification = document.getElementById("notification");
+            notification.textContent = message;
+            notification.classList.add("show");
+
+            // Ukryj powiadomienie po 5 sekundach
+            setTimeout(() => {
+                notification.classList.remove("show");
+            }, 5000);
+        }
         let allData = [];
         let regionFilter = "All";
 
@@ -312,9 +352,10 @@
                 tr.addEventListener('click', () => {
                     const link = `https://prod.onerent.zone/os/rent/reservations/preview/${id}`;
                     navigator.clipboard.writeText(link).then(() => {
-                        alert(`Skopiowano do schowka: ${link}`);
+                        showNotification(`Skopiowano do schowka: ${link}`);
                     }).catch(err => {
                         console.error('Nie udało się skopiować do schowka', err);
+                        showNotification("Nie udało się skopiować linku.");
                     });
                 });
 
