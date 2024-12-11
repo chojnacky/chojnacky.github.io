@@ -172,15 +172,6 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
-        .card.highlight:hover {
-            background-color: #FAC898;
-        }
-
-        .card.expired:hover {
-            background-color: #FAA0A0;
-            color: #FFFFFF;
-        }
-
         .card-header {
             font-weight: bold;
             display: flex;
@@ -212,9 +203,19 @@
             margin-bottom: 3px;
         }
 
+        a.link-icon {
+            color: #18305B;
+            text-decoration: none;
+            font-size: 1.2em;
+            display: inline-block;
+        }
+
+        a.link-icon:hover {
+            color: #E8336F;
+        }
+
     </style>
 </head>
-
 
 <body>
     <header>
@@ -244,6 +245,7 @@
                 <th>Miasto</th>
                 <th>Region</th>
                 <th>Uwagi</th>
+                <th>Link</th>
             </tr>
         </thead>
         <tbody>
@@ -299,8 +301,7 @@
 
             filteredData.forEach(row => {
                 const dateTime = new Date(row[0]?.trim());
-                const operation = row[7]?.trim();
-                const city = row[7]?.trim();
+                const id = row[1]?.trim();
                 const isExpired = dateTime < now;
                 const isHighlight = dateTime <= fourHoursFromNow && dateTime >= now;
 
@@ -313,6 +314,16 @@
                     td.textContent = cell?.trim();
                     tr.appendChild(td);
                 });
+
+                // Dodanie kolumny z linkiem
+                const linkTd = document.createElement('td');
+                const link = document.createElement('a');
+                link.href = `https://prod.onerent.zone/os/rent/reservations/preview/${id}`;
+                link.target = '_blank';
+                link.classList.add('link-icon');
+                link.innerHTML = '&#128279;'; // Ikona linku
+                linkTd.appendChild(link);
+                tr.appendChild(linkTd);
                 tbody.appendChild(tr);
 
                 // Kafelek (mobile)
@@ -323,7 +334,7 @@
 
                 const cardHeader = document.createElement('div');
                 cardHeader.classList.add('card-header');
-                cardHeader.innerHTML = `<span>${row[0]?.trim()}</span><span>${city}</span>`;
+                cardHeader.innerHTML = `<span>${row[0]?.trim()}</span><span>${row[7]?.trim()}</span>`;
                 card.appendChild(cardHeader);
 
                 const cardDetails = document.createElement('div');
@@ -333,8 +344,13 @@
                     detail.innerHTML = `<strong>${document.querySelector('th:nth-child(' + (index + 1) + ')').textContent}:</strong> ${cell?.trim()}`;
                     cardDetails.appendChild(detail);
                 });
-                card.appendChild(cardDetails);
 
+                // Dodanie linku do szczegółów kafelka
+                const linkDetail = document.createElement('div');
+                linkDetail.innerHTML = `<strong>Link:</strong> <a href="https://prod.onerent.zone/os/rent/reservations/preview/${id}" target="_blank" class="link-icon">&#128279;</a>`;
+                cardDetails.appendChild(linkDetail);
+
+                card.appendChild(cardDetails);
                 card.addEventListener('click', () => {
                     card.classList.toggle('active');
                 });
