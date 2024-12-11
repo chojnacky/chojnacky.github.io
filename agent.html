@@ -29,8 +29,6 @@
             font-size: 1.8em;
             font-weight: bold;
             width: 100%;
-            margin: 0;
-            box-sizing: border-box;
         }
 
         .filter {
@@ -61,7 +59,6 @@
             background-color: #FFFFFF;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
-            overflow: hidden;
         }
 
         th,
@@ -106,18 +103,6 @@
             background-color: #F8F9FA;
         }
 
-        /* Tabela wyłącznie na komputerach (769px i więcej) */
-        @media (min-width: 769px) {
-            .card-container {
-                display: none;
-            }
-
-            table {
-                display: table;
-            }
-        }
-
-        /* Kafelki wyłącznie na urządzeniach mobilnych (768px i mniej) */
         @media (max-width: 768px) {
             table {
                 display: none;
@@ -129,11 +114,6 @@
                 gap: 15px;
                 padding: 10px;
                 justify-content: center;
-            }
-
-            .card {
-                width: 100%;
-                max-width: 100%;
             }
         }
 
@@ -148,8 +128,6 @@
             font-size: 0.9em;
             color: #18305B;
             cursor: pointer;
-            position: relative;
-            transition: background-color 0.2s ease, color 0.2s ease;
         }
 
         .card.highlight {
@@ -192,64 +170,107 @@
                 <th>Uwagi</th>
             </tr>
         </thead>
-        <tbody>
-            <!-- Dynamic data -->
-        </tbody>
+        <tbody></tbody>
     </table>
-    <div class="card-container">
-        <!-- Dynamic cards -->
-    </div>
+    <div class="card-container"></div>
     <div id="refresh-timer">Odświeżenie za: <span id="countdown">75</span> sekund</div>
-    <footer>&copy; 2024 OneRent</footer>
+    <footer>
+        &copy; 2024 OneRent - Wszystkie prawa zastrzeżone.
+    </footer>
+
     <script>
         let allData = [];
         let regionFilter = "All";
 
         async function fetchData() {
             try {
-                const response = await fetch(`tabela.csv?nocache=${new Date().getTime()}`);
+                const response = await fetch(`tabela.csv?nocache=${Date.now()}`);
+                if (!response.ok) throw new Error("Błąd pobierania danych.");
                 const data = await response.text();
                 processData(data);
                 showNotification("Tabela została odświeżona.");
             } catch (error) {
-                console.error('Błąd:', error);
+                showNotification("Błąd podczas odświeżania.");
+                console.error(error);
             }
         }
 
         function processData(csvData) {
-            const rows = csvData.split('\n').map(row => row.split(';'));
-            allData = rows.slice(1).filter(row => row.length > 1);
+            const rows = csvData.split("\n").map(row => row.split(";"));
+            allData = rows.filter((row, index) => row.length > 1 && index > 0);
             updateTable();
         }
 
         function updateTable() {
-            const tbody = document.querySelector("#data-table tbody");
-            tbody.innerHTML = "";
+            const tbody = document.getElementById("data-table").querySelector("tbody");
             const cardContainer = document.querySelector(".card-container");
+            tbody.innerHTML = "";
             cardContainer.innerHTML = "";
 
-            const filteredData = allData.filter(row => regionFilter === "All" || row[7]?.trim() === regionFilter);
+            const filteredData = allData.filter(row => {
+                const region = row[7]?.trim();
+                return regionFilter === "All" || region === regionFilter;
+            });
 
             filteredData.forEach(row => {
                 const tr = document.createElement("tr");
                 row.forEach((cell, index) => {
                     if (index !== 6) {
                         const td = document.createElement("td");
-                        td.textContent = cell;
+                        td.textContent = cell.trim();
                         tr.appendChild(td);
                     }
                 });
                 tbody.appendChild(tr);
+
+                const card = document.createElement("div");
+                card.classList.add("card");
+                card.innerHTML = `
+                    <div><strong>Data:</strong> ${row[0].trim()}</div>
+                    <div><strong>ID:</strong> ${row[1].trim()}</div>
+                    <div><strong>Typ:</strong> ${row[2].trim()}</div>
+                    <div><strong>Region:</strong> ${row[7].trim()}</div>
+                `;
+                cardContainer.appendChild(card);
             });
         }
 
-        document.querySelector("#regionFilter").addEventListener("change", (e) => {
-            regionFilter = e.target.value;
+        function startCountdown() {
+            let countdown = 75;
+            const countdownSpan = document.getElementById("countdown");
+
+            setInterval(() => {
+                countdown--;
+                if (countdown === 0) {
+                    fetchData();
+                    countdown = 75;
+                }
+                countdownSpan.textContent = countdown;
+            }, 1000);
+        }
+
+        document.getElementById("regionFilter").addEventListener("change", event => {
+            regionFilter = event.target.value;
             updateTable();
         });
 
         fetchData();
-        setInterval(fetchData, 75000);
+        startCountdown();
+
+        function showNotification(message) {
+            const notification = document.createElement("div");
+            notification.textContent = message;
+            notification.style.position = "fixed";
+            notification.style.bottom = "20px";
+            notification.style.right = "20px";
+            notification.style.backgroundColor = "#18305B";
+            notification.style.color = "white";
+            notification.style.padding = "10px 20px";
+            notification.style.borderRadius = "8px";
+            notification.style.zIndex = "1000";
+            document.body.appendChild(notification);
+            setTimeout(() => notification.remove(), 5000);
+        }
 
     </script>
 </body>
