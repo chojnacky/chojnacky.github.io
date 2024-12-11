@@ -28,12 +28,9 @@
             padding: 20px;
             font-size: 1.8em;
             font-weight: bold;
-            width: 100vw;
-            /* Ustaw pełną szerokość */
+            width: 100%;
             margin: 0;
-            /* Usuń margines */
             box-sizing: border-box;
-            /* Uwzględnij padding w szerokości */
         }
 
         .filter {
@@ -87,7 +84,6 @@
 
         tr.expired {
             background-color: #FAA0A0;
-            color: #FFFFFF;
         }
 
         tr:hover:not(.highlight):not(.expired) {
@@ -148,6 +144,11 @@
                 width: 100%;
                 max-width: 100%;
             }
+
+            header {
+                width: 100vw;
+                /* Ustaw na pełną szerokość dla mobilnych */
+            }
         }
 
         .card {
@@ -171,7 +172,6 @@
 
         .card.expired {
             background-color: #FAA0A0;
-            color: #FFFFFF;
         }
 
         .card:hover {
@@ -209,17 +209,6 @@
             margin-bottom: 3px;
         }
 
-        a.link-icon {
-            color: #18305B;
-            text-decoration: none;
-            font-size: 1.2em;
-            display: inline-block;
-        }
-
-        a.link-icon:hover {
-            color: #E8336F;
-        }
-
     </style>
 </head>
 
@@ -251,7 +240,6 @@
                 <th>Miasto</th>
                 <th>Region</th>
                 <th>Uwagi</th>
-                <th>Link</th>
             </tr>
         </thead>
         <tbody>
@@ -307,7 +295,6 @@
 
             filteredData.forEach(row => {
                 const dateTime = new Date(row[0]?.trim());
-                const id = row[1]?.trim();
                 const isExpired = dateTime < now;
                 const isHighlight = dateTime <= fourHoursFromNow && dateTime >= now;
 
@@ -320,16 +307,6 @@
                     td.textContent = cell?.trim();
                     tr.appendChild(td);
                 });
-
-                // Dodanie kolumny z linkiem
-                const linkTd = document.createElement('td');
-                const link = document.createElement('a');
-                link.href = `https://prod.onerent.zone/os/rent/reservations/preview/${id}`;
-                link.target = '_blank';
-                link.classList.add('link-icon');
-                link.innerHTML = '&#x1F517;' // Ikona linku
-                linkTd.appendChild(link);
-                tr.appendChild(linkTd);
                 tbody.appendChild(tr);
 
                 // Kafelek (mobile)
@@ -351,11 +328,6 @@
                     cardDetails.appendChild(detail);
                 });
 
-                // Dodanie linku do szczegółów kafelka
-                const linkDetail = document.createElement('div');
-                linkDetail.innerHTML = `<strong>Link:</strong> <a href="https://prod.onerent.zone/os/rent/reservations/preview/${id}" target="_blank" class="link-icon">&#x1F517;</a>`;
-                cardDetails.appendChild(linkDetail);
-
                 card.appendChild(cardDetails);
                 card.addEventListener('click', () => {
                     card.classList.toggle('active');
@@ -366,21 +338,18 @@
         }
 
         function startCountdown() {
-            let countdown = 75; // Inicjalizacja wartości odliczania
+            let countdown = 75;
             const countdownSpan = document.getElementById("countdown");
 
-            // Odświeżanie co sekundę
             const timer = setInterval(() => {
                 countdown--;
-                if (countdown >= 0) {
-                    countdownSpan.textContent = countdown; // Aktualizacja tekstu
-                }
+                countdownSpan.textContent = countdown;
 
                 if (countdown <= 0) {
                     clearInterval(timer);
-                    fetchData(); // Wywołanie funkcji odświeżania
-                    countdown = 75; // Reset licznika
-                    startCountdown(); // Ponowne uruchomienie odliczania
+                    fetchData();
+                    countdown = 75;
+                    startCountdown();
                 }
             }, 1000);
         }
