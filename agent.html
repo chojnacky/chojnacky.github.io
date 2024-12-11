@@ -286,7 +286,7 @@
                 <th>Operacja</th>
                 <th>Wykonujący</th>
                 <th>Rejestracja</th>
-                <th>Adres</th>
+                <th style="display:none;">Adres</th>
                 <th>Miasto</th>
                 <th>Region</th>
                 <th>Uwagi</th>
@@ -358,22 +358,20 @@
             });
 
             filteredData.forEach(row => {
-                    const dateTime = new Date(row[0]?.trim());
-                    const id = row[1]?.trim();
-                    const isExpired = dateTime < now;
-                    const isHighlight = dateTime <= fourHoursFromNow && dateTime >= now;
+                const dateTime = new Date(row[0]?.trim());
+                const id = row[1]?.trim();
+                const isExpired = dateTime < now;
+                const isHighlight = dateTime <= fourHoursFromNow && dateTime >= now;
 
-                    // Tabela (PC)
-                    const tr = document.createElement('tr');
-                    if (isExpired) tr.classList.add('expired');
-                    if (isHighlight) tr.classList.add('highlight');
-                    row.forEach(cell, index) => {
-                        if (index != 6) {
-                            const td = document.createElement('td');
-                            td.textContent = cell?.trim();
-                            tr.appendChild(td);
-                        }
-                    });
+                // Tabela (PC)
+                const tr = document.createElement('tr');
+                if (isExpired) tr.classList.add('expired');
+                if (isHighlight) tr.classList.add('highlight');
+                row.forEach(cell => {
+                    const td = document.createElement('td');
+                    td.textContent = cell?.trim();
+                    tr.appendChild(td);
+                });
 
                 // Kopiowanie do schowka po kliknięciu
                 tr.addEventListener('click', () => {
@@ -389,19 +387,26 @@
                 tbody.appendChild(tr);
 
                 // Kafelek (mobile)
-                const card = document.createElement('div'); card.classList.add('card');
+                const card = document.createElement('div');
+                card.classList.add('card');
                 if (isExpired) card.classList.add('expired');
                 if (isHighlight) card.classList.add('highlight');
 
-                const cardHeader = document.createElement('div'); cardHeader.classList.add('card-header'); cardHeader.innerHTML = `<span>${row[0]?.trim()}</span><span>${row[7]?.trim()}</span>`; card.appendChild(cardHeader);
+                const cardHeader = document.createElement('div');
+                cardHeader.classList.add('card-header');
+                cardHeader.innerHTML = `<span>${row[0]?.trim()}</span><span>${row[7]?.trim()}</span>`;
+                card.appendChild(cardHeader);
 
-                const cardDetails = document.createElement('div'); cardDetails.classList.add('card-details'); row.forEach((cell, index) => {
+                const cardDetails = document.createElement('div');
+                cardDetails.classList.add('card-details');
+                row.forEach((cell, index) => {
                     const detail = document.createElement('div');
                     detail.innerHTML = `<strong>${document.querySelector('th:nth-child(' + (index + 1) + ')').textContent}:</strong> ${cell?.trim()}`;
                     cardDetails.appendChild(detail);
                 });
 
-                card.appendChild(cardDetails); card.addEventListener('click', () => {
+                card.appendChild(cardDetails);
+                card.addEventListener('click', () => {
                     card.classList.toggle('active');
                 });
 
