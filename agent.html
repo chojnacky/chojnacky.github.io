@@ -15,95 +15,88 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #FFFFFF;
-            color: #18305B;
             margin: 0;
             padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
         }
 
         header {
-            background-color: #E8336F;
-            color: #FFFFFF;
+            background-color: #003366;
+            /* Ciemny niebieski */
+            color: #fff;
+            padding: 15px 20px;
             text-align: center;
-            padding: 20px;
-            font-size: 1.8em;
-            font-weight: bold;
-            width: 100%;
-            margin: 0;
-            box-sizing: border-box;
+            font-size: 1.5em;
         }
 
         .filter {
             margin: 20px auto;
             text-align: center;
+            padding: 10px;
         }
 
         .filter label {
-            font-size: 1em;
             font-weight: bold;
-            color: #18305B;
+            font-size: 1.1em;
+            color: #003366;
         }
 
         .filter select {
-            padding: 10px 15px;
+            padding: 8px 12px;
             font-size: 1em;
             margin-left: 10px;
-            border: 1px solid #18305B;
-            border-radius: 8px;
-            background-color: #FFFFFF;
-            color: #18305B;
+            border: 1px solid #ccc;
+            border-radius: 4px;
         }
 
         table {
-            width: 95%;
+            width: 90%;
             margin: 20px auto;
             border-collapse: collapse;
-            background-color: #FFFFFF;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
         }
 
         th,
         td {
-            padding: 12px 15px;
+            border: 1px solid #ddd;
+            padding: 12px;
             text-align: center;
-            font-size: 1em;
-            border-bottom: 1px solid #E0E0E0;
+            font-size: 0.83em;
         }
 
         th {
-            background-color: #18305B;
-            color: #FFFFFF;
+            background-color: #003366;
+            /* Niebieski */
+            color: white;
             font-weight: bold;
         }
 
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+            /* Jasnoszary */
+        }
+
         tr.highlight {
-            background-color: #ffea99;
+            background-color: #ffeb99;
+            /* Żółty akcent */
         }
 
         tr.expired {
-            background-color: #FAA0A0;
+            background-color: #ff9999;
+            /* Czerwony dla przedawnionych */
         }
 
-        tr:hover:not(.highlight):not(.expired) {
-            background-color: #F9F9F9;
-        }
-
-        tr.highlight:hover {
-            background-color: #ffea99;
-            filter: brightness(94%);
-        }
-
-        tr.expired:hover {
-            background-color: #FAA0A9;
-            filter: brightness(94%);
+        tr:hover {
+            background-color: #ddeeff;
+            /* Jasnoniebieski na hover */
         }
 
         #refresh-timer {
             text-align: center;
             font-size: 0.9em;
-            color: #18305B;
+            color: #555;
             margin-top: 10px;
         }
 
@@ -111,151 +104,8 @@
             margin-top: 20px;
             text-align: center;
             padding: 10px 0;
-            font-size: 0.8em;
-            color: #18305B;
-            background-color: #F8F9FA;
-        }
-
-        /* Tabela wyłącznie na komputerach (769px i więcej) */
-        @media (min-width: 769px) {
-            .card-container {
-                display: none;
-            }
-
-            table {
-                display: table;
-            }
-        }
-
-        /* Kafelki wyłącznie na urządzeniach mobilnych (768px i mniej) */
-        @media (max-width: 768px) {
-            table {
-                display: none;
-            }
-
-            .card-container {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 15px;
-                padding: 10px;
-                justify-content: center;
-            }
-
-            .card {
-                width: 100%;
-                max-width: 100%;
-            }
-
-            header {
-                width: 100vw;
-                /* Ustaw na pełną szerokość dla mobilnych */
-            }
-        }
-
-        .card {
-            background-color: #F8F9FA;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            padding: 10px;
-            width: 100%;
-            max-width: 300px;
             font-size: 0.9em;
-            color: #18305B;
-            cursor: pointer;
-            position: relative;
-            transition: background-color 0.2s ease, color 0.2s ease;
-        }
-
-        .card.highlight {
-            background-color: #ffea99;
-        }
-
-        .card.expired {
-            background-color: #FAA0A0;
-        }
-
-        .card:hover {
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        .card-header {
-            font-weight: bold;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .card-header span {
-            font-size: 1em;
-        }
-
-        .card-details {
-            display: none;
-            margin-top: 10px;
-            font-size: 0.85em;
-        }
-
-        .card.active .card-details {
-            display: block;
-        }
-
-        .card-details div {
-            margin-bottom: 8px;
-        }
-
-        .card-details div strong {
-            font-weight: bold;
-            display: block;
-            margin-bottom: 3px;
-        }
-
-    </style>
-    <style>
-        /* Styl powiadomień */
-        .notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background-color: #18305B;
-            color: #FFFFFF;
-            padding: 15px 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            font-size: 0.9em;
-            z-index: 1000;
-            opacity: 0;
-            transform: translateY(-20px);
-            transition: opacity 0.3s ease, transform 0.3s ease;
-        }
-
-        .notification.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        @media screen and (min-width: 320px) and (max-width: 767px) and (orientation: landscape) {
-            html {
-                transform: rotate(90deg);
-                transform-origin: right top;
-                width: 100vh;
-                height: 100vw;
-                overflow-x: hidden;
-                position: absolute;
-                top: 100%;
-                right: 0;
-            }
-
-            body {
-                transform: rotate(-90deg);
-                transform-origin: left top;
-                width: 100vw;
-                height: 100vh;
-                overflow-y: auto;
-                position: absolute;
-                top: 0;
-                left: 0;
-            }
+            color: #666;
         }
 
     </style>
@@ -276,7 +126,6 @@
             <option value="Południe">Południe</option>
         </select>
     </div>
-    <div id="notification" class="notification"></div>
     <table id="data-table">
         <thead>
             <tr>
@@ -296,9 +145,6 @@
             <!-- Dynamic data will be injected here -->
         </tbody>
     </table>
-    <div class="card-container">
-        <!-- Dynamic cards will be injected here -->
-    </div>
     <div id="refresh-timer">
         Odświeżenie za: <span id="countdown">75</span> sekund
     </div>
@@ -307,109 +153,79 @@
     </footer>
 
     <script>
-        function showNotification(message) {
-            const notification = document.getElementById("notification");
-            notification.textContent = message;
-            notification.classList.add("show");
-
-            // Ukryj powiadomienie po 5 sekundach
-            setTimeout(() => {
-                notification.classList.remove("show");
-            }, 5000);
-        }
-        let allData = [];
-        let regionFilter = "All";
+        let allData = []; // Zmienna globalna przechowująca wszystkie dane
+        let regionFilter = "All"; // Domyślna wartość filtra
+        let refreshInterval = 75; // Interwał odświeżania w sekundach
+        let countdown = refreshInterval; // Licznik odliczania
 
         async function fetchData() {
             try {
+                // Dodaj znacznik czasu jako parametr zapytania, aby uniknąć buforowania
                 const response = await fetch(`tabela.csv?nocache=${new Date().getTime()}`);
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 const data = await response.text();
                 processData(data);
-
-                // Powiadomienie o odświeżeniu tabeli
-                showNotification("Tabela została odświeżona.");
             } catch (error) {
                 console.error('Błąd podczas pobierania danych:', error);
-                showNotification("Błąd podczas odświeżania tabeli.");
             }
         }
 
         function processData(csvData) {
             const rows = csvData.split('\n').map(row => row.split(';'));
-            allData = rows.filter((row, index) => row.length > 1 && index > 0);
-            updateTable();
+            allData = rows.filter((row, index) => row.length > 1 && index > 0); // Filtruj puste wiersze i nagłówki
+            updateTable(); // Wyświetl tabelę na podstawie filtra
         }
 
         function updateTable() {
             const tbody = document.getElementById('data-table').querySelector('tbody');
-            const cardContainer = document.querySelector('.card-container');
-            tbody.innerHTML = '';
-            cardContainer.innerHTML = '';
+            tbody.innerHTML = ''; // Wyczyść istniejące dane
 
             const now = new Date();
+            const twentyFourHoursFromNow = new Date(now.getTime() + 24 * 60 * 60 * 1000);
             const fourHoursFromNow = new Date(now.getTime() + 4 * 60 * 60 * 1000);
 
+            // Filtrowanie na podstawie regionu i daty
             const filteredData = allData.filter(row => {
-                const region = row[7]?.trim();
-                return regionFilter === "All" || region === regionFilter;
+                const region = row[8].trim();
+                const dateTime = new Date(row[0].trim());
+                return (regionFilter === "All" || region === regionFilter) &&
+                    dateTime <= twentyFourHoursFromNow;
+            });
+
+            // Sortowanie danych według kolumny "Data i godzina"
+            filteredData.sort((a, b) => {
+                const dateA = new Date(a[0].trim());
+                const dateB = new Date(b[0].trim());
+                return dateA - dateB;
             });
 
             filteredData.forEach(row => {
-                    const dateTime = new Date(row[0]?.trim());
-                    const id = row[1]?.trim();
-                    const isExpired = dateTime < now;
-                    const isHighlight = dateTime <= fourHoursFromNow && dateTime >= now;
+                const tr = document.createElement('tr');
 
-                    // Tabela (PC)
-                    const tr = document.createElement('tr');
-                    if (isExpired) tr.classList.add('expired');
-                    if (isHighlight) tr.classList.add('highlight');
-                    row.forEach(cell, index) => {
-                        if (index === 6) return;
-                        const td = document.createElement('td');
-                        td.textContent = cell?.trim();
-                        tr.appendChild(td);
-                    });
+                // Sprawdź datę i godzinę (pierwsza kolumna)
+                const dateTimeStr = row[0].trim();
+                const dateTime = new Date(dateTimeStr);
 
-                // Kopiowanie do schowka po kliknięciu
-                tr.addEventListener('click', () => {
-                    const link = `https://prod.onerent.zone/os/rent/reservations/preview/${id}`;
-                    navigator.clipboard.writeText(link).then(() => {
-                        showNotification(`Skopiowano do schowka: ${link}`);
-                    }).catch(err => {
-                        console.error('Nie udało się skopiować do schowka', err);
-                        showNotification("Nie udało się skopiować linku.");
-                    });
+                if (dateTime < now) {
+                    tr.classList.add('expired'); // Dodaj klasę dla przedawnionych
+                } else if (dateTime <= fourHoursFromNow) {
+                    tr.classList.add('highlight'); // Dodaj klasę dla zadań do 4 godzin
+                }
+
+                row.forEach((cell, index) => {
+                    if (index === 6) return;
+                    const td = document.createElement('td');
+                    td.textContent = cell.trim();
+                    tr.appendChild(td);
                 });
 
                 tbody.appendChild(tr);
-
-                // Kafelek (mobile)
-                const card = document.createElement('div'); card.classList.add('card');
-                if (isExpired) card.classList.add('expired');
-                if (isHighlight) card.classList.add('highlight');
-
-                const cardHeader = document.createElement('div'); cardHeader.classList.add('card-header'); cardHeader.innerHTML = `<span>${row[0]?.trim()}</span><span>${row[7]?.trim()}</span>`; card.appendChild(cardHeader);
-
-                const cardDetails = document.createElement('div'); cardDetails.classList.add('card-details'); row.forEach((cell, index) => {
-                    const detail = document.createElement('div');
-                    detail.innerHTML = `<strong>${document.querySelector('th:nth-child(' + (index + 1) + ')').textContent}:</strong> ${cell?.trim()}`;
-                    cardDetails.appendChild(detail);
-                });
-
-                card.appendChild(cardDetails); card.addEventListener('click', () => {
-                    card.classList.toggle('active');
-                });
-
-                cardContainer.appendChild(card);
             });
         }
 
         function startCountdown() {
-            let countdown = 75;
             const countdownSpan = document.getElementById("countdown");
 
             const timer = setInterval(() => {
@@ -419,17 +235,19 @@
                 if (countdown <= 0) {
                     clearInterval(timer);
                     fetchData();
-                    countdown = 75;
-                    startCountdown();
+                    countdown = refreshInterval; // Resetuj licznik
+                    startCountdown(); // Rozpocznij odliczanie ponownie
                 }
             }, 1000);
         }
 
+        // Nasłuchiwanie zmiany filtra
         document.getElementById("regionFilter").addEventListener("change", (event) => {
-            regionFilter = event.target.value;
+            regionFilter = event.target.value; // Zaktualizuj filtr
             updateTable();
         });
 
+        // Pobierz dane przy starcie
         fetchData();
         startCountdown();
 
