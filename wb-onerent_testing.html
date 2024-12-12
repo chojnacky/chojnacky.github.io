@@ -358,8 +358,8 @@
             if (notificationsEnabled && Notification.permission === "granted") {
                 try {
                     // Tworzenie powiadomienia z datą, typem i miastem
-                    new Notification("OneRent Powiadomienie", {
-                        body: `Data: ${date}, Typ: ${type}, Miasto: ${city}`,
+                    new Notification(date, {
+                        body: `Operacja: ${operation}, Miasto: ${city}`,
                         icon: "https://example.com/icon.png", // Opcjonalna ikona
                     });
                     console.log("Powiadomienie wysłane:", `Data: ${date}, Typ: ${type}, Miasto: ${city}`);
