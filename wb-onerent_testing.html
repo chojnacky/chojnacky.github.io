@@ -489,14 +489,6 @@
             });
         }
 
-        function sendBrowserNotification(message) {
-            if (notificationsEnabled && Notification.permission === "granted") {
-                new Notification("OneRent Powiadomienie", {
-                    body: message
-                });
-            }
-        }
-
         function startCountdown() {
             let countdown = 75;
             const countdownSpan = document.getElementById("countdown");
