@@ -362,20 +362,7 @@
             }
         }
 
-        // Przykładowe wywołanie powiadomienia
-        function exampleNotification() {
-            if (notificationsEnabled && Notification.permission === "granted") {
-                sendBrowserNotification("To jest testowe powiadomienie.");
-            }
-        }
-
-        document.getElementById("regionFilter").addEventListener("change", (event) => {
-            regionFilter = event.target.value;
-            if (regionFilter !== "All" && notificationsEnabled) {
-                sendBrowserNotification(`Wybrano region: ${regionFilter}`);
-            }
-        });
-        exampleNotification();
+        // Przykładowe wywołanie powiadomieni
 
         function showNotification(message) {
             const notification = document.getElementById("notification");
