@@ -329,24 +329,53 @@
     <script>
         let notificationsEnabled = JSON.parse(localStorage.getItem('notificationsEnabled')) || false;
 
-        // Initialize notification checkbox state
         const notificationCheckbox = document.getElementById("enable-notifications");
+
+        // Inicjalizacja stanu checkboxa
         notificationCheckbox.checked = notificationsEnabled;
 
-        notificationCheckbox.addEventListener("change", (event) => {
+        notificationCheckbox.addEventListener("change", async (event) => {
             notificationsEnabled = event.target.checked;
             localStorage.setItem('notificationsEnabled', JSON.stringify(notificationsEnabled));
 
-            if (notificationsEnabled && Notification.permission !== "granted") {
-                Notification.requestPermission().then(permission => {
-                    if (permission !== "granted") {
-                        notificationsEnabled = false;
-                        notificationCheckbox.checked = false;
-                        localStorage.setItem('notificationsEnabled', JSON.stringify(notificationsEnabled));
-                    }
-                });
+            if (notificationsEnabled) {
+                // Zapytanie o nadanie uprawnień do powiadomień
+                const permission = await Notification.requestPermission();
+                if (permission === "granted") {
+                    console.log("Powiadomienia zostały włączone.");
+                } else {
+                    console.log("Powiadomienia nie zostały włączone.");
+                    notificationsEnabled = false;
+                    notificationCheckbox.checked = false;
+                    localStorage.setItem('notificationsEnabled', JSON.stringify(notificationsEnabled));
+                }
             }
         });
+
+        function sendBrowserNotification(message) {
+            if (notificationsEnabled && Notification.permission === "granted") {
+                new Notification("OneRent Powiadomienie", {
+                    body: message
+                });
+            } else if (Notification.permission === "denied") {
+                console.warn("Uprawnienia do powiadomień zostały odrzucone.");
+            }
+        }
+
+        // Przykładowe wywołanie powiadomienia
+        function exampleNotification() {
+            if (notificationsEnabled && Notification.permission === "granted") {
+                sendBrowserNotification("To jest testowe powiadomienie.");
+            }
+        }
+
+        document.getElementById("regionFilter").addEventListener("change", (event) => {
+            regionFilter = event.target.value;
+            if (regionFilter !== "All" && notificationsEnabled) {
+                sendBrowserNotification(`Wybrano region: ${regionFilter}`);
+            }
+        });
+        exampleNotification();
 
         function showNotification(message) {
             const notification = document.getElementById("notification");
@@ -467,31 +496,43 @@
                 });
             }
         }
+        let refreshInProgress = false;
 
         function startCountdown() {
-            let countdown = 75;
             const countdownSpan = document.getElementById("countdown");
 
-            const timer = setInterval(() => {
-                countdown--;
-                countdownSpan.textContent = countdown;
+            if (countdownInterval) clearInterval(countdownInterval);
 
-                if (countdown <= 0) {
-                    clearInterval(timer);
-                    fetchData();
-                    countdown = 75;
-                    startCountdown();
+            countdownInterval = setInterval(() => {
+                if (document.visibilityState === "visible") {
+                    countdown--;
+                    countdownSpan.textContent = countdown;
+
+                    if (countdown <= 0 && !refreshInProgress) {
+                        clearInterval(countdownInterval);
+                        refreshInProgress = true;
+                        fetchData().then(() => {
+                            refreshInProgress = false;
+                            countdown = 75;
+                            startCountdown();
+                        });
+                    }
                 }
             }, 1000);
         }
+
+
 
         document.getElementById("regionFilter").addEventListener("change", (event) => {
             regionFilter = event.target.value;
             updateTable();
         });
-
-        fetchData();
-        startCountdown();
+        document.addEventListener("visibilitychange", () => {
+            if (document.visibilityState === "visible") {
+                fetchData();
+                startCountdown();
+            }
+        });
 
     </script>
 </body>
