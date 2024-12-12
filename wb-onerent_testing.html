@@ -274,6 +274,52 @@
         }
 
     </style>
+
+    <style>
+        .info-icon {
+            display: inline-block;
+            margin-left: 8px;
+            font-size: 16px;
+            color: #18305B;
+            cursor: pointer;
+            position: relative;
+        }
+
+        /* Styl tooltipa */
+        .info-icon:hover::after {
+            content: attr(title);
+            position: absolute;
+            left: 50%;
+            bottom: 120%;
+            transform: translateX(-50%);
+            background-color: #18305B;
+            color: #FFFFFF;
+            font-size: 0.9em;
+            padding: 8px 12px;
+            border-radius: 4px;
+            white-space: nowrap;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        /* Usunięcie wbudowanego 'title' na hover */
+        .info-icon:hover {
+            pointer-events: none;
+        }
+
+        .info-icon:hover::before {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: 110%;
+            transform: translateX(-50%);
+            width: 8px;
+            height: 8px;
+            background-color: #18305B;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        }
+
+    </style>
 </head>
 
 <body>
@@ -294,6 +340,7 @@
     <div id="notification-checkbox">
         <label>
             <input type="checkbox" id="enable-notifications"> Włącz powiadomienia
+            <span class="info-icon" title="Powiadomienia informują o nowych rekordach w tabeli. Są wysyłane tylko dla nowych danych. Wymogiem otrzymania powiadomień jest wybranie regionu.">ℹ️</span>
         </label>
     </div>
     <div id="notification" class="notification"></div>
@@ -327,6 +374,11 @@
     </footer>
 
     <script>
+        document.querySelectorAll('.info-icon').forEach(icon => {
+            const tooltipText = icon.getAttribute('title');
+            icon.setAttribute('data-tooltip', tooltipText); // Przechowujemy tekst tooltipa
+            icon.removeAttribute('title'); // Usuwamy domyślny "title"
+        });
         let notificationsEnabled = JSON.parse(localStorage.getItem('notificationsEnabled')) || false;
         let processedRecords = new Set();
         // Initialize notification checkbox state
