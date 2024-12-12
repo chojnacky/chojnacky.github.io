@@ -276,7 +276,7 @@
     </style>
 
     <style>
-        /* Pozycjonowanie i styl ikony */
+        /* Styl dla ikony informacji */
         .info-icon {
             display: inline-block;
             margin-left: 8px;
@@ -286,12 +286,13 @@
             position: relative;
         }
 
-        /* Styl tooltipa (ukryty domyślnie) */
+        /* Styl dla tooltipa */
         .tooltip {
             display: none;
+            /* Domyślnie ukryty */
             position: absolute;
+            top: 100%;
             left: 50%;
-            bottom: 130%;
             transform: translateX(-50%);
             background-color: #18305B;
             color: #FFFFFF;
@@ -307,18 +308,13 @@
         .tooltip::before {
             content: "";
             position: absolute;
+            top: -5px;
             left: 50%;
-            bottom: -5px;
             transform: translateX(-50%);
             width: 8px;
             height: 8px;
             background-color: #18305B;
             clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-        }
-
-        /* Wyświetlanie tooltipa po najechaniu */
-        .info-icon:hover+.tooltip {
-            display: block;
         }
 
     </style>
@@ -343,8 +339,10 @@
         <label>
             <input type="checkbox" id="enable-notifications"> Włącz powiadomienia
             <span class="info-icon">ℹ️</span>
-            <div class="tooltip">Powiadomienia informują o nowych rekordach w tabeli. Są wysyłane tylko dla nowych danych.</div>
         </label>
+        <div id="tooltip" class="tooltip">
+            Powiadomienia informują o nowych rekordach w tabeli. Są wysyłane tylko dla nowych danych.
+        </div>
     </div>
     <div id="notification" class="notification"></div>
     <table id="data-table">
@@ -377,16 +375,17 @@
     </footer>
 
     <script>
-        document.querySelectorAll('.info-icon').forEach(icon => {
-            icon.addEventListener('mouseenter', () => {
-                const tooltip = icon.nextElementSibling;
-                tooltip.style.display = 'block'; // Pokazanie tooltipa
-            });
+        const infoIcon = document.querySelector(".info-icon");
+        const tooltip = document.getElementById("tooltip");
 
-            icon.addEventListener('mouseleave', () => {
-                const tooltip = icon.nextElementSibling;
-                tooltip.style.display = 'none'; // Ukrycie tooltipa
-            });
+        // Pokazywanie tooltipa po najechaniu
+        infoIcon.addEventListener("mouseenter", () => {
+            tooltip.style.display = "block";
+        });
+
+        // Ukrywanie tooltipa po opuszczeniu
+        infoIcon.addEventListener("mouseleave", () => {
+            tooltip.style.display = "none";
         });
         let notificationsEnabled = JSON.parse(localStorage.getItem('notificationsEnabled')) || false;
         let processedRecords = new Set();
