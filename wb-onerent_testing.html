@@ -393,14 +393,14 @@
             if (Notification.permission === "granted") {
                 new Notification(title, {
                     body: message,
-                    icon: 'https://via.placeholder.com/100', // Możesz podać URL do swojej ikony
+                    icon: 'https://prod.onerent.zone/favicon.ico', // Możesz podać URL do swojej ikony
                 });
             } else if (Notification.permission !== "denied") {
                 Notification.requestPermission().then(permission => {
                     if (permission === "granted") {
                         new Notification(title, {
                             body: message,
-                            icon: 'https://via.placeholder.com/100',
+                            icon: 'https://prod.onerent.zone/favicon.ico',
                         });
                     }
                 });
