@@ -348,22 +348,22 @@
             }
         });
 
-        function sendBrowserNotification(message) {
-            // Sprawdzenie, czy przeglądarka obsługuje powiadomienia
+        function sendBrowserNotification(date, type, city) {
+            console.log("Wywołano funkcję sendBrowserNotification z danymi:", date, type, city);
+
             if (!("Notification" in window)) {
                 console.error("Powiadomienia nie są obsługiwane w tej przeglądarce.");
                 return;
             }
 
-            // Sprawdzenie, czy powiadomienia są włączone
             if (notificationsEnabled && Notification.permission === "granted") {
                 try {
-                    // Tworzenie nowego powiadomienia
+                    // Tworzenie powiadomienia z datą, typem i miastem
                     new Notification("OneRent Powiadomienie", {
-                        body: message,
+                        body: `Data: ${date}, Typ: ${type}, Miasto: ${city}`,
                         icon: "https://example.com/icon.png", // Opcjonalna ikona
                     });
-                    console.log("Powiadomienie wysłane:", message);
+                    console.log("Powiadomienie wysłane:", `Data: ${date}, Typ: ${type}, Miasto: ${city}`);
                 } catch (error) {
                     console.error("Błąd podczas wysyłania powiadomienia:", error);
                 }
@@ -456,9 +456,8 @@
 
                 tbody.appendChild(tr);
 
-                if (notificationsEnabled && regionFilter !== "Wszystkie") {
-                    const message = `Nowy rekord: ${row.join(", ")}`;
-                    sendBrowserNotification(message);
+                if (notificationsEnabled && regionFilter !== "All") {
+                    sendBrowserNotification(row[0]?.trim(), type, city);
                 }
 
                 // Kafelek (mobile)
