@@ -276,7 +276,6 @@
     </style>
 
     <style>
-        /* Styl dla ikony informacji */
         .info-icon {
             display: inline-block;
             margin-left: 8px;
@@ -286,13 +285,13 @@
             position: relative;
         }
 
-        /* Styl dla tooltipa */
-        .tooltip {
-            display: none;
-            /* Domyślnie ukryty */
+        /* Styl tooltipa */
+        .info-icon:hover::after {
+            content: attr(data-tooltip);
+            /* Pobiera treść z `data-tooltip` */
             position: absolute;
-            top: 100%;
             left: 50%;
+            bottom: 120%;
             transform: translateX(-50%);
             background-color: #18305B;
             color: #FFFFFF;
@@ -304,12 +303,12 @@
             z-index: 1000;
         }
 
-        /* Trójkąt pod tooltipem */
-        .tooltip::before {
+        /* Dodanie strzałki poniżej tooltipa */
+        .info-icon:hover::before {
             content: "";
             position: absolute;
-            top: -5px;
             left: 50%;
+            bottom: 110%;
             transform: translateX(-50%);
             width: 8px;
             height: 8px;
@@ -338,11 +337,8 @@
     <div id="notification-checkbox">
         <label>
             <input type="checkbox" id="enable-notifications"> Włącz powiadomienia
-            <span class="info-icon">ℹ️</span>
+            <span class="info-icon" data-tooltip="Powiadomienia informują o nowych rekordach w tabeli. Są wysyłane tylko dla nowych danych.">ℹ️</span>
         </label>
-        <div id="tooltip" class="tooltip">
-            Powiadomienia informują o nowych rekordach w tabeli. Są wysyłane tylko dla nowych danych.
-        </div>
     </div>
     <div id="notification" class="notification"></div>
     <table id="data-table">
@@ -375,17 +371,10 @@
     </footer>
 
     <script>
-        const infoIcon = document.querySelector(".info-icon");
-        const tooltip = document.getElementById("tooltip");
-
-        // Pokazywanie tooltipa po najechaniu
-        infoIcon.addEventListener("mouseenter", () => {
-            tooltip.style.display = "block";
-        });
-
-        // Ukrywanie tooltipa po opuszczeniu
-        infoIcon.addEventListener("mouseleave", () => {
-            tooltip.style.display = "none";
+        document.querySelectorAll('.info-icon').forEach(icon => {
+            const tooltipText = icon.getAttribute('title');
+            icon.setAttribute('data-tooltip', tooltipText); // Przechowujemy tekst tooltipa
+            icon.removeAttribute('title'); // Usuwamy domyślny "title"
         });
         let notificationsEnabled = JSON.parse(localStorage.getItem('notificationsEnabled')) || false;
         let processedRecords = new Set();
