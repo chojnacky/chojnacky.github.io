@@ -335,7 +335,7 @@
         <!-- Dynamic cards will be injected here -->
     </div>
     <div id="refresh-timer">
-        Odświeżenie za: <span id="countdown">15</span> sekund
+        Odświeżenie za: <span id="countdown">75</span> sekund
     </div>
     <footer>
         &copy; 2024 OneRent - Wszystkie prawa zastrzeżone.
@@ -469,7 +469,7 @@
         }
 
         function startCountdown() {
-            let countdown = 15;
+            let countdown = 75;
             const countdownSpan = document.getElementById("countdown");
 
             const timer = setInterval(() => {
@@ -479,7 +479,7 @@
                 if (countdown <= 0) {
                     clearInterval(timer);
                     fetchData();
-                    countdown = 15;
+                    countdown = 75;
                     startCountdown();
                 }
             }, 1000);
