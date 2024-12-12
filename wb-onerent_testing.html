@@ -347,30 +347,6 @@
             }
         });
 
-        function sendBrowserNotification(date, type, city) {
-            console.log("Wywołano funkcję sendBrowserNotification z danymi:", date, type, city);
-
-            if (!("Notification" in window)) {
-                console.error("Powiadomienia nie są obsługiwane w tej przeglądarce.");
-                return;
-            }
-
-            if (notificationsEnabled && Notification.permission === "granted") {
-                try {
-                    // Tworzenie powiadomienia z datą, typem i miastem
-                    new Notification(date, {
-                        body: `Operacja: ${operation}, Miasto: ${city}`,
-                        icon: "https://example.com/icon.png", // Opcjonalna ikona
-                    });
-                    console.log("Powiadomienie wysłane:", `Data: ${date}, Typ: ${type}, Miasto: ${city}`);
-                } catch (error) {
-                    console.error("Błąd podczas wysyłania powiadomienia:", error);
-                }
-            } else if (Notification.permission !== "granted") {
-                console.warn("Brak uprawnień do wysyłania powiadomień.");
-            }
-        }
-
         function showNotification(message) {
             const notification = document.getElementById("notification");
             notification.textContent = message;
@@ -488,6 +464,17 @@
                 cardContainer.appendChild(card);
             });
         }
+
+        function sendBrowserNotification(message) {
+            if (notificationsEnabled && Notification.permission === "granted") {
+                new Notification(date, {
+                    body: `Operacja: ${operation}, Miasto: ${city}`,
+                    icon: "https://example.com/icon.png", // Opcjonalna ikona
+                });
+            }
+        }
+
+
 
         function startCountdown() {
             let countdown = 75;
