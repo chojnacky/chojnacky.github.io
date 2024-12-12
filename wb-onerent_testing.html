@@ -492,13 +492,6 @@
 
                 tbody.appendChild(tr);
 
-                const currentIds = new Set(filteredData.map(row => row[1]?.trim())); // Aktualny zestaw ID w tabeli
-                processedRecords.forEach(storedId => {
-                    if (!currentIds.has(storedId)) {
-                        processedRecords.delete(storedId); // Usuń ID, które już nie istnieje w bieżących danych
-                    }
-                });
-
                 // Jeśli rekord nie został jeszcze przetworzony, wyślij powiadomienie
                 if (!processedRecords.has(id)) {
                     processedRecords.add(id); // Dodaj ID do przetworzonych
