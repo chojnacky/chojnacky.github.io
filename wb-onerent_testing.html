@@ -458,7 +458,7 @@
                 tbody.appendChild(tr);
 
                 if (notificationsEnabled && regionFilter !== "All") {
-                    sendBrowserNotification(row[0]?.trim(), type, city);
+                    sendBrowserNotification(row[0]?.trim(), operation, city);
                 }
 
                 // Kafelek (mobile)
