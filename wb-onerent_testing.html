@@ -210,76 +210,6 @@
             margin-bottom: 3px;
         }
 
-        /* Animacja dodawania nowego wiersza */
-        /* Animacja wsuwania wiersza z lewej */
-        @keyframes slideInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-100%);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        .fade-in {
-            animation: slideInLeft 0.5s ease-out;
-        }
-
-        /* Animacja wysuwania wiersza w prawo */
-        @keyframes slideOutRight {
-            from {
-                opacity: 1;
-                transform: translateX(0);
-            }
-
-            to {
-                opacity: 0;
-                transform: translateX(100%);
-            }
-        }
-
-        .fade-out {
-            animation: slideOutRight 0.5s ease-in;
-            pointer-events: none;
-        }
-
-        /* Animacja wsuwania kafelka z lewej */
-        @keyframes slideInLeftCard {
-            from {
-                opacity: 0;
-                transform: translateX(-100%);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        .card.fade-in {
-            animation: slideInLeftCard 0.6s ease-out;
-        }
-
-        /* Animacja wysuwania kafelka w prawo */
-        @keyframes slideOutRightCard {
-            from {
-                opacity: 1;
-                transform: translateX(0);
-            }
-
-            to {
-                opacity: 0;
-                transform: translateX(100%);
-            }
-        }
-
-        .card.fade-out {
-            animation: slideOutRightCard 0.6s ease-in;
-        }
-
     </style>
     <style>
         /* Styl powiadomień */
@@ -329,6 +259,21 @@
         }
 
     </style>
+    <style>
+        /* Existing styles remain unchanged */
+        #notification-checkbox {
+            display: block;
+            margin: 10px auto;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            #notification-checkbox {
+                display: none;
+            }
+        }
+
+    </style>
 </head>
 
 <body>
@@ -345,8 +290,10 @@
             <option value="Zachód">Zachód</option>
             <option value="Południe">Południe</option>
         </select>
-        <label style="margin-left: 20px;">
-            <input type="checkbox" id="notificationsToggle"> Powiadomienia
+    </div>
+    <div id="notification-checkbox">
+        <label>
+            <input type="checkbox" id="enable-notifications"> Włącz powiadomienia
         </label>
     </div>
     <div id="notification" class="notification"></div>
@@ -380,32 +327,26 @@
     </footer>
 
     <script>
-        let lastDisplayedIds = new Set(); // Przechowuje ID pozycji już wyświetlonych
-        let notificationsEnabled = false; // Flaga powiadomień
+        let notificationsEnabled = JSON.parse(localStorage.getItem('notificationsEnabled')) || false;
 
-        // Obsługa checkboxa dla powiadomień
-        document.getElementById("notificationsToggle").addEventListener("change", (event) => {
+        // Initialize notification checkbox state
+        const notificationCheckbox = document.getElementById("enable-notifications");
+        notificationCheckbox.checked = notificationsEnabled;
+
+        notificationCheckbox.addEventListener("change", (event) => {
             notificationsEnabled = event.target.checked;
-        });
+            localStorage.setItem('notificationsEnabled', JSON.stringify(notificationsEnabled));
 
-        // Funkcja powiadomień desktopowych
-        function showDesktopNotification(title, message) {
-            if (Notification.permission === "granted") {
-                new Notification(title, {
-                    body: message,
-                    icon: 'https://prod.onerent.zone/favicon.ico', // Możesz podać URL do swojej ikony
-                });
-            } else if (Notification.permission !== "denied") {
+            if (notificationsEnabled && Notification.permission !== "granted") {
                 Notification.requestPermission().then(permission => {
-                    if (permission === "granted") {
-                        new Notification(title, {
-                            body: message,
-                            icon: 'https://prod.onerent.zone/favicon.ico',
-                        });
+                    if (permission !== "granted") {
+                        notificationsEnabled = false;
+                        notificationCheckbox.checked = false;
+                        localStorage.setItem('notificationsEnabled', JSON.stringify(notificationsEnabled));
                     }
                 });
             }
-        }
+        });
 
         function showNotification(message) {
             const notification = document.getElementById("notification");
@@ -446,131 +387,85 @@
         function updateTable() {
             const tbody = document.getElementById('data-table').querySelector('tbody');
             const cardContainer = document.querySelector('.card-container');
-            const currentRows = Array.from(tbody.querySelectorAll('tr'));
+            tbody.innerHTML = '';
+            cardContainer.innerHTML = '';
+
             const now = new Date();
             const fourHoursFromNow = new Date(now.getTime() + 4 * 60 * 60 * 1000);
 
-            // Oblicz przefiltrowane dane
             const filteredData = allData.filter(row => {
                 const region = row[8]?.trim();
                 return regionFilter === "All" || region === regionFilter;
             });
 
-            // Usuwanie wierszy z efektem
-            currentRows.forEach(tr => {
-                if (!filteredData.some(row => tr.textContent.includes(row[1]?.trim()))) {
-                    tr.classList.add('fade-out');
-                    setTimeout(() => tr.remove(), 500); // Usuwanie po animacji
-                }
-            });
-
-            // Dodawanie nowych wierszy z efektem
             filteredData.forEach(row => {
+                const dateTime = new Date(row[0]?.trim());
                 const id = row[1]?.trim();
-                if (!currentRows.some(tr => tr.textContent.includes(id))) {
-                    const dateTime = new Date(row[0]?.trim());
-                    const isExpired = dateTime < now;
-                    const isHighlight = dateTime <= fourHoursFromNow && dateTime >= now;
+                const isExpired = dateTime < now;
+                const isHighlight = dateTime <= fourHoursFromNow && dateTime >= now;
 
-                    // Tworzenie nowego wiersza tabeli
-                    const tr = document.createElement('tr');
-                    if (isExpired) tr.classList.add('expired');
-                    if (isHighlight) tr.classList.add('highlight');
-                    tr.classList.add('fade-in');
+                // Tabela (PC)
+                const tr = document.createElement('tr');
+                if (isExpired) tr.classList.add('expired');
+                if (isHighlight) tr.classList.add('highlight');
+                row.forEach(cell => {
+                    const td = document.createElement('td');
+                    td.textContent = cell?.trim();
+                    tr.appendChild(td);
+                });
 
-                    row.forEach(cell => {
-                        const td = document.createElement('td');
-                        td.textContent = cell?.trim();
-                        tr.appendChild(td);
+                // Kopiowanie do schowka po kliknięciu
+                tr.addEventListener('click', () => {
+                    const link = `https://prod.onerent.zone/os/rent/reservations/preview/${id}`;
+                    navigator.clipboard.writeText(link).then(() => {
+                        showNotification(`Skopiowano do schowka: ${link}`);
+                    }).catch(err => {
+                        console.error('Nie udało się skopiować do schowka', err);
+                        showNotification("Nie udało się skopiować linku.");
                     });
+                });
 
-                    tr.addEventListener('click', () => {
-                        const link = `https://prod.onerent.zone/os/rent/reservations/preview/${id}`;
-                        navigator.clipboard.writeText(link).then(() => {
-                            showNotification(`Skopiowano do schowka: ${link}`);
-                        }).catch(err => {
-                            console.error('Nie udało się skopiować do schowka', err);
-                            showNotification("Nie udało się skopiować linku.");
-                        });
-                    });
+                tbody.appendChild(tr);
 
-                    tbody.appendChild(tr);
-
-                    // Powiadomienie desktopowe dla nowych pozycji
-                    const selectedRegion = document.getElementById("regionFilter").value;
-                    if (
-                        notificationsEnabled &&
-                        selectedRegion !== "All" &&
-                        row[8]?.trim() === selectedRegion &&
-                        !lastDisplayedIds.has(id)
-                    ) {
-                        showDesktopNotification(
-                            "Nowa pozycja w regionie",
-                            `ID: ${id}\nRegion: ${row[8]?.trim()}\nMiasto: ${row[7]?.trim()}`
-                        );
-                        lastDisplayedIds.add(id);
-                    }
+                if (notificationsEnabled && regionFilter !== "Wszystkie") {
+                    const message = `Nowy rekord: ${row.join(", ")}`;
+                    sendBrowserNotification(message);
                 }
+
+                // Kafelek (mobile)
+                const card = document.createElement('div');
+                card.classList.add('card');
+                if (isExpired) card.classList.add('expired');
+                if (isHighlight) card.classList.add('highlight');
+
+                const cardHeader = document.createElement('div');
+                cardHeader.classList.add('card-header');
+                cardHeader.innerHTML = `<span>${row[0]?.trim()}</span><span>${row[7]?.trim()}</span>`;
+                card.appendChild(cardHeader);
+
+                const cardDetails = document.createElement('div');
+                cardDetails.classList.add('card-details');
+                row.forEach((cell, index) => {
+                    const detail = document.createElement('div');
+                    detail.innerHTML = `<strong>${document.querySelector('th:nth-child(' + (index + 1) + ')').textContent}:</strong> ${cell?.trim()}`;
+                    cardDetails.appendChild(detail);
+                });
+
+                card.appendChild(cardDetails);
+                card.addEventListener('click', () => {
+                    card.classList.toggle('active');
+                });
+
+                cardContainer.appendChild(card);
             });
+        }
 
-            // Aktualizuj kafelki (mobile)
-            const currentCards = Array.from(cardContainer.querySelectorAll('.card'));
-            currentCards.forEach(card => {
-                const id = card.querySelector('.card-header span')?.textContent?.trim();
-                if (!filteredData.some(row => row[1]?.trim() === id)) {
-                    card.classList.add('fade-out');
-                    setTimeout(() => card.remove(), 600);
-                }
-            });
-
-            filteredData.forEach(row => {
-                const id = row[1]?.trim();
-                if (!currentCards.some(card => card.querySelector('.card-header span')?.textContent?.trim() === id)) {
-                    const dateTime = new Date(row[0]?.trim());
-                    const isExpired = dateTime < now;
-                    const isHighlight = dateTime <= fourHoursFromNow && dateTime >= now;
-
-                    const card = document.createElement('div');
-                    card.classList.add('card', 'fade-in');
-                    if (isExpired) card.classList.add('expired');
-                    if (isHighlight) card.classList.add('highlight');
-
-                    const cardHeader = document.createElement('div');
-                    cardHeader.classList.add('card-header');
-                    cardHeader.innerHTML = `<span>${row[0]?.trim()}</span><span>${row[7]?.trim()}</span>`;
-                    card.appendChild(cardHeader);
-
-                    const cardDetails = document.createElement('div');
-                    cardDetails.classList.add('card-details');
-                    row.forEach((cell, index) => {
-                        const detail = document.createElement('div');
-                        detail.innerHTML = `<strong>${document.querySelector('th:nth-child(' + (index + 1) + ')').textContent}:</strong> ${cell?.trim()}`;
-                        cardDetails.appendChild(detail);
-                    });
-
-                    card.appendChild(cardDetails);
-                    card.addEventListener('click', () => {
-                        card.classList.toggle('active');
-                    });
-
-                    cardContainer.appendChild(card);
-
-                    // Powiadomienie desktopowe dla nowych pozycji
-                    const selectedRegion = document.getElementById("regionFilter").value;
-                    if (
-                        notificationsEnabled &&
-                        selectedRegion !== "All" &&
-                        row[8]?.trim() === selectedRegion &&
-                        !lastDisplayedIds.has(id)
-                    ) {
-                        showDesktopNotification(
-                            "Nowa pozycja w regionie",
-                            `ID: ${id}\nRegion: ${row[8]?.trim()}\nMiasto: ${row[7]?.trim()}`
-                        );
-                        lastDisplayedIds.add(id);
-                    }
-                }
-            });
+        function sendBrowserNotification(message) {
+            if (notificationsEnabled && Notification.permission === "granted") {
+                new Notification("OneRent Powiadomienie", {
+                    body: message
+                });
+            }
         }
 
         function startCountdown() {
