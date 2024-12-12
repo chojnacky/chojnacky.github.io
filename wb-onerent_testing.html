@@ -408,6 +408,11 @@
             updateTable();
         }
 
+        function testNotification() {
+            console.log("Test powiadomień");
+            sendBrowserNotification("To jest testowe powiadomienie.");
+        }
+
         function updateTable() {
             const tbody = document.getElementById('data-table').querySelector('tbody');
             const cardContainer = document.querySelector('.card-container');
