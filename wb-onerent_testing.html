@@ -467,43 +467,31 @@
                 });
             }
         }
-        let refreshInProgress = false;
 
         function startCountdown() {
+            let countdown = 75;
             const countdownSpan = document.getElementById("countdown");
 
-            if (countdownInterval) clearInterval(countdownInterval);
+            const timer = setInterval(() => {
+                countdown--;
+                countdownSpan.textContent = countdown;
 
-            countdownInterval = setInterval(() => {
-                if (document.visibilityState === "visible") {
-                    countdown--;
-                    countdownSpan.textContent = countdown;
-
-                    if (countdown <= 0 && !refreshInProgress) {
-                        clearInterval(countdownInterval);
-                        refreshInProgress = true;
-                        fetchData().then(() => {
-                            refreshInProgress = false;
-                            countdown = 75;
-                            startCountdown();
-                        });
-                    }
+                if (countdown <= 0) {
+                    clearInterval(timer);
+                    fetchData();
+                    countdown = 75;
+                    startCountdown();
                 }
             }, 1000);
         }
-
-
 
         document.getElementById("regionFilter").addEventListener("change", (event) => {
             regionFilter = event.target.value;
             updateTable();
         });
-        document.addEventListener("visibilitychange", () => {
-            if (document.visibilityState === "visible") {
-                fetchData();
-                startCountdown();
-            }
-        });
+
+        fetchData();
+        startCountdown();
 
     </script>
 </body>
