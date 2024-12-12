@@ -430,6 +430,8 @@
             filteredData.forEach(row => {
                 const dateTime = new Date(row[0]?.trim());
                 const id = row[1]?.trim();
+                const operation = row[3]?.trim(); // Operacja
+                const city = row[7]?.trim(); // Miasto
                 const isExpired = dateTime < now;
                 const isHighlight = dateTime <= fourHoursFromNow && dateTime >= now;
 
