@@ -465,7 +465,7 @@
             });
         }
 
-        function sendBrowserNotification(message) {
+        function sendBrowserNotification(date, operation, city) {
             if (notificationsEnabled && Notification.permission === "granted") {
                 new Notification(date, {
                     body: `Operacja: ${operation}, Miasto: ${city}`,
