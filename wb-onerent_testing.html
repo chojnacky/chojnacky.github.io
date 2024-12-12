@@ -378,9 +378,15 @@
 
     <script>
         document.querySelectorAll('.info-icon').forEach(icon => {
-            const tooltipText = icon.getAttribute('title');
-            icon.setAttribute('data-tooltip', tooltipText); // Przechowujemy tekst tooltipa
-            icon.removeAttribute('title'); // Usuwamy domyślny "title"
+            icon.addEventListener('mouseenter', () => {
+                const tooltip = icon.nextElementSibling;
+                tooltip.style.display = 'block'; // Pokazanie tooltipa
+            });
+
+            icon.addEventListener('mouseleave', () => {
+                const tooltip = icon.nextElementSibling;
+                tooltip.style.display = 'none'; // Ukrycie tooltipa
+            });
         });
         let notificationsEnabled = JSON.parse(localStorage.getItem('notificationsEnabled')) || false;
         let processedRecords = new Set();
