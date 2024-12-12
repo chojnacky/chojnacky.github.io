@@ -211,38 +211,72 @@
         }
 
         /* Animacja dodawania nowego wiersza */
-        @keyframes fadeIn {
+        /* Animacja dodawania nowego wiersza */
+        @keyframes slideIn {
             from {
                 opacity: 0;
-                transform: translateY(-10px);
+                transform: translateY(-20px) scale(0.95);
             }
 
             to {
                 opacity: 1;
-                transform: translateY(0);
+                transform: translateY(0) scale(1);
             }
         }
 
         .fade-in {
-            animation: fadeIn 0.5s ease-in-out;
+            animation: slideIn 0.5s ease-out;
         }
 
         /* Animacja usuwania wiersza */
-        @keyframes fadeOut {
+        @keyframes slideOut {
             from {
                 opacity: 1;
-                transform: translateY(0);
+                transform: translateY(0) scale(1);
             }
 
             to {
                 opacity: 0;
-                transform: translateY(-10px);
+                transform: translateY(20px) scale(0.95);
             }
         }
 
         .fade-out {
-            animation: fadeOut 0.5s ease-in-out;
+            animation: slideOut 0.4s ease-in;
             pointer-events: none;
+        }
+
+        /* Animacja dla kafelków */
+        @keyframes fadeInCard {
+            from {
+                opacity: 0;
+                transform: translateY(20px) rotateX(-10deg);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) rotateX(0);
+            }
+        }
+
+        .card.fade-in {
+            animation: fadeInCard 0.6s ease-out;
+        }
+
+        @keyframes fadeOutCard {
+            from {
+                opacity: 1;
+                transform: translateY(0) rotateX(0);
+            }
+
+            to {
+                opacity: 0;
+                transform: translateY(-20px) rotateX(-10deg);
+            }
+        }
+
+        .card.fade-out {
+            animation: fadeOutCard 0.6s ease-in;
         }
 
     </style>
@@ -391,15 +425,15 @@
                 return regionFilter === "All" || region === regionFilter;
             });
 
-            // Oznacz wiersze, które mają zostać usunięte
+            // Usuwanie wierszy z efektem
             currentRows.forEach(tr => {
                 if (!filteredData.some(row => tr.textContent.includes(row[1]?.trim()))) {
                     tr.classList.add('fade-out');
-                    setTimeout(() => tr.remove(), 500); // Usuwanie po animacji
+                    setTimeout(() => tr.remove(), 400); // Usuwanie po animacji
                 }
             });
 
-            // Dodaj nowe wiersze
+            // Dodawanie nowych wierszy z efektem
             filteredData.forEach(row => {
                 const id = row[1]?.trim();
                 if (!currentRows.some(tr => tr.textContent.includes(id))) {
@@ -412,13 +446,13 @@
                     if (isExpired) tr.classList.add('expired');
                     if (isHighlight) tr.classList.add('highlight');
                     tr.classList.add('fade-in');
+
                     row.forEach(cell => {
                         const td = document.createElement('td');
                         td.textContent = cell?.trim();
                         tr.appendChild(td);
                     });
 
-                    // Dodaj kliknięcie do kopiowania linku
                     tr.addEventListener('click', () => {
                         const link = `https://prod.onerent.zone/os/rent/reservations/preview/${id}`;
                         navigator.clipboard.writeText(link).then(() => {
@@ -434,37 +468,47 @@
             });
 
             // Aktualizuj kafelki (mobile)
-            cardContainer.innerHTML = '';
+            const currentCards = Array.from(cardContainer.querySelectorAll('.card'));
+            currentCards.forEach(card => {
+                const id = card.querySelector('.card-header span')?.textContent?.trim();
+                if (!filteredData.some(row => row[1]?.trim() === id)) {
+                    card.classList.add('fade-out');
+                    setTimeout(() => card.remove(), 600);
+                }
+            });
+
             filteredData.forEach(row => {
-                const dateTime = new Date(row[0]?.trim());
                 const id = row[1]?.trim();
-                const isExpired = dateTime < now;
-                const isHighlight = dateTime <= fourHoursFromNow && dateTime >= now;
+                if (!currentCards.some(card => card.querySelector('.card-header span')?.textContent?.trim() === id)) {
+                    const dateTime = new Date(row[0]?.trim());
+                    const isExpired = dateTime < now;
+                    const isHighlight = dateTime <= fourHoursFromNow && dateTime >= now;
 
-                const card = document.createElement('div');
-                card.classList.add('card', 'fade-in');
-                if (isExpired) card.classList.add('expired');
-                if (isHighlight) card.classList.add('highlight');
+                    const card = document.createElement('div');
+                    card.classList.add('card', 'fade-in');
+                    if (isExpired) card.classList.add('expired');
+                    if (isHighlight) card.classList.add('highlight');
 
-                const cardHeader = document.createElement('div');
-                cardHeader.classList.add('card-header');
-                cardHeader.innerHTML = `<span>${row[0]?.trim()}</span><span>${row[7]?.trim()}</span>`;
-                card.appendChild(cardHeader);
+                    const cardHeader = document.createElement('div');
+                    cardHeader.classList.add('card-header');
+                    cardHeader.innerHTML = `<span>${row[0]?.trim()}</span><span>${row[7]?.trim()}</span>`;
+                    card.appendChild(cardHeader);
 
-                const cardDetails = document.createElement('div');
-                cardDetails.classList.add('card-details');
-                row.forEach((cell, index) => {
-                    const detail = document.createElement('div');
-                    detail.innerHTML = `<strong>${document.querySelector('th:nth-child(' + (index + 1) + ')').textContent}:</strong> ${cell?.trim()}`;
-                    cardDetails.appendChild(detail);
-                });
+                    const cardDetails = document.createElement('div');
+                    cardDetails.classList.add('card-details');
+                    row.forEach((cell, index) => {
+                        const detail = document.createElement('div');
+                        detail.innerHTML = `<strong>${document.querySelector('th:nth-child(' + (index + 1) + ')').textContent}:</strong> ${cell?.trim()}`;
+                        cardDetails.appendChild(detail);
+                    });
 
-                card.appendChild(cardDetails);
-                card.addEventListener('click', () => {
-                    card.classList.toggle('active');
-                });
+                    card.appendChild(cardDetails);
+                    card.addEventListener('click', () => {
+                        card.classList.toggle('active');
+                    });
 
-                cardContainer.appendChild(card);
+                    cardContainer.appendChild(card);
+                }
             });
         }
 
