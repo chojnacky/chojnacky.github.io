@@ -288,7 +288,7 @@
         /* Styl tooltipa */
         .info-icon:hover::after {
             content: attr(data-tooltip);
-            /* Pobiera treść z `data-tooltip` */
+            /* Pobieranie treści z atrybutu `data-tooltip` */
             position: absolute;
             left: 50%;
             bottom: 120%;
@@ -371,10 +371,19 @@
     </footer>
 
     <script>
-        document.querySelectorAll('.info-icon').forEach(icon => {
-            const tooltipText = icon.getAttribute('title');
-            icon.setAttribute('data-tooltip', tooltipText); // Przechowujemy tekst tooltipa
-            icon.removeAttribute('title'); // Usuwamy domyślny "title"
+        document.addEventListener("DOMContentLoaded", () => {
+            const infoIcon = document.querySelector(".info-icon");
+
+            // Sprawdzamy, czy istnieje ikona i czy ma ustawiony atrybut `data-tooltip`
+            if (infoIcon) {
+                const tooltipText = infoIcon.getAttribute("data-tooltip");
+                console.log("Treść tooltipa:", tooltipText); // Powinno wyświetlić treść tooltipa w konsoli
+
+                // Jeśli atrybut `data-tooltip` jest pusty lub null, ustawiamy domyślną wartość
+                if (!tooltipText || tooltipText.trim() === "") {
+                    infoIcon.setAttribute("data-tooltip", "Domyślna treść tooltipa.");
+                }
+            }
         });
         let notificationsEnabled = JSON.parse(localStorage.getItem('notificationsEnabled')) || false;
         let processedRecords = new Set();
