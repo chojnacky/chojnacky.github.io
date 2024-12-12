@@ -467,9 +467,8 @@
 
         function sendBrowserNotification(date, operation, city) {
             if (notificationsEnabled && Notification.permission === "granted") {
-                new Notification(date, {
-                    body: `Operacja: ${operation}, Miasto: ${city}`,
-                    icon: "https://example.com/icon.png", // Opcjonalna ikona
+                new Notification(operation, {
+                    body: `${date} w ${city}`,
                 });
             }
         }
