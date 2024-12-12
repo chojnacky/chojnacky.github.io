@@ -358,7 +358,7 @@
             if (notificationsEnabled && Notification.permission === "granted") {
                 try {
                     // Tworzenie powiadomienia z datą, typem i miastem
-                    new Notification(date, {
+                    new Notification(date, operation, city, {
                         body: `Operacja: ${operation}, Miasto: ${city}`,
                         icon: "https://example.com/icon.png", // Opcjonalna ikona
                     });
