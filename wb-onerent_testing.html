@@ -276,6 +276,7 @@
     </style>
 
     <style>
+        /* Pozycjonowanie i styl ikony */
         .info-icon {
             display: inline-block;
             margin-left: 8px;
@@ -285,12 +286,12 @@
             position: relative;
         }
 
-        /* Styl tooltipa */
-        .info-icon:hover::after {
-            content: attr(title);
+        /* Styl tooltipa (ukryty domyślnie) */
+        .tooltip {
+            display: none;
             position: absolute;
             left: 50%;
-            bottom: 120%;
+            bottom: 130%;
             transform: translateX(-50%);
             background-color: #18305B;
             color: #FFFFFF;
@@ -302,21 +303,22 @@
             z-index: 1000;
         }
 
-        /* Usunięcie wbudowanego 'title' na hover */
-        .info-icon:hover {
-            pointer-events: none;
-        }
-
-        .info-icon:hover::before {
+        /* Trójkąt pod tooltipem */
+        .tooltip::before {
             content: "";
             position: absolute;
             left: 50%;
-            bottom: 110%;
+            bottom: -5px;
             transform: translateX(-50%);
             width: 8px;
             height: 8px;
             background-color: #18305B;
             clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        }
+
+        /* Wyświetlanie tooltipa po najechaniu */
+        .info-icon:hover+.tooltip {
+            display: block;
         }
 
     </style>
@@ -340,7 +342,8 @@
     <div id="notification-checkbox">
         <label>
             <input type="checkbox" id="enable-notifications"> Włącz powiadomienia
-            <span class="info-icon" title="Powiadomienia informują o nowych rekordach w tabeli. Są wysyłane tylko dla nowych danych. Wymogiem otrzymania powiadomień jest wybranie regionu.">ℹ️</span>
+            <span class="info-icon">ℹ️</span>
+            <div class="tooltip">Powiadomienia informują o nowych rekordach w tabeli. Są wysyłane tylko dla nowych danych.</div>
         </label>
     </div>
     <div id="notification" class="notification"></div>
