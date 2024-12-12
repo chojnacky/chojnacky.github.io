@@ -345,6 +345,9 @@
             <option value="Zachód">Zachód</option>
             <option value="Południe">Południe</option>
         </select>
+        <label style="margin-left: 20px;">
+            <input type="checkbox" id="notificationsToggle"> Powiadomienia
+        </label>
     </div>
     <div id="notification" class="notification"></div>
     <table id="data-table">
@@ -377,6 +380,33 @@
     </footer>
 
     <script>
+        let lastDisplayedIds = new Set(); // Przechowuje ID pozycji już wyświetlonych
+        let notificationsEnabled = false; // Flaga powiadomień
+
+        // Obsługa checkboxa dla powiadomień
+        document.getElementById("notificationsToggle").addEventListener("change", (event) => {
+            notificationsEnabled = event.target.checked;
+        });
+
+        // Funkcja powiadomień desktopowych
+        function showDesktopNotification(title, message) {
+            if (Notification.permission === "granted") {
+                new Notification(title, {
+                    body: message,
+                    icon: 'https://via.placeholder.com/100', // Możesz podać URL do swojej ikony
+                });
+            } else if (Notification.permission !== "denied") {
+                Notification.requestPermission().then(permission => {
+                    if (permission === "granted") {
+                        new Notification(title, {
+                            body: message,
+                            icon: 'https://via.placeholder.com/100',
+                        });
+                    }
+                });
+            }
+        }
+
         function showNotification(message) {
             const notification = document.getElementById("notification");
             notification.textContent = message;
@@ -465,6 +495,21 @@
                     });
 
                     tbody.appendChild(tr);
+
+                    // Powiadomienie desktopowe dla nowych pozycji
+                    const selectedRegion = document.getElementById("regionFilter").value;
+                    if (
+                        notificationsEnabled &&
+                        selectedRegion !== "All" &&
+                        row[8]?.trim() === selectedRegion &&
+                        !lastDisplayedIds.has(id)
+                    ) {
+                        showDesktopNotification(
+                            "Nowa pozycja w regionie",
+                            `ID: ${id}\nRegion: ${row[8]?.trim()}\nMiasto: ${row[7]?.trim()}`
+                        );
+                        lastDisplayedIds.add(id);
+                    }
                 }
             });
 
@@ -509,6 +554,21 @@
                     });
 
                     cardContainer.appendChild(card);
+
+                    // Powiadomienie desktopowe dla nowych pozycji
+                    const selectedRegion = document.getElementById("regionFilter").value;
+                    if (
+                        notificationsEnabled &&
+                        selectedRegion !== "All" &&
+                        row[8]?.trim() === selectedRegion &&
+                        !lastDisplayedIds.has(id)
+                    ) {
+                        showDesktopNotification(
+                            "Nowa pozycja w regionie",
+                            `ID: ${id}\nRegion: ${row[8]?.trim()}\nMiasto: ${row[7]?.trim()}`
+                        );
+                        lastDisplayedIds.add(id);
+                    }
                 }
             });
         }
