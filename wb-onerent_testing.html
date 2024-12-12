@@ -328,7 +328,7 @@
 
     <script>
         let notificationsEnabled = JSON.parse(localStorage.getItem('notificationsEnabled')) || false;
-
+        let processedRecords = new Set();
         // Initialize notification checkbox state
         const notificationCheckbox = document.getElementById("enable-notifications");
         notificationCheckbox.checked = notificationsEnabled;
@@ -404,7 +404,7 @@
 
             filteredData.forEach(row => {
                 const dateTime = new Date(row[0]?.trim());
-                const id = row[1]?.trim();
+                const id = row[1]?.trim(); // Unikalny identyfikator rekordu
                 const operation = row[3]?.trim(); // Operacja
                 const city = row[7]?.trim(); // Miasto
                 const isExpired = dateTime < now;
@@ -433,8 +433,12 @@
 
                 tbody.appendChild(tr);
 
-                if (notificationsEnabled && regionFilter !== "All") {
-                    sendBrowserNotification(row[0]?.trim(), operation, city);
+                // Powiadomienie dla nowych rekordów
+                if (!processedRecords.has(id)) {
+                    processedRecords.add(id); // Dodajemy rekord do przetworzonych
+                    if (notificationsEnabled && regionFilter !== "All") {
+                        sendBrowserNotification(row[0]?.trim(), operation, city);
+                    }
                 }
 
                 // Kafelek (mobile)
