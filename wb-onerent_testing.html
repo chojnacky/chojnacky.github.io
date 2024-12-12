@@ -348,6 +348,30 @@
             }
         });
 
+        function sendBrowserNotification(message) {
+            // Sprawdzenie, czy przeglądarka obsługuje powiadomienia
+            if (!("Notification" in window)) {
+                console.error("Powiadomienia nie są obsługiwane w tej przeglądarce.");
+                return;
+            }
+
+            // Sprawdzenie, czy powiadomienia są włączone
+            if (notificationsEnabled && Notification.permission === "granted") {
+                try {
+                    // Tworzenie nowego powiadomienia
+                    new Notification("OneRent Powiadomienie", {
+                        body: message,
+                        icon: "https://example.com/icon.png", // Opcjonalna ikona
+                    });
+                    console.log("Powiadomienie wysłane:", message);
+                } catch (error) {
+                    console.error("Błąd podczas wysyłania powiadomienia:", error);
+                }
+            } else if (Notification.permission !== "granted") {
+                console.warn("Brak uprawnień do wysyłania powiadomień.");
+            }
+        }
+
         function showNotification(message) {
             const notification = document.getElementById("notification");
             notification.textContent = message;
