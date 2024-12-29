@@ -1,23 +1,22 @@
 
 2024-12-29 15:00;24780;Assistance;Odbierz pojazd;;PY26852;Wrocław;Zachód;
 2024-12-29 20:00;25095;Indywidualny;Odbierz pojazd;;WW643AM;Gdańsk;Północ;
+2024-12-30 08:00;25011;Assistance;Wydaj pojazd;;PY1365A;Łódź;Wschód;uw1000 stc227 2/14 pełny bak
 2024-12-30 08:00;25026;Assistance;Wydaj pojazd;;PY5840C;Olsztyn;Północ;gwarancja 3/10
 2024-12-30 08:00;24985;Assistance;Wydaj pojazd;;PZ5V848;Elbląg;Północ;uw2000 stc227 do sprzedania 7/7
-2024-12-30 08:00;25011;Assistance;Wydaj pojazd;;PY1365A;Łódź;Wschód;uw1000 stc227 2/14 pełny bak
 2024-12-30 08:00;7728;Długoterminowy;Odbierz pojazd;;WW642AM;Gdańsk;Północ;
 2024-12-30 08:00;9204;Długoterminowy;Odbierz pojazd;;WW640AM;Gdańsk;Północ;
-2024-12-30 09:00;25063;Assistance;Wydaj pojazd;;PZ5V832;Gorzów Wielkopolski;Północ;uw1000 stc227 do sprzedania 7/30
-2024-12-30 09:00;25047;Assistance;Wydaj pojazd;;PY3534E;Szczecin;Północ;stc 327 uw 2500 do sprzedania
-2024-12-30 09:00;24953;OC Promesa;Wydaj pojazd;;WJ2216N;Łódź;Wschód;gwarancja, max3
-2024-12-30 09:00;25033;OC Sprawcy;Wydaj pojazd;;PY64823;Bydgoszcz;Centrum;gwarancja 8/x db osoba prywatna brutto
-2024-12-30 09:00;25030;Assistance;Wydaj pojazd;;PY76195;Słupsk;Północ;gwarancja wstępnie 1 wjazd od ul. Murarska
 2024-12-30 09:00;25038;OC Sprawcy;Wydaj pojazd;;WL5681W;Szczecinek;Północ;uw3000 stc89 sprzedane karta 4/x db osoba prywatna brutto
+2024-12-30 09:00;24953;OC Promesa;Wydaj pojazd;;WJ2216N;Łódź;Wschód;gwarancja, max3
+2024-12-30 09:00;25063;Assistance;Wydaj pojazd;;PZ5V832;Gorzów Wielkopolski;Północ;uw1000 stc227 do sprzedania 7/30
+2024-12-30 09:00;25030;Assistance;Wydaj pojazd;;PY76195;Słupsk;Północ;gwarancja wstępnie 1 wjazd od ul. Murarska
+2024-12-30 09:00;25047;Assistance;Wydaj pojazd;;PY3534E;Szczecin;Północ;stc 327 uw 2500 do sprzedania
+2024-12-30 09:00;25033;OC Sprawcy;Wydaj pojazd;;PY64823;Bydgoszcz;Centrum;gwarancja 8/x db osoba prywatna brutto
 2024-12-30 09:30;24347;Długoterminowy;Wydaj pojazd;;WJ4953N;Koszalin;Północ;
 2024-12-30 09:30;25042;Assistance;Wydaj pojazd;;KTA7391K;Olsztyn;Północ;uw2000 stc 227 do sprzedania 9/9db
-2024-12-30 10:00;24990;Assistance;Wydaj pojazd;;PK2950R;Zielona Góra;Zachód;UW 1000 STC 227ZL DO SPRZEDANIA, KOMBI
+2024-12-30 10:00;25035;OC Sprawcy;Wydaj pojazd;;PY10302;Bydgoszcz;Centrum;gwarancja 4/x db osoba prywatna brutto
+2024-12-30 10:00;25043;Assistance;Wydaj pojazd;;PY10213;Olsztyn;Północ;stc 227 uw 1000
 2024-12-30 10:00;25028;Długoterminowy;Wydaj pojazd;;WW640AM;Gdańsk;Północ;
 2024-12-30 10:00;25027;Długoterminowy;Wydaj pojazd;;WW642AM;Gdańsk;Północ;
-2024-12-30 10:00;25043;Assistance;Wydaj pojazd;;PY10213;Olsztyn;Północ;stc 227 uw 1000
-2024-12-30 10:00;25035;OC Sprawcy;Wydaj pojazd;;PY10302;Bydgoszcz;Centrum;gwarancja 4/x db osoba prywatna brutto
 2024-12-30 10:00;24295;Assistance;Odbierz pojazd;;KTA8891K;Warszawa;Wschód;
 2024-12-30 12:00;24822;Assistance;Odbierz pojazd;;EL5KK31;Opole;Zachód;
