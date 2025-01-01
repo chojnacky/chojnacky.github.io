@@ -4,6 +4,7 @@
 2025-01-01 16:00;25093;Assistance;Odbierz pojazd;;KTA8054K;Poznań;Centrum;
 2025-01-01 17:00;24613;Assistance;Odbierz pojazd;;EL3KH43;Łódź;Wschód;
 2025-01-01 18:00;25246;Indywidualny;Odbierz pojazd;;PY79390;Gdańsk;Północ;
+2025-01-01 20:30;25137;Assistance;Odbierz pojazd;;EL3LJ71;Szczecin;Północ;BIURO
 2025-01-02 08:00;24536;Assistance;Wydaj pojazd;;EL9KC15;Szczecin;Północ;GWARANCJA, Wszystko tylko nie toyota
 2025-01-02 08:00;25163;Assistance;Wydaj pojazd;;PY0077C;Giżycko;Północ;uw1000 stc327 3/3
 2025-01-02 08:30;25212;Promesa;Wydaj pojazd;;WY638ER;Rzeszów;Południe;UW 3000 STC 30db do sprzedania
@@ -13,8 +14,8 @@
 2025-01-02 10:00;25211;OC Promesa;Wydaj pojazd;;WA6794C;Gorzów Wielkopolski;Północ;uw2000 stc20brutto/doba na sprzedaż 6/x
 2025-01-02 10:00;25142;OC Sprawcy;Wydaj pojazd;;PY79390;Gdańsk;Północ;gwarancja 6/x db
 2025-01-02 10:00;25263;Assistance;Wydaj pojazd;;KTA8934K;Lubin;Zachód;gwarancja
-2025-01-02 10:00;24819;Assistance;Odbierz pojazd;;PY17184;Kraków;Południe;
 2025-01-02 10:00;24508;Assistance;Odbierz pojazd;;KTA9837K;Kielce;Południe;
+2025-01-02 10:00;24819;Assistance;Odbierz pojazd;;PY17184;Kraków;Południe;
 2025-01-02 11:00;25237;OC Sprawcy;Wydaj pojazd;;EL3LR59;Zielona Góra;Zachód;gwarancja
 2025-01-02 13:00;22285;OC Sprawcy;Odbierz pojazd;;EL7LK03;Toruń;Centrum;
 2025-01-02 13:30;25170;Assistance;Wydaj pojazd;;PY2722C;Chojnice;Północ;UW1500 STC 227ZL SPRZEDANE - karta
