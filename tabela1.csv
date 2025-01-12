@@ -2,21 +2,21 @@
 2025-01-08 18:00;23123;Assistance;Odbierz pojazd;;KTA8726K;Kalisz;Centrum;SZKODA zderzak tylny, błotnik tylny . Wypełnić druk szkodowy
 2025-01-13 07:30;25949;Assistance;Wydaj pojazd;;KTA8725K;Gdańsk;Północ;
 2025-01-13 07:30;25933;OC Sprawcy;Wydaj pojazd;;PY89916;Poznań;Centrum;GWARANCJA, W segmencie E pełny bak przy wydaniu
-2025-01-13 08:00;26049;Assistance;Wydaj pojazd;;PY41186;Warszawa;Wschód;uw2k,stc227,2max
 2025-01-13 08:00;25799;Assistance;Wydaj pojazd;;EL3LJ71;Gorzów Wielkopolski;Północ;uw1000 stc227 na sprzedaż 5/5 manual ceed albo corolla najlepiej
-2025-01-13 08:00;26070;Assistance;Wydaj pojazd;;KTA8641K;Zielona Góra;Zachód;uw1000 stc227 do sprzedania 1/10db
 2025-01-13 08:00;23863;OC Sprawcy;Wydaj pojazd;;PY3269F;Poznań;Centrum;gwarancja AUTOMAT
+2025-01-13 08:00;26070;Assistance;Wydaj pojazd;;KTA8641K;Zielona Góra;Zachód;uw1000 stc227 do sprzedania 1/10db
+2025-01-13 08:00;26049;Assistance;Wydaj pojazd;;PY41186;Warszawa;Wschód;uw2k,stc227,2max
 2025-01-13 08:15;25985;Assistance;Wydaj pojazd;;KTA7842K;Białystok;Wschód;UW 1000 STC 227ZL DO SPRZEDANIA, AT
 2025-01-13 08:30;25866;OC Sprawcy;Wydaj pojazd;;PY35614;Wrocław;Zachód;gwarancja, wst3
 2025-01-13 08:30;25954;OC Sprawcy;Wydaj pojazd;;WE9Y887;Szczecin;Północ;gwarancja
-2025-01-13 09:00;25965;Assistance;Wydaj pojazd;;KTA7391K;Olsztyn;Północ;UW 3000 STC 227ZL DO SPRZEDANIA
 2025-01-13 09:00;25711;OC Sprawcy;Wydaj pojazd;;PY1362A;Koszalin;Północ;
 2025-01-13 09:00;25810;Indywidualny P.H.;Wydaj pojazd;;KTA8054K;Poznań;Centrum;
-2025-01-13 10:00;25999;Assistance;Wydaj pojazd;;WW588AM;Gorzów Wielkopolski;Północ;UW 1000 STC 227ZL DO SPRZEDANIA
-2025-01-13 10:00;26068;OC Sprawcy;Wydaj pojazd;;PY62048;Giżycko;Północ;uw2000 stc89 do sprzedania 4/x db osoba prywatna brutto
-2025-01-13 10:00;25402;OC Sprawcy;Wydaj pojazd;;WT4128H;Warszawa;Wschód;
-2025-01-13 10:00;25907;Assistance;Wydaj pojazd;;PY1504F;Koszalin;Północ;stc 89 zł karta, 100% paliwa
+2025-01-13 09:00;25965;Assistance;Wydaj pojazd;;KTA7391K;Olsztyn;Północ;UW 3000 STC 227ZL DO SPRZEDANIA
 2025-01-13 10:00;26019;OC Sprawcy;Wydaj pojazd;;WT4073H;Elbląg;Północ;gwarancja 4/x db firma netto 100%
+2025-01-13 10:00;25907;Assistance;Wydaj pojazd;;PY10215;Koszalin;Północ;stc 89 zł karta, 100% paliwa
+2025-01-13 10:00;25999;Assistance;Wydaj pojazd;;WW588AM;Gorzów Wielkopolski;Północ;UW 1000 STC 227ZL DO SPRZEDANIA
+2025-01-13 10:00;25402;OC Sprawcy;Wydaj pojazd;;WT4128H;Warszawa;Wschód;
+2025-01-13 10:00;26068;OC Sprawcy;Wydaj pojazd;;PY62048;Giżycko;Północ;uw2000 stc89 do sprzedania 4/x db osoba prywatna brutto
 2025-01-13 11:00;25580;Indywidualny P.H.;Wydaj pojazd;;WL5693W;Poznań;Centrum;
 2025-01-13 11:00;25572;Assistance;Wydaj pojazd;;KTA1413L;Warszawa;Wschód;uw1000 stc227 sprzedane karta 3/5
 2025-01-13 11:30;23151;OC Sprawcy;Odbierz pojazd;;PY9687E;Gdańsk;Północ;
@@ -27,3 +27,5 @@
 2025-01-13 14:00;20009;Assistance;Odbierz pojazd;;EL9KY87;Chojnice;Północ;
 2025-01-13 14:00;20066;Assistance;Odbierz pojazd;;EL3LR57;Warszawa;Wschód;
 2025-01-13 14:30;25647;Indywidualny P.H.;Wydaj pojazd;;EL5LL65;Poznań;Centrum;
+2025-01-13 15:00;25959;Assistance;Wydaj pojazd;;PY76088;Olsztyn;Północ;uw2000 stc89 sprzedane - karta 7/15 kontakt do Pani Ewy
+2025-01-13 15:00;24065;OC Sprawcy;Wydaj pojazd;;WL5689W;Zielona Góra;Zachód;
