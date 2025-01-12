@@ -2,22 +2,23 @@
 2025-01-08 18:00;23123;Assistance;Odbierz pojazd;;KTA8726K;Częstochowska 211, 62-800 Kalisz, Polska;Kalisz;Centrum;SZKODA zderzak tylny, błotnik tylny . Wypełnić druk szkodowy
 2025-01-12 14:00;26060;Assistance;Odbierz pojazd;;PY09924;Żwirki i Wigury 1, 03 Warszawa, Polska;Warszawa;Wschód;Lotnisko Chopina Warszawa
 2025-01-12 19:00;26014;Assistance;Wydaj pojazd;;EL8KM04;Jodłowa 2, 46-081 Dobrzeń Wielki, Polska;Opole;Zachód;UW 2000 STC 227ZL DO SPRZEDANIA
-2025-01-13 07:30;25933;OC Sprawcy;Wydaj pojazd;;PY89916;Biedrzyckiego 1, 60-272 Poznań, Polska;Poznań;Centrum;GWARANCJA, W segmencie E pełny bak przy wydaniu
 2025-01-13 07:30;25949;Assistance;Wydaj pojazd;;KTA8725K;węzeł Ofiar Grudnia 51, 81 Gdynia, Polska;Gdańsk;Północ;
-2025-01-13 08:00;23863;OC Sprawcy;Wydaj pojazd;;PY3269F;Rzemieślnicza 8 , 62-020 Swarzędz;Poznań;Centrum;gwarancja AUTOMAT
+2025-01-13 07:30;25933;OC Sprawcy;Wydaj pojazd;;PY89916;Biedrzyckiego 1, 60-272 Poznań, Polska;Poznań;Centrum;GWARANCJA, W segmencie E pełny bak przy wydaniu
 2025-01-13 08:00;26049;Assistance;Wydaj pojazd;;PY41186;Ignacego Krasickiego 31A, 05-250 Słupno, Polska;Warszawa;Wschód;uw2k,stc227,2max
+2025-01-13 08:00;23863;OC Sprawcy;Wydaj pojazd;;PY3269F;Rzemieślnicza 8 , 62-020 Swarzędz;Poznań;Centrum;gwarancja AUTOMAT
 2025-01-13 08:00;25799;Assistance;Wydaj pojazd;;EL3LJ71;Kobylogórska 98, 66-400 Gorzów Wielkopolski, Polska;Gorzów Wielkopolski;Północ;uw1000 stc227 na sprzedaż 5/5 manual ceed albo corolla najlepiej
 2025-01-13 08:15;25985;Assistance;Wydaj pojazd;;KTA7842K;Stefana Batorego 4, 15-131 Białystok, Polska;Białystok;Wschód;UW 1000 STC 227ZL DO SPRZEDANIA, AT
 2025-01-13 08:30;25954;OC Sprawcy;Wydaj pojazd;;WE9Y887;3 Maja 27b, 72-200 Nowogard, Polska;Szczecin;Północ;gwarancja
 2025-01-13 08:30;25866;OC Sprawcy;Wydaj pojazd;;PY35614;aleja Karkonoska 54, 53-015 Wrocław, Polska;Wrocław;Zachód;gwarancja, wst3
+2025-01-13 09:00;25810;Indywidualny P.H.;Wydaj pojazd;;KTA8054K;Osiedle Bolesława Śmiałego 7, 60-101 Poznań, Polska;Poznań;Centrum;
+2025-01-13 09:00;25838;OC Sprawcy;Wydaj pojazd;;PY61858;Szosa Kisielińska 20, 65-001 Zielona Góra, Polska;Zielona Góra;Zachód;uw 2000 stc 227
 2025-01-13 09:00;25711;OC Sprawcy;Wydaj pojazd;;PY1362A;Koszalińska 81, 76-039 Stare Bielice;Koszalin;Północ;
 2025-01-13 09:00;25901;Assistance;Wydaj pojazd;;EL3LJ67;Osiedlowa 11, 66-016 Płoty, Polska;Zielona Góra;Zachód;UW 1000 STC 227ZL SPRZEDANE - KARTA Preferowana mt skrzynia
-2025-01-13 09:00;25838;OC Sprawcy;Wydaj pojazd;;PY61858;Szosa Kisielińska 20, 65-001 Zielona Góra, Polska;Zielona Góra;Zachód;uw 2000 stc 227
 2025-01-13 09:00;25965;Assistance;Wydaj pojazd;;KTA7391K;Sielska 40, 10-802 Olsztyn, Polska;Olsztyn;Północ;UW 3000 STC 227ZL DO SPRZEDANIA
-2025-01-13 09:00;25810;Indywidualny P.H.;Wydaj pojazd;;KTA8054K;Osiedle Bolesława Śmiałego 7, 60-101 Poznań, Polska;Poznań;Centrum;
-2025-01-13 10:00;25402;OC Sprawcy;Wydaj pojazd;;WT4128H;Ojcowska 2, 02-918 Warszawa, Polska;Warszawa;Wschód;
-2025-01-13 10:00;26019;OC Sprawcy;Wydaj pojazd;;WT4073H;Szeroka 26, 82-500 Kwidzyn;Elbląg;Północ;gwarancja 4/x db firma netto 100%
+2025-01-13 09:30;26023;Assistance;Wydaj pojazd;;PY1503F;Przylep-Kosowa 46, 66-015 Zielona Góra, Polska;Lubin;Zachód;
 2025-01-13 10:00;25999;Assistance;Wydaj pojazd;;WW588AM;Partyzantów 16, 66-415 Chwalęcice, Polska;Gorzów Wielkopolski;Północ;UW 1000 STC 227ZL DO SPRZEDANIA
 2025-01-13 10:00;25907;Assistance;Wydaj pojazd;;PY1504F;Stare Bielice 8B, 76-039 Stare Bielice, Polska;Koszalin;Północ;stc 89 zł karta, 100% paliwa
-2025-01-13 11:00;25580;Indywidualny P.H.;Wydaj pojazd;;WL5693W;Jasielska 3, 60-476 Poznań, Polska;Poznań;Centrum;
+2025-01-13 10:00;26019;OC Sprawcy;Wydaj pojazd;;WT4073H;Szeroka 26, 82-500 Kwidzyn;Elbląg;Północ;gwarancja 4/x db firma netto 100%
+2025-01-13 10:00;25402;OC Sprawcy;Wydaj pojazd;;WT4128H;Ojcowska 2, 02-918 Warszawa, Polska;Warszawa;Wschód;
 2025-01-13 11:00;25572;Assistance;Wydaj pojazd;;KTA1413L;Kościelna 10A, 05-124 Skrzeszew, Polska;Warszawa;Wschód;uw1000 stc227 sprzedane karta 3/5
+2025-01-13 11:00;25580;Indywidualny P.H.;Wydaj pojazd;;WL5693W;Jasielska 3, 60-476 Poznań, Polska;Poznań;Centrum;
